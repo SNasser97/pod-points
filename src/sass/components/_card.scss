@@ -1,0 +1,34 @@
+.card-container {
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:space-around;
+	position: relative;
+}
+.card {
+	position: relative;
+	height: 40rem;
+	width: 40rem;
+	border-radius:100%;
+	background: -webkit-linear-gradient(135deg,
+		$colour-primary, $colour-secondary);
+	background: -o-linear-gradient(135deg,
+		$colour-primary, $colour-secondary);
+	background: linear-gradient(135deg,
+		$colour-primary, $colour-secondary);
+	&__desc {
+		padding-top: 0rem;
+	}
+	&__info--length {
+		padding:2rem 0;
+	}
+	&__info--desc {
+		padding-bottom: 2rem;
+	}
+	&__btn {
+		padding-bottom: 1rem;
+		.btn__full {
+			width: 15rem;
+		}
+	}
+}
