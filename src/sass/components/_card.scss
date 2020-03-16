@@ -2,7 +2,7 @@
 	display:flex;
 	flex-direction:row;
 	align-items:center;
-	justify-content:space-around;
+	justify-content:center;
 	position: relative;
 }
 .card {
@@ -10,6 +10,7 @@
 	height: 40rem;
 	width: 40rem;
 	border-radius:100%;
+	margin: 0 2rem;
 	background: -webkit-linear-gradient(135deg,
 		$colour-primary, $colour-secondary);
 	background: -o-linear-gradient(135deg,

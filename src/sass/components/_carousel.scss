@@ -12,6 +12,8 @@
 		width: 8rem;
 		border-radius:100%;
 		cursor:pointer;
+		background: $dark-colour-2;
+		border-color:$dark-colour-2;
 		&--prev {
 			left:0;
 		}
