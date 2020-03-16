@@ -1,0 +1,32 @@
+.btn {
+
+	height: 4rem;
+	padding: 1rem;
+	border-radius: 5px;
+	transition:all .2s;
+	border:1px solid;
+	color:$colour-primary;
+	text-decoration: none;
+	&__full {
+		background: $colour-primary;
+		border-color:$colour-primary;
+		color:$colour-tertiary;
+		&:hover {
+			background: $colour-primary-hover;
+			border-color:$colour-primary-hover;
+		}
+		
+		
+	}
+	&__ghost {
+		background: transparent;
+		border-color:$colour-tertiary;
+		color:$colour-tertiary;
+		
+		&:hover {
+			background: transparent;
+			color:$colour-primary;
+			border-color:$colour-primary;
+		}
+	}
+}

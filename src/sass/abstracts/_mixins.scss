@@ -1,0 +1,19 @@
+
+@mixin font($fontType:"normal") {
+	@if $fontType == "normal" {
+		font-family:$font;
+		font-weight: normal;
+	} @else  {
+		font-family: $font;
+		font-weight: bolder;
+	}
+}
+
+@mixin bgGrad($grad-direction:135deg) {
+	background: $colour-primary;  /* fallback for old browsers */
+    background: -webkit-linear-gradient($grad-direction, $colour-tertiary 60%, $colour-primary 50%);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient($grad-direction, $colour-tertiary 60%, $colour-primary 50%) no-repeat; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background-image:no-repeat;
+
+
+}
