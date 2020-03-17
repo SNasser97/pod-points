@@ -1,0 +1,41 @@
+.SearchField {
+	display:flex;
+	justify-content:center;
+	flex-direction:column;
+	width: 100%;
+	text-align: center;
+	height: 100%;
+	padding: 5rem 0;
+	background: $dark-colour-2;
+	.title {
+		margin-bottom: 10rem;
+		color:$colour-secondary;
+	}
+	&__field {
+
+	}
+	&__btn {
+		width: 15rem;
+		border-radius:2.5rem;
+
+			&:hover{
+			cursor:pointer;
+			}
+		}
+	&__input {
+		width: 30vw;
+		height: 5rem;
+		border:none;
+		border-bottom:1px solid $colour-secondary;
+		text-align: center;
+		color:$colour-secondary;
+		background: transparent;
+		margin-bottom: 2rem;
+		transition: all .2s;
+		
+		&:focus {
+			width: 35vw;
+		}
+
+	}
+}

@@ -1,0 +1,52 @@
+.results {
+	width: 100%;
+	background:$dark-colour-1;
+	// margin: 1rem auto;
+	margin-top: 2rem;
+	padding: 0;
+	&__pod {
+		background: $dark-colour-1;
+		color:$colour-tertiary;
+		// margin-bottom: 1rem;
+		height: 10rem;
+		display:flex;
+		align-items:center;
+		justify-content:space-around;
+		transition: 0.1s all;
+		&:hover {
+			background: rgba($colour-secondary, 0.25);
+		}
+		&-details {
+			display:flex;
+			align-items:center;
+		}
+		&-name {
+			margin-right: 10rem;
+		}
+		&-genre {
+			margin-right: 5rem;
+		}
+		&-author {
+			margin-right: 2.5rem;
+		}
+		&-length {
+			margin-right: 2rem;
+		}
+		&-btn {
+			margin-left: 4rem;
+			width: 6rem;
+			height: 6rem;
+			border-radius:50%;
+			background: transparent;
+			&:hover {
+				cursor:pointer;
+			}
+		}
+		&-image {
+			// position: absolute;
+			height: 8rem;
+			width: 8rem;
+			margin-right: 10rem;
+		}
+	}
+}
