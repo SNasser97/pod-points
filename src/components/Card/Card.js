@@ -1,28 +1,31 @@
 import React from "react";
 
-const Card = () => {
-	return (
+const Card = ({title,desc, length, name, image}) => {
+	// remove html elements from JSON desc
+	let regex= /(<([^>]+)>)/ig;
+	let descriptionNoHTML = desc.replace(regex, "");
+	return (	
 				<div className="card">
 					<div className="card--front">
 						<div className="card__details">
-						<h4 className="card__title fs--2">
-							Card Title
-						</h4>
-						
+							<h4 className="card__title fs--2">
+								{title}
+							</h4>
+							<h5 className="card__title fs--3">
+								{name}
+							</h5>
 						</div>
 						<div className="card__desc">
-							<p className="card__info--genre">
-								Pod Genre
-							</p>
-							<p className="card__info--length">
-								Pod card__info--length
-							</p>
-							<p className="card__info--desc">
-								About podcast here....
-							</p>
+							<img src={image} alt="thumbnail" className="card__image"/>
+								<p className="card__info--length fs--4">
+									{"Duration: "+ length + " minutes"}
+								</p>
+							<div className="card__info--round">
+								<p>{descriptionNoHTML !== "" ? descriptionNoHTML.substring(0,150)+"..." : "Hmm..this podcast doesn't include a description..." }</p>
+							</div>
 						</div>
 						<div className="card__btn">
-							<button className="btn btn__full">Play</button>
+							<button className="btn btn__full--secondary">Play</button>
 						</div>
 					</div>
 					<div className="card--back">

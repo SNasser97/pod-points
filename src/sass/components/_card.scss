@@ -7,29 +7,119 @@
 }
 .card {
 	position: relative;
-	height: 40rem;
-	width: 40rem;
+	height: auto;
+	padding: 1rem;
+	padding-top: 5%;
+	width: 60rem;
+	height: 60rem;
+	min-height: 100%;
 	border-radius:100%;
 	margin: 0 2rem;
-	background: -webkit-linear-gradient(135deg,
-		$colour-primary, $colour-secondary);
-	background: -o-linear-gradient(135deg,
-		$colour-primary, $colour-secondary);
-	background: linear-gradient(135deg,
-		$colour-primary, $colour-secondary);
+	@include bgGrad2(-180deg);
+	z-index: 1;
+	&__title {
+		text-align: center;
+		margin: 0 auto;
+		width: 50%;
+	}
+	&__image {
+		height: 15rem;
+		width: 15rem;
+		position: absolute;
+		left: 0%;
+		top:0;
+		border-radius:100%;
+		// z-index: 1;
+		border:.5rem solid $colour-secondary;
+		background: $dark-colour-2;
+		transform:scale(1);
+		transition: all .3s;
+		&:hover {
+			transform:scale(.95);
+		}
+	}
+	h5 {
+		font-style: italic;
+		margin-top: 2.5rem;
+		// align-self:center;
+		color:$colour-secondary;
+	}
 	&__desc {
 		padding-top: 0rem;
+		// padding: 1rem;
+		// padding: 4rem 5rem;
+		color:$colour-tertiary;
+		
 	}
+	
 	&__info--length {
-		padding:2rem 0;
+		transform:scale(1);
+		transition: all .3s;
+		&:hover {
+			transform:scale(.95);
+		}
+		// padding:2rem 0;
+		background: $dark-colour-1;
+		width: 16rem;
+		height: 16rem;
+		margin: 0 auto;
+		border-radius:25rem;
+		display:flex;
+		flex-wrap:wrap;
+		align-items:center;
+		position: absolute;
+		left:0;
+		bottom:0rem;
+		border:.5rem solid $colour-secondary;
+		color:$colour-secondary;
 	}
 	&__info--desc {
 		padding-bottom: 2rem;
+
+	}
+	&__info--round {
+		transform:scale(1);
+		transition: all .3s;
+		&:hover {
+			transform:scale(.95);
+		}
+		height: 25rem;
+		width: 25rem;
+		border-radius:50%;
+		background: $dark-colour-1;
+		// padding: ;
+		padding: 2rem;
+		border:.5rem solid $colour-secondary;
+		position: absolute;
+		right:-8rem;
+		display:flex;
+		align-items:center;
+		top:20rem;
+		p {
+			line-height: 1.5;
+			font-style: italic;
+			&:before {
+				content:"Description";
+				position: absolute;
+				top:2rem;
+				left:7rem;
+				color:$colour-secondary;
+				font-weight: bold;
+				font-size: 2rem;
+			}
+		}
 	}
 	&__btn {
 		padding-bottom: 1rem;
-		.btn__full {
-			width: 15rem;
+		// position: absolute;
+		position: absolute;
+		bottom:10rem;
+		right:25rem;
+		.btn__full--secondary {
+			width: 10rem;
+			margin-top: 5rem;
+			height: 10rem;
+			border-radius:50%;
 		}
 	}
 }

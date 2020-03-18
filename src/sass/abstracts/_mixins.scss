@@ -17,3 +17,13 @@
 
 
 }
+
+@mixin bgGrad2($grad-direction:135deg) {
+	background: -webkit-linear-gradient($grad-direction,
+		$dark-colour-1 50%, $dark-colour-2 50%);
+	background: -o-linear-gradient($grad-direction,
+		$dark-colour-1 50%, $dark-colour-2 50%);
+	background: linear-gradient($grad-direction,
+		$dark-colour-1 50%, $colour-secondary 50%, $dark-colour-2 50%);
+	color:$colour-tertiary;
+}

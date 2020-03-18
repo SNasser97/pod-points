@@ -5,7 +5,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-
+  z-index: 99;
   transform: translate(-50%, -50%);
 }
 .lds-facebook div {
@@ -13,8 +13,8 @@
   position: absolute;
   left: 8px;
   width: 14px;
-  background: $col-main;
-  animation: lds-facebook 2.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  background: $colour-primary;
+  animation: lds-facebook 2.5s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 .lds-facebook div:nth-child(1) {
   left: 10px;
@@ -61,14 +61,17 @@
   0% {
     top: 0px;
     height: 64px;
+    background: $colour-secondary;
+    // z-index: 1;
   }
   25%{
-    background: $col-secondary;
+    background: $colour-tertiary;
+    z-index: 4;
   }
   50%, 100% {
     top: 24px;
     height: 32px;
-    background: $col-main;
+    background: $colour-primary;
 
   }
 }

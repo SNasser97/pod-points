@@ -1,6 +1,6 @@
 import React from "react";
 
-const Rank = () => {
+const Rank = ({loadData}) => {
 	return (
 		<div className="user">
 			<div className="user__details">
@@ -11,7 +11,7 @@ const Rank = () => {
 				  You have a total score of <span className="user__rank--score">105</span> points!
 				</p>
 				<div className="user__info">
-					<a href="#!" className="btn btn__ghost user__btn">View leaderboard</a>
+					<a onClick={loadData} href="#!" className="btn btn__ghost user__btn">View leaderboard</a>
 				</div>
 			</div>
 		</div>

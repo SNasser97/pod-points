@@ -3,17 +3,19 @@
 	background: $colour-secondary;
 	padding: 2rem;
 	width: 100%;
-
+	height: auto;
+	margin: 0;
 	&__btn {
-		margin: 2rem;
-		position: absolute;
-		top:60%;
-		height: 8rem;
-		width: 8rem;
-		border-radius:100%;
-		cursor:pointer;
 		background: $dark-colour-2;
 		border-color:$dark-colour-2;
+		width: 25rem;
+		height: 8rem;
+		margin-top: 3rem;
+		&:hover{
+			background: $dark-colour-1;
+			border-color:$dark-colour-1;
+		}
+		// rem 0;
 		&--prev {
 			left:0;
 		}

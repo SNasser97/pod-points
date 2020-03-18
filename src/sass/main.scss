@@ -1,6 +1,7 @@
 @import "./abstracts/variables";
 @import "./abstracts/mixins";
 @import "./abstracts/typography";
+@import "./abstracts/animations";
 
 @import "./components/nav";
 @import "./components/button";
@@ -9,6 +10,8 @@
 @import "./components/carousel";
 @import "./components/searchfield";
 @import "./components/results";
+@import "./components/loader";
+@import "./components/cardloader";
 
 // @import "./components/nav";
 // @import "./components/nav";
