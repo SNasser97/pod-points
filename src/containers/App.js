@@ -39,7 +39,7 @@ class App extends Component {
         fetch(randompod, {
         headers:{
           "Content-Type":"application/json",
-          "X-ListenAPI-Key":"5bc09b556c3f4175b51bfef06a27543c"
+          "X-ListenAPI-Key":"XXXXXXXXXXXXXXXXXXXXXXXX"
         }
       })
       .then(resp=> resp.json())
