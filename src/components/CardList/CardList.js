@@ -19,7 +19,7 @@ const CardList = ({bestPodCasts}) => {
 		);
 	} else {
 		return(
-			<h3 className="title fs--3">Click me below for a suprise episode...</h3>
+			<h3 className="title fs--3">Nothing here...or is there? <span className="fs--2" role="img" aria-label="emoji-think">🤔</span></h3>
 		)
 	}
 	

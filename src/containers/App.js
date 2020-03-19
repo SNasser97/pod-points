@@ -39,13 +39,13 @@ class App extends Component {
         fetch(randompod, {
         headers:{
           "Content-Type":"application/json",
-          "X-ListenAPI-Key":"XXXXXXXXXXXXXXXXXXXXXXXX"
+          "X-ListenAPI-Key":""
         }
       })
       .then(resp=> resp.json())
       .then(data=>{
         console.log(data);
-        // check skeleton loader
+        // Delay response to display skeleten
           setTimeout(() => {
             let time = data.audio_length_sec;
             let hrs = Math.floor(time / 60 / 60);
