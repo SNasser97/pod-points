@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../Card/Card";
 
+
 const CardList = ({bestPodCasts}) => {
 	const [pod] = bestPodCasts;
 

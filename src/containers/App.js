@@ -7,6 +7,7 @@ import SearchField from "../components/SearchField/SearchField";
 import ResultList from "../components/ResultList/ResultList";
 import CardLoader from "../components/CardLoader/CardLoader";
 import Loader from "../components/Loader/Loader";
+import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 
 
 class App extends Component {
@@ -39,7 +40,7 @@ class App extends Component {
         fetch(randompod, {
         headers:{
           "Content-Type":"application/json",
-          "X-ListenAPI-Key":""
+          // "X-ListenAPI-Key":"e532f48241d5476dac08a9286e42d5bc"
         }
       })
       .then(resp=> resp.json())
@@ -62,7 +63,7 @@ class App extends Component {
             ], loading:false})
 
           }, 4000)
-      });
+      }).catch(err=>console.log("fetch err=>",err));
     })
   }
   
@@ -73,9 +74,10 @@ class App extends Component {
         <React.Fragment>
         <Nav/>
 
-         <Carousel loadRandomPod={this.loadRandomPod}>
-          {loading ? <CardLoader/> : <CardList bestPodCasts={podcast}/>}
+        <Carousel loadRandomPod={this.loadRandomPod}>
+          {loading ? <CardLoader/> :  <ErrorBoundry><CardList bestPodCasts={podcast}/></ErrorBoundry>}
         </Carousel>
+
         <Rank/>
         <SearchField>
             <ResultList/>

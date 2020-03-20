@@ -8,21 +8,57 @@
 		// flex-grow:1;
 		margin: 0;
 		margin-left: 1.5rem;
+		flex-grow:1;
 		&--name {
 			color:$colour-tertiary;
 			@include font(bold);
+			
+			@include respond(phone){
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				font-size: 2.5rem;
+			}
+			@include respond(phone-xs){
+				font-size:2rem;
+			}
 		}
+
 	}
 	&__legal {
 		text-align: center;
 		margin: 0 auto;
+		@include respond(phone){
+			// height: 1rem;
+			// width: 1rem;
+			display:none;
+		}
 		&--logo {
 			display:flex;
 			height: 2.5rem;
-			// width: 100%;
+			@include respond(tab-port){
+				// height: 1.5rem;
+				// width: 1.5rem;
+				width: 35vw;
+			}
 		}
 	}
 	&__btn {
+		@include respond(phone){
+			// height: 1rem;
+			// width: 1rem;
+			// width: 100%;
+			padding: 0;
+			font-size: 1.6rem;
+			margin: 0;
+			padding: .5rem;
+		}
+		@include respond(tab-port){
+			padding: 0;
+			font-size: 1.8rem;
+			margin: 0;
+			padding: .5rem;
+		}
 		margin-right: 1.5rem;
 		// padding: 1.5rem;
 	}
@@ -30,5 +66,17 @@
 		// color:$colour-tertiary;
 		text-decoration:none;
 		
+	}
+}
+
+
+.legal {
+	margin: 0 auto;
+	justify-content:center;
+	width: 50vw;
+	height: auto;
+	display:none;
+	@include respond(phone) {
+		display:block;
 	}
 }
