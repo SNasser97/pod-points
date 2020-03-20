@@ -40,7 +40,7 @@ class App extends Component {
         fetch(randompod, {
         headers:{
           "Content-Type":"application/json",
-          // "X-ListenAPI-Key":"e532f48241d5476dac08a9286e42d5bc"
+          "X-ListenAPI-Key":`${process.env.REACT_APP_API_KEY}`
         }
       })
       .then(resp=> resp.json())
