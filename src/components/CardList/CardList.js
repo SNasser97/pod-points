@@ -5,7 +5,7 @@ import Card from "../Card/Card";
 const CardList = ({bestPodCasts}) => {
 	const [pod] = bestPodCasts;
 
-	if(pod.title !== "") {
+	if(pod.id !== "") {
 		return (
 		<div className="card-container">
 			<Card 

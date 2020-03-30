@@ -36,6 +36,7 @@
 		&--logo {
 			display:flex;
 			height: 2.5rem;
+			margin-right: 2.5rem;
 			@include respond(tab-port){
 				// height: 1.5rem;
 				// width: 1.5rem;
