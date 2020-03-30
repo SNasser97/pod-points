@@ -1,10 +1,12 @@
 import React from "react";
 
-const Card = ({title,desc, length, name, image}) => {
+const Card = ({id,title,desc, length, name, image}) => {
 	// remove html elements from JSON desc
-	let regex= /(<([^>]+)>)/ig;
-	let descriptionNoHTML = desc.replace(regex, "");
-	return (	
+		
+		if(id !== "") {
+			let regex= /(<([^>]+)>)/ig;
+			let descriptionNoHTML = desc.replace(regex, "");
+			return (	
 				<div className="card">
 					<div className="card--front">
 						<div className="card__details">
@@ -32,7 +34,9 @@ const Card = ({title,desc, length, name, image}) => {
 							
 					</div>
 				</div>
-	);	
+			);
+		}
+		
 }
 
 export default Card;

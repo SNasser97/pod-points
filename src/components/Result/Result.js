@@ -2,18 +2,18 @@ import React from "react";
 import test from "../../assets/img/test.png";
 
 
-const Result = () => {
+const Result = ({id,title,name,desc,image,length}) => {
 
 	return (
 		<div className="results">
 			<div className="results__pod">
 				<div className="results__pod-details">
-					<img src={test} alt="podcast" className="results__pod-image"/>
+					<img src={image ? image: test} alt="podcast" className="results__pod-image"/>
 					<h4 className="results__pod-name fs--4">
-						Pod Name/Title
+						{title}
 					</h4>
 					<p className="results__pod-genre">
-						Pod About...
+						{name}
 					</p>
 				</div>
 				<div className="results__pod-details">
@@ -25,7 +25,7 @@ const Result = () => {
 						Pod Author
 					</p>
 					<p className="results__pod-length">
-						00:00
+						{length}
 					</p>
 					<button className="btn btn__full results__pod-btn">Play</button>
 				</div>

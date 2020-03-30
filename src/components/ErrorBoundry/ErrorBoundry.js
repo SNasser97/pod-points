@@ -14,7 +14,7 @@ class ErrorBoundry extends Component {
 	}
 	render() {
 		if(this.state.hasError) {
-			return <p className="title fs--3">Sorry, the server is asleep <span role="img" aria-label="server asleep">😴</span></p>
+			return <p className="title fs--3">Sorry, that wasn't supposed to happen <span role="img" aria-label="server asleep">😳</span></p>
 		} // else
 		return this.props.children;
 	}
