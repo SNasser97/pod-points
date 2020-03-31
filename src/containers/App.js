@@ -8,7 +8,7 @@ import ResultList from "../components/ResultList/ResultList";
 import CardLoader from "../components/CardLoader/CardLoader";
 import Loader from "../components/Loader/Loader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
-
+import Pagination from "../components/Pagination/Pagination";
 
 class App extends Component {
   constructor() {
@@ -39,19 +39,18 @@ class App extends Component {
  }
  onSearchSubmit = () => {
   this.setState({loadingResult:true}, ()=> {
-    const url = `https://listen-api.listennotes.com/api/v2/search?q=${this.state.searchField}`
+    const url = `https://listen-api.listennotes.com/api/v2/search?q=${this.state.searchField}&sort_by_date=0&scope=episode&offset=0&language=Any language&len_min=0`
     fetch(url, {
       headers:{
           "Content-Type":"application/json",
-          // "X-ListenAPI-Key":`${process.env.REACT_APP_API_KEY}`
+          "X-ListenAPI-Key":`${process.env.REACT_APP_API_KEY}`
         }
     })
     .then(resp=>resp.json())
     .then(data => {
-      console.log("submit fetch=>",data.results);
-      setTimeout(()=> {
-        this.setState({episodeResults: data.results, loadingResult:false})
-      }, 4000);
+      console.log("data results=>",data.results);
+      console.log("data", data);
+      this.setState({episodeResults: data.results, loadingResult:false})
       console.log(url) // check if input value from form is appended to query str
     });
   })
@@ -84,7 +83,7 @@ loadRandomPod = () => { // onclick fetch random podcast
                   "image":data.thumbnail
                 }
           ], loadingCard:false})
-        }, 4000)
+        }, 2000)
       }).catch(err=>console.log("fetch err=>",err));
     })
   }
@@ -92,8 +91,8 @@ loadRandomPod = () => { // onclick fetch random podcast
   render() {
     const { randomPodcast, loadingCard, loadingResult, episodeResults } = this.state;
     const { loadRandomPod, onSearchChange, onSearchSubmit } = this;
-    console.log("NOT RANDOM=>", episodeResults)
-    console.log("IS RANDOM=>", randomPodcast)
+    // console.log("NOT RANDOM=>", episodeResults)
+    // console.log("IS RANDOM=>", randomPodcast)
 
       return (
         <React.Fragment>
@@ -104,7 +103,12 @@ loadRandomPod = () => { // onclick fetch random podcast
 
         <Rank/>
         <SearchField onSearchSubmit={ onSearchSubmit } onSearchChange={ onSearchChange }>
-          {!loadingResult ? <Loader/> : <ErrorBoundry><ResultList episodeResults={ episodeResults } /></ErrorBoundry> }
+          {loadingResult ? <Loader/> : 
+            <ErrorBoundry>
+              <ResultList episodeResults={ episodeResults } />
+              <Pagination episodeResults={ episodeResults }/>
+            </ErrorBoundry> 
+          }
         </SearchField>
         {/*
           <Leaderboard/> // TODO
