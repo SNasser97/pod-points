@@ -8,7 +8,7 @@ const Result = ({id,title,name,desc,image,length}) => {
 		<div className="results">
 			<div className="results__pod">
 				<div className="results__pod-details">
-					<img src={image ? image: test} alt="podcast" className="results__pod-image"/>
+					<img src={image ? image: test} width="8" height="8" alt="podcast" className="results__pod-image"/>
 					<h4 className="results__pod-name fs--4">
 						{title}
 					</h4>
