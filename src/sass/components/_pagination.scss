@@ -1,0 +1,16 @@
+.pagination {
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  &__btn {
+      color:$colour-secondary;
+      border:1px solid $colour-secondary;
+      background: transparent;
+      margin: 0 .5rem;
+      transition:all .4s;
+      &:hover{
+        // transform:scale(1.1);
+        // height: 6rem;
+        transform:scaleY(1.5) scaleX(1.25);
+      }
+  }
+}

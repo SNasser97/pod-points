@@ -9,7 +9,7 @@ const ResultList = ({ episodeResults }) => {
       return `${mins}:00`;
     }
 	return (
-		<React.Fragment>
+    <div className="resultList">
       {
         episodeResults.map((eps,i) => {
           return <Result 
@@ -23,7 +23,7 @@ const ResultList = ({ episodeResults }) => {
             /> 
         })
       }
-		</React.Fragment>
+    </div>
 	)
 }
 

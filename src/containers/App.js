@@ -3,12 +3,10 @@ import Nav from "../components/Nav/Nav";
 import Rank from "../components/Rank/Rank";
 import Carousel from "../components/Carousel/Carousel";
 import CardList from "../components/CardList/CardList";
-import SearchField from "../components/SearchField/SearchField";
-import ResultList from "../components/ResultList/ResultList";
 import CardLoader from "../components/CardLoader/CardLoader";
-import Loader from "../components/Loader/Loader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
-import Pagination from "../components/Pagination/Pagination";
+import Search from "./Search";
+
 
 class App extends Component {
   constructor() {
@@ -16,7 +14,7 @@ class App extends Component {
     
     this.state= {
       loadingCard:false,
-      loadingResult:false,
+      // loadingResult:false,
       randomPodcast: [
         {
           "id":"",
@@ -26,9 +24,7 @@ class App extends Component {
           "length":"",
           "image":""
         }
-      ],
-      episodeResults: [],
-      searchField: ""
+      ]
     }
   }
 
@@ -37,24 +33,7 @@ class App extends Component {
     // console.log(e.target.value);
     this.setState({searchField:e.target.value});
  }
- onSearchSubmit = () => {
-  this.setState({loadingResult:true}, ()=> {
-    const url = `https://listen-api.listennotes.com/api/v2/search?q=${this.state.searchField}&sort_by_date=0&scope=episode&offset=0&language=Any language&len_min=0`
-    fetch(url, {
-      headers:{
-          "Content-Type":"application/json",
-          "X-ListenAPI-Key":`${process.env.REACT_APP_API_KEY}`
-        }
-    })
-    .then(resp=>resp.json())
-    .then(data => {
-      console.log("data results=>",data.results);
-      console.log("data", data);
-      this.setState({episodeResults: data.results, loadingResult:false})
-      console.log(url) // check if input value from form is appended to query str
-    });
-  })
-}
+ 
 loadRandomPod = () => { // onclick fetch random podcast
   const randomPod = "https://listen-api.listennotes.com/api/v2/just_listen"
   
@@ -89,8 +68,8 @@ loadRandomPod = () => { // onclick fetch random podcast
   }
   
   render() {
-    const { randomPodcast, loadingCard, loadingResult, episodeResults } = this.state;
-    const { loadRandomPod, onSearchChange, onSearchSubmit } = this;
+    const { randomPodcast, loadingCard, loadingResult } = this.state;
+    const { loadRandomPod } = this;
     // console.log("NOT RANDOM=>", episodeResults)
     // console.log("IS RANDOM=>", randomPodcast)
 
@@ -100,16 +79,9 @@ loadRandomPod = () => { // onclick fetch random podcast
         <Carousel loadRandomPod={ loadRandomPod }>
           {loadingCard ? <CardLoader/> : <ErrorBoundry><CardList bestPodCasts={ randomPodcast }/></ErrorBoundry>}
         </Carousel>
-
+        
         <Rank/>
-        <SearchField onSearchSubmit={ onSearchSubmit } onSearchChange={ onSearchChange }>
-          {loadingResult ? <Loader/> : 
-            <ErrorBoundry>
-              <ResultList episodeResults={ episodeResults } />
-              <Pagination episodeResults={ episodeResults }/>
-            </ErrorBoundry> 
-          }
-        </SearchField>
+        <Search/>
         {/*
           <Leaderboard/> // TODO
           <Profile/> // TODO

@@ -1,15 +1,17 @@
 import React from "react";
 
-const Pagination = ({episodeResults}) => {
-  return (
-      <div>
-        {
-          episodeResults.map((item,pagNumber) => {
-            return <button className="btn--primary" key={pagNumber}>{pagNumber}</button>
-          })
-        }
+const Pagination = ({incrementOffset, decrementOffset, episodeResults, onSearchSubmit}) => {
+  console.log(episodeResults.length);
+  if(!episodeResults.length) {
+    return null;
+  } else {
+    return (
+      <div className="pagination">
+           <button onClick={()=> {decrementOffset(); onSearchSubmit();}}>prev</button>
+           <button onClick={()=> {incrementOffset(); onSearchSubmit();}}>next</button>
       </div>
-  );
+    );
+  }
 }
 
 export default Pagination;
