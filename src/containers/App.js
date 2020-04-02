@@ -11,10 +11,8 @@ import Search from "./Search";
 class App extends Component {
   constructor() {
     super();
-    
     this.state= {
       loadingCard:false,
-      // loadingResult:false,
       randomPodcast: [
         {
           "id":"",
@@ -68,7 +66,7 @@ loadRandomPod = () => { // onclick fetch random podcast
   }
   
   render() {
-    const { randomPodcast, loadingCard, loadingResult } = this.state;
+    const { randomPodcast, loadingCard} = this.state;
     const { loadRandomPod } = this;
     // console.log("NOT RANDOM=>", episodeResults)
     // console.log("IS RANDOM=>", randomPodcast)

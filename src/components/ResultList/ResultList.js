@@ -8,6 +8,11 @@ const ResultList = ({ episodeResults }) => {
       let mins = Math.floor(time / 60 ) - (hrs * 60);
       return `${mins}:00`;
     }
+  // displays when user hasn't typed or no results are returned  
+  if(!episodeResults.length) {
+    return <p className="fs--2">hmmm..nothing here? <span role="img">🧐</span></p>
+  }
+
 	return (
     <div className="resultList">
       {

@@ -5,12 +5,18 @@
       color:$colour-secondary;
       border:1px solid $colour-secondary;
       background: transparent;
-      margin: 0 .5rem;
-      transition:all .4s;
+      margin: 0 .1rem;
+      transition:all .1s;
+      width: 3.5rem;
+      border-radius:0;
       &:hover{
-        // transform:scale(1.1);
-        // height: 6rem;
-        transform:scaleY(1.5) scaleX(1.25);
+        background: $colour-tertiary;
+        color:$dark-colour-1;
+      }
+      &--active {
+        background: $colour-tertiary;
+        color:$dark-colour-1;
       }
   }
+
 }
