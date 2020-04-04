@@ -18,7 +18,7 @@ const Card = ({id,title,desc, length, name, image}) => {
 							</h5>
 						</div>
 						<div className="card__desc">
-							<img src={image} alt="thumbnail" className="card__image"/>
+							<img src={image} alt="thumbnail" className="card__image" height="150" width="150"/>
 								<p className="card__info--length fs--4">
 									{"Duration: "+ length + " minutes"}
 								</p>

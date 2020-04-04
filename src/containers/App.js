@@ -7,7 +7,6 @@ import CardLoader from "../components/CardLoader/CardLoader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import Search from "./Search";
 
-
 class App extends Component {
   constructor() {
     super();
@@ -26,12 +25,7 @@ class App extends Component {
     }
   }
 
- onSearchChange = (e) => {
-    // Get input field value
-    // console.log(e.target.value);
-    this.setState({searchField:e.target.value});
- }
- 
+
 loadRandomPod = () => { // onclick fetch random podcast
   const randomPod = "https://listen-api.listennotes.com/api/v2/just_listen"
   
@@ -44,8 +38,7 @@ loadRandomPod = () => { // onclick fetch random podcast
     })
     .then(resp=> resp.json())
     .then(data=>{
-      // Delay response to display skeleten
-      // console.log(data);
+        // Delay response to display skeleten
         setTimeout(() => {
           let time = data.audio_length_sec;
           let hrs = Math.floor(time / 60 / 60);

@@ -10,7 +10,7 @@ const ResultList = ({ episodeResults }) => {
     }
   // displays when user hasn't typed or no results are returned  
   if(!episodeResults.length) {
-    return <p className="fs--2">hmmm..nothing here? <span role="img">🧐</span></p>
+    return <p className="fs--2">hmmm..nothing here? <span role="img" aria-label="inspect emoji">🧐</span></p>
   }
 
 	return (
