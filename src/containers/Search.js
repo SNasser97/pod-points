@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+
 import SearchField from "../components/SearchField/SearchField";
 import ResultList from "../components/ResultList/ResultList";
 import Loader from "../components/Loader/Loader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import Pagination from "../components/Pagination/Pagination";
+import { setSearchField } from "../redux/actions";
+
+const mapStateToProps = (state) => {
+  return {
+    searchField: state.searchEpisodes.searchField
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (e) => dispatch(setSearchField(e.target.value))
+  }
+}
 
 class Search extends Component {
   constructor() {
@@ -12,14 +26,14 @@ class Search extends Component {
       loadingResult:false,
       episodeResults: [],
       totalResults:0,
-      searchField: "",
+      // searchField: "",
       offset:0,
     }
   }
  
  // pass as prop to Paginate component which on click pass value from PageNum array
  paginateResult = (pageNum) => {
-    const {searchField, offset} = this.state;
+    const { searchField } = this.props;
     this.setState({offset:pageNum})
     this.setState({loadingResult:true},  ()=> {
        this.callAPI(searchField, pageNum);
@@ -28,13 +42,14 @@ class Search extends Component {
  }
 
  // Get value of input field from user
- onSearchChange = (e) => {
-    this.setState({searchField:e.target.value});
- }
+ // onSearchChange = (e) => {
+ //    this.setState({searchField:e.target.value});
+ // }
 
  // Call api with provide query params
  callAPI = async (urlSearch,urlOffset) => {
-      const {searchField, offset} = this.state;
+      const {offset} = this.state;
+      const {searchField} = this.props;
 
       const url =  `https://listen-api.listennotes.com/api/v2/search?q=${searchField}&offset=${urlOffset ? offset : 0}&scope=episode&language=Any language&len_min=0`
       const resp =  await fetch(url, {
@@ -53,15 +68,19 @@ class Search extends Component {
 
  // Display first page of result from query string
  onSearchSubmit = () => {
-  const {searchField, offset} = this.state;
+  const { offset } = this.state;
+  const { searchField } = this.props;
+
+  this.setState({offset:0}); // reset for 1st page results
   this.setState({loadingResult:true}, ()=> {
        this.callAPI(searchField, offset);
   })
 }
   
 render() {
-    const {episodeResults, loadingResult, totalResults, offset} = this.state;
-    const {onSearchSubmit, onSearchChange, paginateResult} = this;
+    const { onSearchChange } = this.props; // from our redux
+    const {episodeResults, loadingResult, totalResults} = this.state;
+    const {onSearchSubmit, paginateResult} = this;
     return (
       <React.Fragment>
         <SearchField onSearchSubmit={ onSearchSubmit } onSearchChange={ onSearchChange }>
@@ -77,4 +96,7 @@ render() {
   }
 }
 
-export default Search;
+// listen
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
+
+// connect = () => {do stuff related to connect...} return (Search)
