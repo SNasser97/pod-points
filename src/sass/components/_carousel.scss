@@ -1,19 +1,19 @@
 .carousel {
 	text-align: center;
-	background: $colour-secondary;
+	background: $white-colour-2;
 	padding: 2rem;
 	width: 100%;
 	height: auto;
 	margin: 0;
 	&__btn {
-		background: $dark-colour-2;
-		border-color:$dark-colour-2;
+		background: $colour-secondary;
+		border-color:$colour-secondary;
 		width: 25rem;
-		height: 8rem;
+		height: 6rem;
 		margin-top: 3rem;
 		&:hover{
-			background: $dark-colour-1;
-			border-color:$dark-colour-1;
+			background: $colour-secondary-hover;
+			border-color:$colour-secondary-hover;
 		}
 		// rem 0;
 		&--prev {

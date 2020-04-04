@@ -1,5 +1,6 @@
 .nav {
-	background: $dark-colour-2;
+	background: $colour-tertiary;
+	border-bottom:2px solid $colour-secondary;
 	display:flex;
 	justify-content:flex-end;
 	height: 6rem;
@@ -10,7 +11,7 @@
 		margin-left: 1.5rem;
 		flex-grow:1;
 		&--name {
-			color:$colour-tertiary;
+			color:$colour-secondary;
 			@include font(bold);
 			
 			@include respond(phone){
@@ -28,6 +29,10 @@
 	&__legal {
 		text-align: center;
 		margin: 0 auto;
+		background: #000;
+		width: auto;
+		height: auto;
+		display:none;
 		@include respond(phone){
 			// height: 1rem;
 			// width: 1rem;
@@ -40,7 +45,8 @@
 			@include respond(tab-port){
 				// height: 1.5rem;
 				// width: 1.5rem;
-				width: 35vw;
+				// width: 25vw;
+				display:none;
 			}
 		}
 	}
@@ -65,8 +71,18 @@
 	}
 	&__btn a {
 		// color:$colour-tertiary;
+		display:flex;
+		font-size: 2rem;
 		text-decoration:none;
-		
+		line-height: 1;
+		height: 4rem;
+		width: 15rem;
+		@include respond(phone) {
+			display:inline;
+		}
+		text-align: center;
+		justify-content: center;
+		align-items: center;
 	}
 }
 
@@ -74,10 +90,17 @@
 .legal {
 	margin: 0 auto;
 	justify-content:center;
-	width: 50vw;
+	width: 25rem;
 	height: auto;
-	display:none;
-	@include respond(phone) {
+	display:block;
+	background: $dark-colour-1;
+	border-radius:.25rem;
+	padding: 1rem;
+	&:hover {
+		cursor:pointer;
+		animation: shrinkExpand 1.5s infinite;
+	}
+	@include respond(tab-port) {
 		display:block;
 	}
 }

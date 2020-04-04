@@ -18,11 +18,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @include font();
-  @include bgGrad();
+  // @include bgGrad();
   height: 100%;
    margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    position: relative;
 }
 
 code {

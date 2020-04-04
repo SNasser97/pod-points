@@ -9,12 +9,12 @@
 	text-decoration: none;
 	cursor:pointer;
 	&__full {
-		background: $colour-primary;
-		border-color:$colour-primary;
+		background: $colour-secondary;
+		border-color:$colour-secondary;
 		color:$colour-tertiary;
 		&:hover {
-			background: $colour-primary-hover;
-			border-color:$colour-primary-hover;
+			background: $colour-secondary-hover;
+			border-color:$colour-secondary-hover;
 		}
 		&--secondary {
 			background: $colour-secondary;
@@ -25,13 +25,13 @@
 	}
 	&__ghost {
 		background: transparent;
-		border-color:$colour-tertiary;
-		color:$colour-tertiary;
+		border-color:$colour-secondary;
+		color:$colour-secondary;
 		
 		&:hover {
 			background: transparent;
-			color:$colour-primary;
-			border-color:$colour-primary;
+			color:$colour-secondary-hover;
+			border-color:$colour-secondary-hover;
 		}
 	}
 }

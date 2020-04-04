@@ -13,14 +13,35 @@
 	width: 60rem;
 	height: 60rem;
 	min-height: 100%;
-	border-radius:100%;
+	border-radius:20%;
 	margin: 0 2rem;
-	@include bgGrad2(-180deg);
+	// @include bgGrad2(-180deg);
+	@include respond(phone) {
+		height: 60rem;
+		width: 100%;
+		border-radius:10%;
+		// padding: ;
+		margin: 0;
+		background: $dark-colour-2;
+	}
+	@include respond(phone-xs) {
+		height: 60rem;
+		width: 100%;
+		// padding: ;
+		border-radius:1.5rem;
+		margin: 0;
+	}
+	background: $colour-tertiary;
 	z-index: 1;
+	box-shadow:2px 1px 1px 0px $colour-secondary;
 	&__title {
 		text-align: center;
 		margin: 0 auto;
 		width: 50%;
+		@include respond(phone) {
+			width: 100%;
+		}
+		
 	}
 	&__image {
 		height: 15rem;
@@ -31,9 +52,22 @@
 		border-radius:100%;
 		// z-index: 1;
 		border:.5rem solid $colour-secondary;
-		background: $dark-colour-2;
+		background: $white-colour-1;
 		transform:scale(1);
 		transition: all .3s;
+			
+		@include respond(phone) {
+			width: 12rem;
+			height: 12rem;
+			top:18rem;
+			left: 2.5rem;
+		}
+		@include respond(phone-xs) {
+			width: 9rem;
+			height: 9rem;
+			top:20rem;
+			left: 1rem;
+		}
 		&:hover {
 			transform:scale(.95);
 		}
@@ -59,7 +93,7 @@
 			transform:scale(.95);
 		}
 		// padding:2rem 0;
-		background: $dark-colour-1;
+		background: $dark-colour-2;
 		width: 16rem;
 		height: 16rem;
 		margin: 0 auto;
@@ -72,10 +106,22 @@
 		bottom:0rem;
 		border:.5rem solid $colour-secondary;
 		color:$colour-secondary;
+		@include respond(phone) {
+			width: 14rem;
+			height: 14rem;
+			top:42rem;
+			left:2rem;
+		}
+		@include respond(phone-xs) {
+			width: 12rem;
+			height: 12rem;
+			top:46rem;
+			left:1rem;
+		}
 	}
 	&__info--desc {
 		padding-bottom: 2rem;
-
+		
 	}
 	&__info--round {
 		transform:scale(1);
@@ -95,6 +141,18 @@
 		display:flex;
 		align-items:center;
 		top:20rem;
+		@include respond(phone) {
+			// width:auto;
+			padding: 1rem;
+			top:20rem;
+			right:1rem;
+		}
+		@include respond(phone-xs) {
+			// width:auto;
+			padding: 1rem;
+			top:25rem;
+			right:1rem;
+		}
 		p {
 			line-height: 1.5;
 			font-style: italic;
@@ -115,11 +173,30 @@
 		position: absolute;
 		bottom:10rem;
 		right:25rem;
+		@include respond(phone) {
+			// width:auto;
+			padding: .5rem;
+			top:42rem;
+			right:1rem;
+		}
+		@include respond(phone-xs) {
+			// width:auto;
+			padding: .5rem;
+			top:45rem;
+			right:1rem;
+		}
 		.btn__full--secondary {
 			width: 10rem;
 			margin-top: 5rem;
 			height: 10rem;
 			border-radius:50%;
+			@include respond(phone-xs) {
+			// width:auto;
+			width: 8rem;
+			height: 8rem;
+			padding: .5rem;
+			
+			}
 		}
 	}
 }

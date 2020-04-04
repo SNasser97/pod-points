@@ -1,6 +1,12 @@
 .pagination {
   margin-top: 4rem;
   margin-bottom: 1.5rem;
+  width: 50%;
+  overflow-x:auto;
+  margin:0rem auto;
+  height: 9rem;
+  padding-top: 3rem;
+  // padding: 4rem;
   &__btn {
       color:$colour-secondary;
       border:1px solid $colour-secondary;
