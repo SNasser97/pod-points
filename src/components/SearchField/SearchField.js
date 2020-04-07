@@ -8,7 +8,7 @@ const SearchField = ({children, onSearchChange, onSearchSubmit}) => {
 				<input onChange={ onSearchChange }  type="text" className="SearchField__input fs--3" placeholder="Search for an episode"/>
 			</div>
 			<div className="SearchField__field ">
-				<input onClick={ onSearchSubmit } type="submit" value="Search" className="btn btn__full--secondary SearchField__btn "/>
+				<input onClick={ ()=> onSearchSubmit() } type="submit" value="Search" className="btn btn__full--secondary SearchField__btn "/>
 			</div>
 				{children}
 		</div>
