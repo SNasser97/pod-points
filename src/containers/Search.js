@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
     onSearchChange: (e) => {
       dispatch(setSearchField(e.target.value))
     },
-    onRequestEpisodes: (url, offset) => {
+    onSearchSubmit: (url, offset) => {
       dispatch(requestEpisodes(url,offset))
     }
   }
@@ -38,32 +38,40 @@ class Search extends Component {
     }
   }
  
+ // TODO
  // pass as prop to Paginate component which on click pass value from PageNum array
  paginateResult = (pageNum) => {
     // const { searchField } = this.props;
     this.setState({offset:pageNum})
-    // this.setState({loadingResult:true},  ()=> {
-    //    this.callAPI(searchField, pageNum);
-    // })
- 
  }
 
  // Display first page of result from query string
- onSearchSubmit = (url, Offset) => {
-  // e.preventDefault();
-  const { offset } = this.state;
-  const { searchField } = this.props;
-  this.props.onRequestEpisodes(this.props.searchField,this.props.offset);
-}
+//  onSearchSubmit = (url, Offset) => {
+//   // e.preventDefault();
+//   const { offset } = this.state;
+//   const { searchField } = this.props;
+//   this.props.onRequestEpisodes(searchField,this.props.offset);
+// }
   
 render() {
-    const { onSearchChange, episodesList, total, isLoading, episodeResults, totalResults } = this.props; // from our redux
-    const { onSearchSubmit, paginateResult} = this;
-    console.log(episodeResults);
+    const { // from our redux store
+      onSearchChange, 
+      onSearchSubmit, 
+      searchField,
+      episodeResults,
+      totalResults,
+      isLoading,
+    } = this.props; 
+    // TODO
+    const { paginateResult} = this;
 
     return (
       <React.Fragment>
-        <SearchField onSearchSubmit={ onSearchSubmit } onSearchChange={ onSearchChange }>
+        <SearchField 
+          onSearchSubmit={ onSearchSubmit } 
+          onSearchChange={ onSearchChange }
+          searchField = { searchField }
+        >
           { isLoading ? <Loader/> : 
             <ErrorBoundry>
               <ResultList episodeResults={ episodeResults } />

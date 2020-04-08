@@ -4,15 +4,17 @@ import { Provider } from "react-redux";
 import logger from "redux-logger";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
+import { searchEpisodes, getEpisodes, getRandomEpisode } from "./redux/reducers";
 import thunkMiddleWare from "redux-thunk"
-import { searchEpisodes, getEpisodes } from "./redux/reducers";
+
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import './sass/main.scss';
 
 const rootReducer = combineReducers({
-  searchEpisodes:searchEpisodes,
-  getEpisodes:getEpisodes
+  searchEpisodes, // same as searchEpisodes: searchEpisodes
+  getEpisodes,
+  getRandomEpisode
 });
 const store = createStore(
   rootReducer, 

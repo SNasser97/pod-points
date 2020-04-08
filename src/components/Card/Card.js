@@ -1,11 +1,10 @@
 import React from "react";
 
-const Card = ({id,title,desc, length, name, image}) => {
+const Card = ({id,title,description, length, name, image}) => {
 	// remove html elements from JSON desc
-		
 		if(id !== "") {
 			let regex= /(<([^>]+)>)/ig;
-			let descriptionNoHTML = desc.replace(regex, "");
+			let descriptionNoHTML = description.replace(regex, "");
 			return (	
 				<div className="card">
 					<div className="card--front">
