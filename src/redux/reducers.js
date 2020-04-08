@@ -23,8 +23,8 @@ export const searchEpisodes = (state=initStateSearch, {type, payload}) => {
 // GET SPECIFIED EPISODE RESULTS
 const initStateEpisodes = {
   isLoading:false,
-  episodesList:[],
-  total:0,
+  episodeResults:[],
+  totalResults:0,
   offset:0,
   error:""
 }
@@ -39,8 +39,8 @@ export const getEpisodes = (state=initStateEpisodes, {type, payload}) => {
     case REQUEST_EPISODE_SUCCESS:
       return {
         ...state,
-        episodesList: payload.results,
-        total: payload.total,
+        episodeResults: payload.results,
+        totalResults: payload.total,
         isLoading:false
       }
     case REQUEST_EPISODE_FAILED:
