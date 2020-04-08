@@ -4,7 +4,7 @@ import Card from "../Card/Card";
 
 const CardList = ({ randomEpisode}) => {
 	const [pod] = randomEpisode;
-	
+
 	// we check if podcast exists else display placeholder
 	if(pod.id !== "") {
 		return (
@@ -14,7 +14,7 @@ const CardList = ({ randomEpisode}) => {
 				id={pod.id}
 				name={pod.name} 
 				title={pod.title} 
-				description={pod.desc} 
+				description={pod.description} 
 				length={pod.length} 
 				image={pod.image}
 			/>

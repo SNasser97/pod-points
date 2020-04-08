@@ -58,13 +58,13 @@ export const getEpisodes = (state=initStateEpisodes, {type, payload}) => {
 }
 
 const initStateRandomEp = {
-  loadingCard: false,
+  isLoading: false,
   randomEpisode: [
     {
       "id":"",
       "title":"",
       "name":"",
-      "desc":"",
+      "description":"",
       "length":"",
       "image":""
     }
@@ -76,7 +76,7 @@ export const getRandomEpisode = (state=initStateRandomEp, {type, payload}) => {
     case REQUEST_RAND_EPISODE_PENDING:
       return {
         ...state,
-        loadingCard:true,
+        isLoading:true
       }
     case REQUEST_RAND_EPISODE_SUCCESS:
       return {
@@ -85,17 +85,17 @@ export const getRandomEpisode = (state=initStateRandomEp, {type, payload}) => {
           "id":payload.id,
           "title":payload.podcast_title,
           "name":payload.title,
-          "desc":payload.description,
+          "description":payload.description,
           "length":payload.audio_length_sec,
           "image":payload.thumbnail
         }],
-        loadingCard:false
+        isLoading:false
       }
     case REQUEST_RAND_EPISODE_FAILED:
       return {
         ...state,
         error: payload,
-        loadingCard:false
+        isLoading:false
       }
     default:
       return state;

@@ -8,11 +8,9 @@ const Carousel = ({children, onClickLoadRand}) => {
 			{children}
 			<img className="legal" src={Legal} alt="powered by listen notes" />
 			<button onClick={ ()=> onClickLoadRand() } className="btn btn__full carousel__btn fs--3">Suprise Me</button>
-			
 		</div>
 	);
 }
 
 export default Carousel;
 
-			// <button className="btn btn__full carousel__btn carousel__btn--prev">Prev</button>

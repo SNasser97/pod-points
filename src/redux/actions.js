@@ -34,10 +34,11 @@ export const requestRandomEpisode = () => (dispatch) => {
   })
   .then(resp => resp.json())
   .then(data => {
-    dispatch({
+    // For showing the skel loader
+    setTimeout(()=>dispatch({
       type: REQUEST_RAND_EPISODE_SUCCESS,
       payload: data
-    })
+    }), 3000);
   })
   .catch(error => {
     dispatch({
