@@ -101,12 +101,14 @@
 		border-radius:25rem;
 		display:flex;
 		flex-wrap:wrap;
+		justify-content:center;
 		align-items:center;
 		position: absolute;
 		left:0;
 		bottom:0rem;
 		border:.5rem solid $colour-secondary;
 		color:$colour-secondary;
+
 		@include respond(phone) {
 			width: 14rem;
 			height: 14rem;

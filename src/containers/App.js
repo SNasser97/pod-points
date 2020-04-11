@@ -24,9 +24,24 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
 }
 
 class App extends Component {
-  
+  constructor() {
+    super();
+  }
+  formatAudio = (audioSeconds) => {
+    let h = Math.floor(audioSeconds / 3600);
+    audioSeconds %= 3600; // get remainder of mins from hours 
+    let m = Math.floor(audioSeconds / 60);
+    let s = audioSeconds % 60; // get remainder of seconds from mins
+    m  = m < 10 ? `0${m}` : m;
+    s = s < 10 ? `0${s}` : s;
+    h = h ? `${h}:` : "";
+    return `${h}${m}:${s}`
+  }
+
   render() {
     const { randomEpisode, isLoading} = this.props;
+    const { formatAudio} = this;
+
       return (
         <React.Fragment>
         <Nav/>
@@ -34,12 +49,12 @@ class App extends Component {
           {isLoading ? 
               <CardLoader/> : 
               <ErrorBoundry>
-                <CardList randomEpisode={ randomEpisode }/>
+                <CardList formatAudio={formatAudio} randomEpisode={ randomEpisode }/>
               </ErrorBoundry>
           }
         </Carousel>
         <Rank/>
-        <Search/>
+        <Search formatAudio={formatAudio}/>
         {/*
           <Leaderboard/> // TODO
           <Profile/> // TODO

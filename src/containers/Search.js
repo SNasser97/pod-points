@@ -31,19 +31,22 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class Search extends Component { 
-
+  constructor(props) {
+    super(props);
+  }
   
-render() {
+  render() {
     const { // from our redux store
       onSearchChange, 
       onSearchSubmit, 
       searchField,
       episodeResults,
       totalResults,
-      isLoading,
-    } = this.props; 
-    // TODO
-    // const { paginateResult} = this;
+      isLoading
+    } = this.props; // from store
+    const {formatAudio} = this.props; // from App
+    console.log(formatAudio);
+   
     return (
       <React.Fragment>
         <SearchField 
@@ -53,13 +56,14 @@ render() {
         >
           { isLoading ? <Loader/> : 
             <ErrorBoundry>
-              <ResultList episodeResults={ episodeResults } />
+              <ResultList formatAudio={formatAudio} episodeResults={ episodeResults } />
 
               <Pagination 
                 onSearchSubmit={onSearchSubmit}
                 totalResults={ totalResults } 
                 episodeResults={ episodeResults } 
                 searchField={searchField}
+                formatAudio={formatAudio}
               />
 
             </ErrorBoundry> 

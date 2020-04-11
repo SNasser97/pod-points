@@ -19,7 +19,7 @@ const Card = ({id,title,description, length, name, image}) => {
 						<div className="card__desc">
 							<img src={image} alt="thumbnail" className="card__image" height="150" width="150"/>
 								<p className="card__info--length fs--4">
-									{"Duration: "+ length + " minutes"}
+									{"Duration: "+ length}
 								</p>
 							<div className="card__info--round">
 								<p>{descriptionNoHTML !== "" ? descriptionNoHTML.substring(0,150)+"..." : "Hmm..this podcast doesn't include a description..." }</p>
