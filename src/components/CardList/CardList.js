@@ -2,8 +2,9 @@ import React from "react";
 import Card from "../Card/Card";
 
 
-const CardList = ({ bestPodCasts }) => {
-	const [pod] = bestPodCasts;
+const CardList = ({ randomEpisode}) => {
+	const [pod] = randomEpisode;
+
 	// we check if podcast exists else display placeholder
 	if(pod.id !== "") {
 		return (
@@ -13,7 +14,7 @@ const CardList = ({ bestPodCasts }) => {
 				id={pod.id}
 				name={pod.name} 
 				title={pod.title} 
-				desc={pod.desc} 
+				description={pod.description} 
 				length={pod.length} 
 				image={pod.image}
 			/>

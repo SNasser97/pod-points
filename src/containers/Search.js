@@ -6,88 +6,62 @@ import ResultList from "../components/ResultList/ResultList";
 import Loader from "../components/Loader/Loader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import Pagination from "../components/Pagination/Pagination";
-import { setSearchField } from "../redux/actions";
+import { setSearchField, requestEpisodes } from "../redux/actions";
 
 const mapStateToProps = (state) => {
+  const {searchEpisodes, getEpisodes} = state;
   return {
-    searchField: state.searchEpisodes.searchField
+    searchField: searchEpisodes.searchField,
+    episodeResults:getEpisodes.episodeResults,
+    totalResults: getEpisodes.totalResults,
+    isLoading: getEpisodes.isLoading,
+    error: getEpisodes.error,
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSearchChange: (e) => dispatch(setSearchField(e.target.value))
-  }
-}
-
-class Search extends Component {
-  constructor() {
-    super();
-    this.state= {
-      loadingResult:false,
-      episodeResults: [],
-      totalResults:0,
-      // searchField: "",
-      offset:0,
+    onSearchChange: (e) => {
+      dispatch(setSearchField(e.target.value));
+    },
+    onSearchSubmit: (url, offset) => {
+      dispatch(requestEpisodes(url, offset));
     }
   }
- 
- // pass as prop to Paginate component which on click pass value from PageNum array
- paginateResult = (pageNum) => {
-    const { searchField } = this.props;
-    this.setState({offset:pageNum})
-    this.setState({loadingResult:true},  ()=> {
-       this.callAPI(searchField, pageNum);
-    })
- 
- }
-
- // Get value of input field from user
- // onSearchChange = (e) => {
- //    this.setState({searchField:e.target.value});
- // }
-
- // Call api with provide query params
- callAPI = async (urlSearch,urlOffset) => {
-      const {offset} = this.state;
-      const {searchField} = this.props;
-
-      const url =  `https://listen-api.listennotes.com/api/v2/search?q=${searchField}&offset=${urlOffset ? offset : 0}&scope=episode&language=Any language&len_min=0`
-      const resp =  await fetch(url, {
-        headers:{
-          "Content-Type":"application/json",
-          "X-ListenAPI-Key":`${process.env.REACT_APP_API_KEY}`
-        }
-      })
-      const respJSON =  await resp.json();
-      this.setState({
-        episodeResults:respJSON.results,
-        totalResults:respJSON.total,
-        loadingResult:false,
-      });
- }
-
- // Display first page of result from query string
- onSearchSubmit = () => {
-  const { offset } = this.state;
-  const { searchField } = this.props;
-
-  this.setState({offset:0}); // reset for 1st page results
-  this.setState({loadingResult:true}, ()=> {
-       this.callAPI(searchField, offset);
-  })
 }
+
+class Search extends Component { 
+
   
 render() {
-    const { onSearchChange } = this.props; // from our redux
-    const {episodeResults, loadingResult, totalResults} = this.state;
-    const {onSearchSubmit, paginateResult} = this;
+    const { // from our redux store
+      onSearchChange, 
+      onSearchSubmit, 
+      searchField,
+      episodeResults,
+      totalResults,
+      isLoading,
+    } = this.props; 
+    // TODO
+    // const { paginateResult} = this;
     return (
       <React.Fragment>
-        <SearchField onSearchSubmit={ onSearchSubmit } onSearchChange={ onSearchChange }>
-          {loadingResult ? <Loader/> : 
+        <SearchField 
+          onSearchSubmit={ onSearchSubmit } 
+          onSearchChange={ onSearchChange }
+          searchField = { searchField }
+        >
+          { isLoading ? <Loader/> : 
             <ErrorBoundry>
               <ResultList episodeResults={ episodeResults } />
-              <Pagination totalResults={ totalResults } episodeResults={ episodeResults } paginateResult={paginateResult} />
+
+              <Pagination 
+                onSearchSubmit={onSearchSubmit}
+                totalResults={ totalResults } 
+                episodeResults={ episodeResults } 
+                searchField={searchField}
+              />
+
             </ErrorBoundry> 
           }
         </SearchField>

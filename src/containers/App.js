@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+
 import Nav from "../components/Nav/Nav";
 import Rank from "../components/Rank/Rank";
 import Carousel from "../components/Carousel/Carousel";
@@ -6,71 +8,36 @@ import CardList from "../components/CardList/CardList";
 import CardLoader from "../components/CardLoader/CardLoader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import Search from "./Search";
+import { requestRandomEpisode } from "../redux/actions";
+
+const mapStateToProps = (state) => {
+  const { getRandomEpisode } = state // reducers
+  return {
+    isLoading:getRandomEpisode.isLoading,
+    randomEpisode: getRandomEpisode.randomEpisode
+  }
+}
+const mapDispatchToProps = (dispatch) => { // dispatch the action
+  return {  
+    onClickLoadRand: () => dispatch(requestRandomEpisode())
+  }
+}
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state= {
-      loadingCard:false,
-      randomPodcast: [
-        {
-          "id":"",
-          "title":"",
-          "name":"",
-          "desc":"",
-          "length":"",
-          "image":""
-        }
-      ]
-    }
-  }
-
-
-loadRandomPod = () => { // onclick fetch random podcast
-  const randomPod = "https://listen-api.listennotes.com/api/v2/just_listen"
-  
-  this.setState({loadingCard:true}, ()=> {
-      fetch(randomPod, {
-      headers:{
-        "Content-Type":"application/json",
-        "X-ListenAPI-Key":`${process.env.REACT_APP_API_KEY}`
-      }
-    })
-    .then(resp=> resp.json())
-    .then(data=>{
-        // Delay response to display skeleten
-        setTimeout(() => {
-          let time = data.audio_length_sec;
-          let hrs = Math.floor(time / 60 / 60);
-          let mins = Math.floor(time / 60 ) - (hrs * 60);
-            this.setState({randomPodcast:[
-                {
-                  "id":data.id,
-                  "title":data.podcast_title,
-                  "name":data.title,
-                  "desc":data.description,
-                  "length":mins,
-                  "image":data.thumbnail
-                }
-          ], loadingCard:false})
-        }, 2000)
-      }).catch(err=>console.log("fetch err=>",err));
-    })
-  }
   
   render() {
-    const { randomPodcast, loadingCard} = this.state;
-    const { loadRandomPod } = this;
-    // console.log("NOT RANDOM=>", episodeResults)
-    // console.log("IS RANDOM=>", randomPodcast)
-
+    const { randomEpisode, isLoading} = this.props;
       return (
         <React.Fragment>
         <Nav/>
-        <Carousel loadRandomPod={ loadRandomPod }>
-          {loadingCard ? <CardLoader/> : <ErrorBoundry><CardList bestPodCasts={ randomPodcast }/></ErrorBoundry>}
+        <Carousel onClickLoadRand = {this.props.onClickLoadRand} >
+          {isLoading ? 
+              <CardLoader/> : 
+              <ErrorBoundry>
+                <CardList randomEpisode={ randomEpisode }/>
+              </ErrorBoundry>
+          }
         </Carousel>
-        
         <Rank/>
         <Search/>
         {/*
@@ -80,7 +47,6 @@ loadRandomPod = () => { // onclick fetch random podcast
         </React.Fragment>
       );
   }
-  
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

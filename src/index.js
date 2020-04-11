@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
-import { searchEpisodes } from "./redux/reducers";
+import logger from "redux-logger";
+
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { searchEpisodes, getEpisodes, getRandomEpisode} from "./redux/reducers";
+import thunkMiddleWare from "redux-thunk"
+
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import './sass/main.scss';
 
 const rootReducer = combineReducers({
-  searchEpisodes,
-  
+  searchEpisodes, // same as searchEpisodes: searchEpisodes
+  getEpisodes,
+  getRandomEpisode,
 });
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer, 
+  applyMiddleware(thunkMiddleWare,logger)
+);
 
 ReactDOM.render(
   <Provider store={store}>
