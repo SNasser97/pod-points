@@ -22,7 +22,7 @@
 		border-radius:10%;
 		// padding: ;
 		margin: 0;
-		background: $dark-colour-2;
+		// background: $dark-colour-2;
 	}
 	@include respond(phone-xs) {
 		height: 60rem;
@@ -93,7 +93,6 @@
 		&:hover {
 			transform:scale(.95);
 		}
-		// padding:2rem 0;
 		background: $dark-colour-2;
 		width: 16rem;
 		height: 16rem;
@@ -176,6 +175,7 @@
 		position: absolute;
 		bottom:10rem;
 		right:25rem;
+		// background: #000;
 		@include respond(phone) {
 			// width:auto;
 			padding: .5rem;
@@ -193,6 +193,12 @@
 			margin-top: 5rem;
 			height: 10rem;
 			border-radius:50%;
+			background: transparent;
+			color:$colour-secondary;
+			&:hover {
+				background: $colour-secondary;
+				color:$dark-colour-1;
+			}
 			@include respond(phone-xs) {
 			// width:auto;
 			width: 8rem;

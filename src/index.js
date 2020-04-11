@@ -9,6 +9,7 @@ import thunkMiddleWare from "redux-thunk"
 
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './sass/main.scss';
 
 const rootReducer = combineReducers({

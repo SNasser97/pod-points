@@ -8,9 +8,9 @@
   padding-top: 3rem;
   // padding: 4rem;
   &__btn {
-      color:$colour-secondary;
-      border:1px solid $colour-secondary;
-      background: transparent;
+      color:$dark-colour-1;
+      border:1px solid $white-colour-1;
+      background: $colour-tertiary;
       margin: 0 .1rem;
       transition:all .1s;
       width: 3.5rem;
@@ -20,7 +20,7 @@
         color:$dark-colour-1;
       }
       &--active {
-        background: $colour-tertiary;
+        background: $colour-secondary;
         color:$dark-colour-1;
       }
   }

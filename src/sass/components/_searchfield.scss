@@ -6,36 +6,52 @@
 	text-align: center;
 	height:auto;
 	padding: 5rem 0;
-	background: $dark-colour-2;
+	background: $white-colour-1;
 	
 	.title {
 		margin-bottom: 10rem;
-		color:$colour-secondary;
+		color:$dark-colour-1;
 	}
 	&__field {
 
 	}
 	&__btn {
 		width: 15rem;
-		border-radius:2.5rem;
+		// border-radius:2.5rem;
+		color:$colour-tertiary;
 		margin: 1.5rem;
 			&:hover{
+				background: $colour-secondary-hover;
 			cursor:pointer;
 			}
 		}
 	&__input {
-		width: 30vw;
+		width: 35rem;
 		height: 5rem;
 		border:none;
-		border-bottom:1px solid $colour-secondary;
+		border-bottom:1px solid $dark-colour-1;
 		text-align: center;
-		color:$colour-secondary;
+		color:rgba($dark-colour-1,.25);
 		background: transparent;
 		margin-bottom: 2rem;
 		transition: all .2s;
 		
+		@include respond(tab-port) {
+			width: 45%;
+			font-size: 2.5rem;
+		}
+		@include respond(phone) {
+			width: 70%;
+			font-size: 2rem;
+		}
 		&:focus {
-			width: 35vw;
+			width: 40rem;
+			@include respond(tab-port) {
+				width: 55%;
+			}
+			@include respond(phone) {
+				width: 85%;
+			}
 		}
 
 	}

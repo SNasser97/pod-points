@@ -26,7 +26,7 @@ const Card = ({id,title,description, length, name, image}) => {
 							</div>
 						</div>
 						<div className="card__btn">
-							<button className="btn btn__full--secondary">Play</button>
+							<button className="btn btn__full--secondary"><i className="far fa-5x fa-play-circle "></i></button>
 						</div>
 					</div>
 					<div className="card--back">
