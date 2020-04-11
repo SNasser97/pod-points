@@ -3,7 +3,6 @@ import {
   REQUEST_EPISODE_PENDING,
   REQUEST_EPISODE_SUCCESS,
   REQUEST_EPISODE_FAILED,
-  SET_OFFSET,
   REQUEST_RAND_EPISODE_PENDING,
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED
@@ -13,13 +12,6 @@ export const setSearchField = (text) => {
   return {
      type: CHANGE_SEARCH_FIELD,
      payload: text
-  }
-}
-
-export const setOffset = (offset) => {
-  return {
-    type: SET_OFFSET,
-    payload: offset
   }
 }
 

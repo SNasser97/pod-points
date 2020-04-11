@@ -15,43 +15,23 @@ const mapStateToProps = (state) => {
     episodeResults:getEpisodes.episodeResults,
     totalResults: getEpisodes.totalResults,
     isLoading: getEpisodes.isLoading,
-    error: getEpisodes.error
+    error: getEpisodes.error,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange: (e) => {
-      dispatch(setSearchField(e.target.value))
+      dispatch(setSearchField(e.target.value));
     },
     onSearchSubmit: (url, offset) => {
-      dispatch(requestEpisodes(url,offset))
+      dispatch(requestEpisodes(url, offset));
     }
   }
 }
 
-class Search extends Component {
-  constructor() {
-    super();
-    this.state= {
-      offset:0,
-    }
-  }
- 
- // TODO
- // pass as prop to Paginate component which on click pass value from PageNum array
- paginateResult = (pageNum) => {
-    // const { searchField } = this.props;
-    this.setState({offset:pageNum})
- }
+class Search extends Component { 
 
- // Display first page of result from query string
-//  onSearchSubmit = (url, Offset) => {
-//   // e.preventDefault();
-//   const { offset } = this.state;
-//   const { searchField } = this.props;
-//   this.props.onRequestEpisodes(searchField,this.props.offset);
-// }
   
 render() {
     const { // from our redux store
@@ -63,8 +43,7 @@ render() {
       isLoading,
     } = this.props; 
     // TODO
-    const { paginateResult} = this;
-
+    // const { paginateResult} = this;
     return (
       <React.Fragment>
         <SearchField 
@@ -75,7 +54,14 @@ render() {
           { isLoading ? <Loader/> : 
             <ErrorBoundry>
               <ResultList episodeResults={ episodeResults } />
-              <Pagination totalResults={ totalResults } episodeResults={ episodeResults } paginateResult={paginateResult} />
+
+              <Pagination 
+                onSearchSubmit={onSearchSubmit}
+                totalResults={ totalResults } 
+                episodeResults={ episodeResults } 
+                searchField={searchField}
+              />
+
             </ErrorBoundry> 
           }
         </SearchField>

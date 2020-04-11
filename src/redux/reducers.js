@@ -3,7 +3,6 @@ import {
   REQUEST_EPISODE_PENDING,
   REQUEST_EPISODE_SUCCESS,
   REQUEST_EPISODE_FAILED,
-  SET_OFFSET,
   REQUEST_RAND_EPISODE_PENDING,
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED
@@ -28,7 +27,6 @@ const initStateEpisodes = {
   isLoading:false,
   episodeResults:[],
   totalResults:0,
-  offset:0,
   error:""
 }
 
@@ -101,3 +99,4 @@ export const getRandomEpisode = (state=initStateRandomEp, {type, payload}) => {
       return state;
   }
 }
+

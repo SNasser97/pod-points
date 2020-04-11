@@ -24,10 +24,7 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
 }
 
 class App extends Component {
-  constructor() {
-    super();
-  }
-
+  
   render() {
     const { randomEpisode, isLoading} = this.props;
       return (
