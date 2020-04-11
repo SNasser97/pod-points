@@ -1,0 +1,51 @@
+.user {
+	display:flex;
+	justify-content: center;
+	text-align: center;
+	margin-top: 2rem;
+	background: $colour-tertiary;
+	height: auto;
+	width: 100%;
+	padding: .5rem;
+	padding-bottom: 3rem;
+	margin: 0 auto;
+	height: 45rem;
+	&__details {
+		// padding-top: 0;
+		margin-top: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		width: 65rem;
+		box-shadow: 0 1px 4px $white-colour-1;
+	}
+	&__rank {
+		margin-top: 0;
+
+		&--score,&--name {
+			color:$colour-secondary;
+		}
+		&--score {
+			border:1px solid $colour-secondary;
+			padding: 1rem;
+			margin: 0 .8rem;
+			@include respond(phone) {
+				display: block;
+				width: auto;
+				margin:.5rem auto;
+				padding: 1rem 0;
+			}
+			width: auto;
+		}
+	}
+	&__info {
+		margin-top: 3rem;
+	}
+	&__btn {
+		&:hover {
+			color:$colour-secondary-hover;
+			border-color:currentColor;
+		}
+	}
+}

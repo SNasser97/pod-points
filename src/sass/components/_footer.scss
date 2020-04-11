@@ -1,0 +1,19 @@
+.footer {
+  width: 100%;
+  background: $dark-colour-1;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__details {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 4rem;
+    width: 40rem;
+  }
+  &__author {
+    // text-decoration: ;
+    color:$colour-secondary;
+  }
+}

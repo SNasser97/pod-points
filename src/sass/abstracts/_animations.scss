@@ -1,0 +1,41 @@
+/* DO NOT HAVE THIS FLASH CONSTANTLY */
+@keyframes shrinkExpand {
+   0% {
+    background: rgba($dark-colour-1,0.7);
+    transform:scale(1);
+  }
+  25%{
+    background: rgba($white-colour-1,.5);
+    transform:scale(.95);
+
+  }
+  50%, 100% {
+    // background: rgba($dark-colour-1,.25);
+    transform:scale(1);
+  }
+}
+@keyframes move {
+  0% {
+    background: rgba($dark-colour-2,1.7);
+    transform:translateY(0);
+    border:.5rem solid $colour-tertiary;
+  }
+  25%{
+    background: rgba($colour-tertiary,1);
+    transform:translateY(-1rem);
+    border:.5rem solid $colour-secondary;
+  }
+  50%, 100% {
+    // background: rgba($dark-colour-1,.25);
+    transform:translateY(0rem);
+    color:$colour-tertiary;
+    border:.5rem solid $colour-tertiary;
+  }
+}
+
+
+
+
+
+
+

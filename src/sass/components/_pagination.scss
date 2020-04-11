@@ -1,0 +1,28 @@
+.pagination {
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  width: 50%;
+  overflow-x:auto;
+  margin:0rem auto;
+  height: 9rem;
+  padding-top: 3rem;
+  // padding: 4rem;
+  &__btn {
+      color:$colour-secondary;
+      border:1px solid $colour-secondary;
+      background: transparent;
+      margin: 0 .1rem;
+      transition:all .1s;
+      width: 3.5rem;
+      border-radius:0;
+      &:hover{
+        background: $colour-tertiary;
+        color:$dark-colour-1;
+      }
+      &--active {
+        background: $colour-tertiary;
+        color:$dark-colour-1;
+      }
+  }
+
+}

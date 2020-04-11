@@ -1,0 +1,102 @@
+.results {
+	width: 99%;
+	background:$colour-secondary;
+	// margin: 1rem auto;
+	margin-top: 2rem;
+	border-radius:25rem;
+	padding: 0;
+	@include respond(tab-port) {
+				// height:40rem;
+				// width: 100%;
+				border-radius:8rem;
+		}
+	&__pod {
+		background: $dark-colour-1;
+		color:$colour-tertiary;
+		// margin-bottom: 1rem;
+		height: 10rem;
+		display:flex;
+		align-items:center;
+		justify-content:space-around;
+		transition: .1s all;
+		transform:translateX(0);
+		border-radius:1rem;
+		@include respond(tab-port) {
+				height:40rem;
+				width: 100%;
+				border-radius:2rem;
+		}
+		&:hover {
+			// background: rgba($colour-tertiary, 0.85);
+			transform:translateX(15px);
+		}
+		&-details {
+			display:flex;
+			align-items:center;
+			width: 100%;
+			justify-content:center;
+			// text-align: center;
+			margin: 0 auto;
+			margin-left: 3rem;
+			// margin-right: 1rem;
+			@include respond(tab-port) {
+				display:flex;
+				justify-content: center;
+				flex-direction: column;
+			}
+		}
+		&-name {
+			margin-right: 3rem;
+			margin-left: 0.5rem;
+			width: 100%;
+			color:$colour-secondary;
+		}
+		&-genre {
+			// margin-right: 5rem;
+			width: 100%;
+		}
+		&-author {
+			// margin-right: 2.5rem;
+			width: 100%;
+		}
+		&-length {
+			// margin-right: 2rem;
+			width: 100%;
+		}
+		&-btn {
+			margin-right: 10rem;
+			width: 6rem;
+			height: 6rem;
+			border-radius:50%;
+			@include respond(tab-port) {
+				margin-right: 0rem;
+				height: 9rem;
+				width: 9rem;
+			}
+			@include respond(phone) {
+				margin-right: 0rem;
+				height: 6rem;
+				width: 6rem;
+			}
+			background: transparent;
+			&:hover {
+				cursor:pointer;
+			}
+		}
+		&-image {
+			// position: absolute;
+			height: 8rem;
+			width: 8rem;
+			// margin-right: 1rem;
+			@include respond(tab-port) {
+				height: 12rem;
+				width: 12rem;
+			}
+			@include respond(phone) {
+				margin-right: 0rem;
+				height: 11rem;
+				width: 11rem;
+			}
+		}
+	}
+}

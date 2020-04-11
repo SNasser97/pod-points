@@ -1,0 +1,24 @@
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+@import "./abstracts/typography";
+@import "./abstracts/animations";
+
+@import "./components/nav";
+@import "./components/button";
+@import "./components/rank";
+@import "./components/card";
+@import "./components/carousel";
+@import "./components/searchfield";
+@import "./components/results";
+@import "./components/resultList";
+@import "./components/loader";
+@import "./components/cardloader";
+@import "./components/pagination";
+@import "./components/footer";
+
+// @import "./components/nav";
+// @import "./components/nav";
+// @import "./components/nav";
+
+
+@import "./base/base";

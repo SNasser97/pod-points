@@ -1,0 +1,132 @@
+.lds-container {
+  
+  background: rgba($dark-colour-2,1);
+  width: 60rem;
+  height: 60rem;
+  display:flex;
+  justify-content:flex-start;
+  position: relative;
+  // z-index: ;
+  align-items:center;
+  border-radius:20%;
+  margin: 0 auto;
+  animation: shrinkExpand 2.5s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  // animation-delay:1s;
+  transform:scale(1);
+  @include respond(phone) {
+    width: 100%;
+    border-radius:10%;
+
+  }
+  @include respond(phone-xs) {
+    border-radius:1.5rem;
+  }
+  h2 {
+    color:$colour-tertiary;
+    // flex-wra
+    position: absolute;
+    margin-left:8rem;
+    // align-self:flex-start;
+    // top:0;
+    // transform:rotate(-45deg);
+    @include respond(phone) {
+      width: 100%;
+      border-radius:10%;
+      top:0;
+      margin-left: 0;
+      margin-top: 10rem;
+    }
+  }
+  
+
+  // Our skeleton
+ 
+  
+  &-skel {
+    display:flex;
+    align-items:center;
+
+     &--duration, 
+     &--about, 
+     &--img {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position: absolute;
+      height:15rem; 
+      width:15rem;
+      background: rgba($dark-colour-2,1);
+      border-radius:100%;
+      transform:translateY(0);
+      animation: move 2.5s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+      border:.5rem solid $colour-secondary;
+      
+     }
+      
+     p{
+      color:$dark-colour-2;
+      padding: 1rem;
+
+      &:before {
+        content:"?";
+        font-size: 6rem;
+      }
+     }
+     &--img {
+      left: 0;
+      top:0;
+      animation-delay: .3s;
+      @include respond(phone) {
+       top:18rem;
+       left:2.5rem;
+       height: 12rem;
+       width: 12rem;
+      }
+      @include respond(phone-xs) {
+        top: 20rem;
+        left:1rem;
+        height: 9rem;
+        width: 9rem;
+      }
+     }
+
+     &--about {
+        height: 25rem;
+        width: 25rem;
+        right: -8rem;
+        bottom:15rem;
+        // bottom:0;
+        animation-delay: .2s;
+      @include respond(phone) {
+        top:20rem;
+        right:1rem;
+      }
+      @include respond(phone-xs) {
+        top:25rem;
+        right:1rem;
+      }
+     }
+
+     &--duration{
+      height: 16rem;
+      width: 16rem;
+      left:0;
+      bottom:0;
+      animation-delay: .1s;
+      @include respond(phone) {
+        width: 14rem;
+        height: 14rem;
+        top:42rem;
+        left:2rem;
+      }
+      @include respond(phone-xs) {
+        width: 12rem;
+        height: 12rem;
+        top:46rem;
+        left:1rem;
+      }
+     }
+  }
+ 
+}
+

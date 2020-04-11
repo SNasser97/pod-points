@@ -1,0 +1,63 @@
+
+@mixin font($fontType:"normal") {
+	@if $fontType == "normal" {
+		font-family:$font;
+		font-weight: normal;
+	} @else  {
+		font-family: $font;
+		font-weight: bolder;
+	}
+}
+
+@mixin bgGrad($grad-direction:135deg) {
+	background: $colour-primary;  /* fallback for old browsers */
+    background: -webkit-linear-gradient($grad-direction, $colour-tertiary 60%, $colour-primary 50%);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient($grad-direction, $colour-tertiary 60%, $colour-primary 50%) no-repeat; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background-image:no-repeat;
+
+
+}
+
+@mixin bgGrad2($grad-direction:135deg) {
+	background: -webkit-linear-gradient($grad-direction,
+		$dark-colour-1 50%, $dark-colour-2 50%);
+	background: -o-linear-gradient($grad-direction,
+		$dark-colour-1 50%, $dark-colour-2 50%);
+	background: linear-gradient($grad-direction,
+		$dark-colour-1 50%, $colour-secondary 50%, $dark-colour-2 50%);
+	color:$colour-tertiary;
+}
+
+
+@mixin respond($breakpoint) {
+  // Phone-xs
+  @if $breakpoint == phone-xs {
+    @media (max-width: 20em) {
+      @content;
+    } //0 - 320px
+  }
+  // Phone
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      @content;
+    } //0 - 600px
+  }
+  // Table Portrait
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) {
+      @content;
+    } //900px
+  }
+  // Table Landscape
+  @if $breakpoint == tab-land {
+    @media (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+  // Big Desktop
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    } //1800px +
+  }
+}
