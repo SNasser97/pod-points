@@ -33,7 +33,8 @@
 	}
 	background: $colour-tertiary;
 	z-index: 1;
-	box-shadow:2px 1px 1px 0px $colour-secondary;
+	border:3px solid rgba($colour-secondary,1.25);
+	box-shadow:2px 1px 5px 0px rgba(0,0,0,.15);
 	&__title {
 		text-align: center;
 		margin: 0 auto;
