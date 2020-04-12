@@ -1,10 +1,58 @@
 .media {
   width: 100%;
-  background: red;
+  background: $colour-secondary;
   display:flex;
-  justify-content:center;
+  height: auto;
+  justify-content:flex-start;
   align-items:center;
+  position: sticky;
+  left:0;
+  bottom:0;
+  box-shadow:0 1px 25px 3px rgba($dark-colour-1,0.25);
+  z-index: 1;
+  border:0;
   &-player {
-    
+    width: 0;
+    border:0;
+  }
+  &-controls {
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    display:flex;
+    border:0;
+    // background: #000;
+  }
+  &-details {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-right: 15%;
+    &-name {
+      margin-left: 5rem;
+    }
+  }
+  &-img {
+    img{
+      width: 8rem;
+      height: 8rem;
+    }
+  }
+
+  button {
+    // order:-3;
+    &:first-child{
+      order:-2;
+    }
+    &:last-child {
+      order:2;
+    }
+    // color:transparent;
+  }
+  time {
+    order:-1;
+  }
+  progress {
+    order:-1;
   }
 }

@@ -45,7 +45,6 @@ class Search extends Component {
       isLoading
     } = this.props; // from store
     const {calcAudio} = this.props; // from App
-    console.log(calcAudio);
    
     return (
       <React.Fragment>
