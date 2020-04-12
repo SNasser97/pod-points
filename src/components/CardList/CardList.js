@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../Card/Card";
 
 
-const CardList = ({ randomEpisode, formatAudio}) => {
+const CardList = ({ randomEpisode, calcAudio}) => {
 	const [pod] = randomEpisode;
 
 	// we check if podcast exists else display placeholder
@@ -15,7 +15,7 @@ const CardList = ({ randomEpisode, formatAudio}) => {
 				name={pod.name} 
 				title={pod.title} 
 				description={pod.description} 
-				length={formatAudio(pod.length)} 
+				length={calcAudio(pod.length)} 
 				image={pod.image}
 			/>
 		</div>	

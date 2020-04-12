@@ -7,6 +7,8 @@ import Carousel from "../components/Carousel/Carousel";
 import CardList from "../components/CardList/CardList";
 import CardLoader from "../components/CardLoader/CardLoader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
+import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
+
 import Search from "./Search";
 import { requestRandomEpisode } from "../redux/actions";
 
@@ -27,20 +29,29 @@ class App extends Component {
   constructor() {
     super();
   }
-  formatAudio = (audioSeconds) => {
-    let h = Math.floor(audioSeconds / 3600);
-    audioSeconds %= 3600; // get remainder of mins from hours 
-    let m = Math.floor(audioSeconds / 60);
-    let s = audioSeconds % 60; // get remainder of seconds from mins
-    m  = m < 10 ? `0${m}` : m;
-    s = s < 10 ? `0${s}` : s;
-    h = h ? `${h}:` : "";
+  
+  formatAudio = (hours,mins,secs) => {
+    let h = hours ? `${hours}:` : "";
+    let m = mins < 10 ? `0${mins}` : mins;
+    let s = secs < 10 ? `0${secs}` : secs;
     return `${h}${m}:${s}`
   }
+  
+  calcAudio  = (audioSeconds) => {
+    let hours = Math.floor(audioSeconds / 3600);
+    audioSeconds %= 3600; // get remainder of mins from hours 
+    let mins = Math.floor(audioSeconds / 60);
+    let secs = audioSeconds % 60; // get remainder of seconds from mins
+    // m  = m < 10 ? `0${m}` : m;
+    // s = s < 10 ? `0${s}` : s;
+    // h = h ? `${h}:` : "";
+    return this.formatAudio(hours,mins,secs);
+  }
+  
 
   render() {
     const { randomEpisode, isLoading} = this.props;
-    const { formatAudio} = this;
+    const { calcAudio } = this;
 
       return (
         <React.Fragment>
@@ -49,16 +60,17 @@ class App extends Component {
           {isLoading ? 
               <CardLoader/> : 
               <ErrorBoundry>
-                <CardList formatAudio={formatAudio} randomEpisode={ randomEpisode }/>
+                <CardList calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
               </ErrorBoundry>
           }
         </Carousel>
         <Rank/>
-        <Search formatAudio={formatAudio}/>
+        <Search calcAudio={calcAudio}/>
         {/*
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
+        <MediaPlayer randomEpisode={randomEpisode}/>
         </React.Fragment>
       );
   }

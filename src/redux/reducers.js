@@ -64,7 +64,8 @@ const initStateRandomEp = {
       "name":"",
       "description":"",
       "length":"",
-      "image":""
+      "image":"",
+      "src":""
     }
   ]
 }
@@ -85,7 +86,8 @@ export const getRandomEpisode = (state=initStateRandomEp, {type, payload}) => {
           "name":payload.title,
           "description":payload.description,
           "length":payload.audio_length_sec,
-          "image":payload.thumbnail
+          "image":payload.thumbnail,
+          "src":payload.audio
         }],
         isLoading:false
       }

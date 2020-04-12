@@ -44,8 +44,8 @@ class Search extends Component {
       totalResults,
       isLoading
     } = this.props; // from store
-    const {formatAudio} = this.props; // from App
-    console.log(formatAudio);
+    const {calcAudio} = this.props; // from App
+    console.log(calcAudio);
    
     return (
       <React.Fragment>
@@ -56,14 +56,13 @@ class Search extends Component {
         >
           { isLoading ? <Loader/> : 
             <ErrorBoundry>
-              <ResultList formatAudio={formatAudio} episodeResults={ episodeResults } />
+              <ResultList calcAudio={calcAudio} episodeResults={ episodeResults } />
 
               <Pagination 
                 onSearchSubmit={onSearchSubmit}
                 totalResults={ totalResults } 
                 episodeResults={ episodeResults } 
                 searchField={searchField}
-                formatAudio={formatAudio}
               />
 
             </ErrorBoundry> 

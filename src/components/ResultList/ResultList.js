@@ -1,7 +1,7 @@
 import React from "react";
 import Result from "../Result/Result";
 
-const ResultList = ({ episodeResults, formatAudio }) => {
+const ResultList = ({ episodeResults, calcAudio }) => {
   
   // displays when user hasn't typed or no results are returned  
   if(!episodeResults.length) {
@@ -19,7 +19,7 @@ const ResultList = ({ episodeResults, formatAudio }) => {
             name={eps.title_original} 
             desc={eps.description_original} 
             image={ eps.thumbnail } 
-            length={ formatAudio(eps.audio_length_sec) }
+            length={ calcAudio(eps.audio_length_sec) }
             /> 
         })
       }
