@@ -24,7 +24,7 @@ const MediaPlayer = ({randomEpisode}) => {
           </p>
         </div>
         <div className="media-controls">
-          <Progress  className={styles.media_duration_bar}/>
+          <Progress className={styles.media_duration_bar}/>
           <CurrentTime className={`fs--4 ${styles.media_time} ${styles.media_time__current}`}/>
           <PlayPause className={`far fa-2x fa-play-circle ${styles.media_button}`}></PlayPause>
           <Duration className={`fs--4 ${styles.media_time} ${styles.media_time__duration}`}/>
