@@ -3,20 +3,20 @@ import Card from "../Card/Card";
 
 
 const CardList = ({ randomEpisode, calcAudio}) => {
-	const [pod] = randomEpisode;
+	const [episode] = randomEpisode;
 
-	// we check if podcast exists else display placeholder
-	if(pod.id !== "") {
+	// we check if episodecast exists else display placeholder
+	if(episode.id !== "") {
 		return (
 		<div className="card-container">
 			<Card 
-				key={pod.id}
-				id={pod.id}
-				name={pod.name} 
-				title={pod.title} 
-				description={pod.description} 
-				length={calcAudio(pod.length)} 
-				image={pod.image}
+				key={episode.id}
+				id={episode.id}
+				name={episode.name} 
+				title={episode.title} 
+				description={episode.description} 
+				length={calcAudio(episode.length)} 
+				image={episode.image}
 			/>
 		</div>	
 		);

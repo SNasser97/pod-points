@@ -1,6 +1,9 @@
+// media container/wrapper styles (for LAYOUT)
 .media {
   width: 100%;
-  background: $colour-secondary;
+  background: linear-gradient(105deg, 
+    $colour-secondary 24%, 
+    $colour-tertiary 24%);
   display:flex;
   height: auto;
   justify-content:flex-start;
@@ -8,51 +11,47 @@
   position: sticky;
   left:0;
   bottom:0;
-  box-shadow:0 1px 25px 3px rgba($dark-colour-1,0.25);
+  box-shadow:0 1px 25px 3px rgba($dark-colour-1,0.05);
   z-index: 1;
   border:0;
   &-player {
-    width: 0;
-    border:0;
+    display:none;
+    // visibility:hidden;
   }
   &-controls {
     display:flex;
     justify-content:space-around;
     align-items:center;
     display:flex;
-    border:0;
-    // background: #000;
+    padding: .5rem;
   }
   &-details {
     display:flex;
     justify-content:center;
     align-items:center;
-    margin-right: 15%;
+    margin-right: 10rem;
+    width: 25%;
+    border-right:1px solid rgba($dark-colour-1,0.15);
+    background: rgba($colour-secondary,.25);
     &-name {
-      margin-left: 5rem;
+      // margin-left: 1rem;
+      width: 50rem;
+      padding-left: 1rem;
     }
   }
   &-img {
+    height: 100%;
+    width: 100%;
+    margin-left: 1rem;
     img{
-      width: 8rem;
-      height: 8rem;
+      width: 12rem;
+      padding: 1rem;
+      padding-top: 1.4rem;
+      height: 12rem;
     }
   }
 
-  button {
-    // order:-3;
-    &:first-child{
-      order:-2;
-    }
-    &:last-child {
-      order:2;
-    }
-    // color:transparent;
-  }
-  time {
-    order:-1;
-  }
-  progress {
-    order:-1;
-  }
+  
 }
+
+// Talking Twins and More. A Multiple Births Podcast. Season 2. Episode 5. What are your kids missing due to COVID-19

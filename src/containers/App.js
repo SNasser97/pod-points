@@ -42,9 +42,7 @@ class App extends Component {
     audioSeconds %= 3600; // get remainder of mins from hours 
     let mins = Math.floor(audioSeconds / 60);
     let secs = audioSeconds % 60; // get remainder of seconds from mins
-    // m  = m < 10 ? `0${m}` : m;
-    // s = s < 10 ? `0${s}` : s;
-    // h = h ? `${h}:` : "";
+    
     return this.formatAudio(hours,mins,secs);
   }
   
@@ -52,7 +50,7 @@ class App extends Component {
   render() {
     const { randomEpisode, isLoading} = this.props;
     const { calcAudio } = this;
-
+    console.log("episode length=>",calcAudio(this.props.randomEpisode[0].length)); // display current time of episode    
       return (
         <React.Fragment>
         <Nav/>
