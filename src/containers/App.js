@@ -30,20 +30,18 @@ class App extends Component {
     super();
   }
   
-  formatAudio = (hours,mins,secs) => {
-    let h = hours ? `${hours}:` : "";
-    let m = mins < 10 ? `0${mins}` : mins;
-    let s = secs < 10 ? `0${secs}` : secs;
-    return `${h}${m}:${s}`
-  }
-  
   calcAudio  = (audioSeconds) => {
     let hours = Math.floor(audioSeconds / 3600);
     audioSeconds %= 3600; // get remainder of mins from hours 
     let mins = Math.floor(audioSeconds / 60);
     let secs = audioSeconds % 60; // get remainder of seconds from mins
     
-    return this.formatAudio(hours,mins,secs);
+    return () => {
+      hours = hours ? `${hours}:` : "";
+      mins = mins < 10 ? `0${mins}` : mins;
+      secs = secs < 10 ? `0${secs}` : secs;
+      return `${hours}${mins}:${secs}`
+    };
   }
   
 
