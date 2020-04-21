@@ -4,7 +4,7 @@ import test from "../../assets/img/test.png";
 import styles from "./Media.module.scss";
 import CustomPlayPause from './CustomPlayPause/CustomPlayPause';
 import CustomProgress from './CustomProgress/CustomProgress';
-
+import sampleAudio from "../../assets/audio/sample_audio.mp3";
 const {CurrentTime, Progress, Duration} = controls;
 
 class MediaPlayer extends Component  {
@@ -16,7 +16,7 @@ class MediaPlayer extends Component  {
       <Media>
         <div className="media">
           <div className="media-player">
-            <Player src={episode.src ? episode.src : "empty"} />
+            <Player src={episode.src ? episode.src : sampleAudio} />
           </div>
           <div className="media-details">
             <div className="media-img">
