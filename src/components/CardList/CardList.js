@@ -15,7 +15,7 @@ const CardList = ({ randomEpisode, calcAudio}) => {
 				name={episode.name} 
 				title={episode.title} 
 				description={episode.description} 
-				length={calcAudio(episode.length)} 
+				length={calcAudio(episode.length)()} 
 				image={episode.image}
 			/>
 		</div>	

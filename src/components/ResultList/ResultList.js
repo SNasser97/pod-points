@@ -19,7 +19,7 @@ const ResultList = ({ episodeResults, calcAudio }) => {
             name={eps.title_original} 
             desc={eps.description_original} 
             image={ eps.thumbnail } 
-            length={ calcAudio(eps.audio_length_sec) }
+            length={ calcAudio(eps.audio_length_sec)() }
             /> 
         })
       }
