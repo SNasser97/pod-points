@@ -8,16 +8,13 @@ class CustomProgress extends Component {
 
   render() {
     const { className, style, media } = this.props;
-    console.log(media); // props of media
     return (
-      <React.Fragment>
       <progress
         className={className}
         style={style}
         max={media.duration}
         value={media.currentTime}
       />
-      </React.Fragment>
     )
   }
 }
