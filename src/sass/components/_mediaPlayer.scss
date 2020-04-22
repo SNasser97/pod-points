@@ -2,21 +2,26 @@
 .media {
   width: 100%;
   background: linear-gradient(105deg, 
-    $colour-secondary 24%, 
-    $colour-tertiary 24%);
+    $white-colour-1 30%, 
+    $colour-tertiary 30%);
   display:flex;
   height: auto;
   justify-content:flex-start;
   align-items:center;
-  position: sticky;
   left:0;
   bottom:0;
-  box-shadow:0 1px 25px 3px rgba($dark-colour-1,0.05);
+  box-shadow:0 1px 15px 4px rgba($dark-colour-1,0.05);
   z-index: 1;
   border:0;
+  position: fixed;
+  @include respond(tab-port) {
+    bottom:0;
+    width: 100%;
+    flex-direction:column;
+  }
+  
   &-player {
     display:none;
-    // visibility:hidden;
   }
   &-controls {
     display:flex;
@@ -25,31 +30,71 @@
     display:flex;
     padding: .5rem;
     position: relative;
+    margin-left: 12.5rem;
+    @include respond(tab-port) {
+      margin-bottom: .5rem;
+      margin-left: 0;
+    }
   }
   &-details {
     display:flex;
     justify-content:center;
     align-items:center;
-    margin-right: 10rem;
     width: 25%;
     border-right:1px solid rgba($dark-colour-1,0.15);
-    background: rgba($colour-secondary,.25);
+    // background: rgba($colour-secondary,.25);
     height: inherit;
+
+    @include respond(tab-port) {
+      display:flex;
+      align-items:flex-start;
+      justify-content: flex-start;
+      margin-right: auto;
+      background: transparent;
+      border:0;
+      width: 25rem;
+    }
     &-name {
-      // margin-left: 1rem;
+
       width: 50rem;
       padding-left: 1rem;
+
+      @include respond(tab-port) {
+        align-self:center;
+        display:flex;
+        width: 100%;
+        justify-content: flex-start;
+        margin-bottom: 8rem;
+        padding-left: 1rem;
+      }
+
     }
   }
   &-img {
     height: 100%;
     width: 100%;
     margin-left: 1rem;
+    @include respond(tab-port) {
+        width: 15rem;
+    }
+   
     img{
+
       width: 12rem;
       padding: 1rem;
       padding-top: 1.4rem;
       height: 12rem;
+       @include respond(tab-port) {
+        width: 9rem;
+        height:9rem;
+        padding: 0;
+        margin-top: 1rem;
+      }
+      @include respond(phone) {
+        width: 7rem;
+        height: 7rem;
+      }
+      
     }
   }
 }
