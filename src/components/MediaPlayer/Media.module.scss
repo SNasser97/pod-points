@@ -1,5 +1,6 @@
 // styles for react media player components
 @import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/animations";
 
 .media_button {
   background: $colour-secondary;
@@ -19,9 +20,8 @@
   width: 25vw;
   &::-moz-progress-bar { 
     background: $colour-secondary;  
-
   }
-
+  
   /* Chrome */
   &::-webkit-progress-value {
       background: $colour-secondary;
