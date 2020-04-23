@@ -6,22 +6,26 @@ import {
   REQUEST_RAND_EPISODE_PENDING,
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED,
-  PLAY_EPISODE
+  SHOW_PLAYER
 } from "./constants";
 
+
+
+// DISPLAY MEDIA PLAY ON BUTTON CLICK
 const initStateMediaPlayer = {
   isShown: false,
 }
 
 export const showMediaPlayer = (state=initStateMediaPlayer, {type,payload}) => {
   switch(type) {
-    case PLAY_EPISODE:
+    case SHOW_PLAYER:
       return {...state, isShown:payload}
     default:
       return state;
   }
 }
 
+// SET QUERY STRING ON EPISODE RESULTS
 const initStateSearch = {
   searchField:""
 }
@@ -69,6 +73,7 @@ export const getEpisodes = (state=initStateEpisodes, {type, payload}) => {
   }
 }
 
+// GET RANDOM EPISODE FROM API
 const initStateRandomEp = {
   isLoading: false,
   randomEpisode: [

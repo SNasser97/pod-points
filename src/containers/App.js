@@ -13,11 +13,12 @@ import Search from "./Search";
 import { requestRandomEpisode, displayMediaPlayer } from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode, showMediaPlayer } = state // reducers
+  const { getRandomEpisode, showMediaPlayer, getEpisodes } = state // reducers
   return {
     isLoading:getRandomEpisode.isLoading,
     randomEpisode: getRandomEpisode.randomEpisode,
-    isShown: showMediaPlayer.isShown
+    isShown: showMediaPlayer.isShown,
+    episodeResults: getEpisodes.episodeResults
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -50,6 +51,7 @@ class App extends Component {
   render() {
     const { randomEpisode, isLoading, isShown, onClickShowPlayer, onClickLoadRand} = this.props;
     const { calcAudio } = this;
+    console.log("search res=>", this.props.episodeResults);
     console.log("episode length=>",calcAudio(randomEpisode[0].length)()); // display current time of episode    
       return (
         <React.Fragment>
@@ -68,7 +70,7 @@ class App extends Component {
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
-        {isShown ? <MediaPlayer randomEpisode={randomEpisode}/> : null}
+        {isShown ? <MediaPlayer episodeResults={this.props.episodeResults} randomEpisode={randomEpisode}/> : null}
         </React.Fragment>
       );
   }

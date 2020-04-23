@@ -6,13 +6,13 @@ import {
   REQUEST_RAND_EPISODE_PENDING,
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED,
-  PLAY_EPISODE,
+  SHOW_PLAYER,
 } from "./constants";
 
 
 export const displayMediaPlayer = () => {
   return {
-    type: PLAY_EPISODE,
+    type: SHOW_PLAYER,
     payload: true
   }
 }

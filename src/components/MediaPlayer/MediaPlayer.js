@@ -4,15 +4,15 @@ import test from "../../assets/img/test.png";
 import styles from "./Media.module.scss";
 import CustomPlayPause from './CustomPlayPause/CustomPlayPause';
 import CustomProgress from './CustomProgress/CustomProgress';
-import Loader from "../Loader/Loader";
 // dev purposes
 import sampleAudio from "../../assets/audio/sample_audio.mp3"; 
 const {CurrentTime, Progress, Duration} = controls;
 
-const MediaPlayer = ({ randomEpisode }) => {
+const MediaPlayer = ({ randomEpisode, episodeResults }) => {
  
      const [episode] = randomEpisode; // randomEp[0].props
-     
+
+     console.log("mediap_eplist=>",episodeResults);
      return (
       <Media>
         <div className="media">

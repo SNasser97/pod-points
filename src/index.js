@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   searchEpisodes, // same as searchEpisodes: searchEpisodes
   getEpisodes,
   getRandomEpisode,
-  showMediaPlayer
+  showMediaPlayer,
 });
 const store = createStore(
   rootReducer, 
