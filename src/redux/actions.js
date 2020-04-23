@@ -26,8 +26,8 @@ export const setSearchField = (text) => {
 export const requestRandomEpisode = () => async (dispatch) => {
   const url = "https://listen-api.listennotes.com/api/v2/just_listen"; 
   
+  dispatch({type: REQUEST_RAND_EPISODE_PENDING}); // do pending outside catch block
   try {
-    dispatch({type: REQUEST_RAND_EPISODE_PENDING});
     const resp = await fetch(url, {
       headers:{
         "Content-Type":"application/json",
@@ -51,8 +51,8 @@ export const requestRandomEpisode = () => async (dispatch) => {
 export const requestEpisodes = (urlSearch, urlOffset) => async (dispatch) => {
   const url =  `https://listen-api.listennotes.com/api/v2/search?q=${urlSearch}&offset=${urlOffset ? urlOffset : 0}&scope=episode&language=Any language&len_min=0`
   
+  dispatch({type: REQUEST_EPISODE_PENDING});
   try {
-    dispatch({type: REQUEST_EPISODE_PENDING});
     const resp = await fetch(url, {
        headers:{
         "Content-Type":"application/json",
