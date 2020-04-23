@@ -1,7 +1,8 @@
 import React from "react";
 
-const Card = ({id,title,description, length, name, image}) => {
+const Card = ({id,title,description, length, name, image, onClickLoadPlayer}) => {
 	// remove html elements from JSON desc
+	console.log("c=>",onClickLoadPlayer);
 		if(id !== "") {
 			let regex= /(<([^>]+)>)/ig;
 			let descriptionNoHTML = description.replace(regex, "");
@@ -26,7 +27,9 @@ const Card = ({id,title,description, length, name, image}) => {
 							</div>
 						</div>
 						<div className="card__btn">
-							<button className="btn btn__full--secondary"><i className="far fa-5x fa-play-circle "></i></button>
+							<button onClick={()=>onClickLoadPlayer()}className="btn btn__full--secondary">
+								<i className="far fa-5x fa-play-circle "></i>
+							</button>
 						</div>
 					</div>
 					<div className="card--back">

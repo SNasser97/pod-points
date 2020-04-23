@@ -1,7 +1,7 @@
 import React from "react";
 import Legal from "../../assets/img/api-transparent.png";
 
-const Carousel = ({children, onClickLoadRand}) => {
+const Carousel = ({children, onClickLoadRand, onPlayShow}) => {
 	return (
 		<div className="carousel">
 			<h1 className="title fs--1">Listen and earn!</h1>

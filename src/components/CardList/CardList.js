@@ -2,9 +2,9 @@ import React from "react";
 import Card from "../Card/Card";
 
 
-const CardList = ({ randomEpisode, calcAudio}) => {
+const CardList = ({ randomEpisode, calcAudio,onClickLoadPlayer}) => {
 	const [episode] = randomEpisode;
-
+	console.log("cl",onClickLoadPlayer);
 	// we check if episodecast exists else display placeholder
 	if(episode.id !== "") {
 		return (
@@ -17,6 +17,7 @@ const CardList = ({ randomEpisode, calcAudio}) => {
 				description={episode.description} 
 				length={calcAudio(episode.length)()} 
 				image={episode.image}
+				onClickLoadPlayer={onClickLoadPlayer}
 			/>
 		</div>	
 		);

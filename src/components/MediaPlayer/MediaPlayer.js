@@ -10,6 +10,8 @@ import sampleAudio from "../../assets/audio/sample_audio.mp3";
 const {CurrentTime, Progress, Duration} = controls;
 
 class MediaPlayer extends Component  {
+
+  
   render() {
      const [episode] = this.props.randomEpisode; // randomEp[0].props
      

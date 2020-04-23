@@ -5,8 +5,22 @@ import {
   REQUEST_EPISODE_FAILED,
   REQUEST_RAND_EPISODE_PENDING,
   REQUEST_RAND_EPISODE_SUCCESS,
-  REQUEST_RAND_EPISODE_FAILED
+  REQUEST_RAND_EPISODE_FAILED,
+  PLAY_EPISODE
 } from "./constants";
+
+const initStateMediaPlayer = {
+  isShown: false,
+}
+
+export const showMediaPlayer = (state=initStateMediaPlayer, {type,payload}) => {
+  switch(type) {
+    case PLAY_EPISODE:
+      return {...state, isShown:payload}
+    default:
+      return state;
+  }
+}
 
 const initStateSearch = {
   searchField:""

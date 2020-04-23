@@ -10,18 +10,20 @@ import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
 
 import Search from "./Search";
-import { requestRandomEpisode } from "../redux/actions";
+import { requestRandomEpisode, displayMediaPlayer } from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode } = state // reducers
+  const { getRandomEpisode, showMediaPlayer } = state // reducers
   return {
     isLoading:getRandomEpisode.isLoading,
-    randomEpisode: getRandomEpisode.randomEpisode
-  }
+    randomEpisode: getRandomEpisode.randomEpisode,
+    isShown: showMediaPlayer.isShown
+  } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
   return {  
-    onClickLoadRand: () => dispatch(requestRandomEpisode())
+    onClickLoadRand: () => dispatch(requestRandomEpisode()),
+    onClickLoadPlayer: () => dispatch(displayMediaPlayer())
   }
 }
 
@@ -46,17 +48,17 @@ class App extends Component {
   
 
   render() {
-    const { randomEpisode, isLoading} = this.props;
+    const { randomEpisode, isLoading, isShown, onClickLoadPlayer, onClickLoadRand} = this.props;
     const { calcAudio } = this;
-    console.log("episode length=>",calcAudio(this.props.randomEpisode[0].length)); // display current time of episode    
+    console.log("episode length=>",calcAudio(randomEpisode[0].length)()); // display current time of episode    
       return (
         <React.Fragment>
         <Nav/>
-        <Carousel onClickLoadRand = {this.props.onClickLoadRand} >
+        <Carousel onClickLoadRand = {onClickLoadRand} >
           {isLoading ? 
               <CardLoader/> : 
               <ErrorBoundry>
-                <CardList calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
+                <CardList onClickLoadPlayer={onClickLoadPlayer} calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
               </ErrorBoundry>
           }
         </Carousel>
@@ -66,7 +68,7 @@ class App extends Component {
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
-        <MediaPlayer randomEpisode={randomEpisode}/>
+        {isShown ? <MediaPlayer randomEpisode={randomEpisode}/> : null}
         </React.Fragment>
       );
   }

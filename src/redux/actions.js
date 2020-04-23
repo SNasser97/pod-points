@@ -9,6 +9,13 @@ import {
   PLAY_EPISODE,
 } from "./constants";
 
+
+export const displayMediaPlayer = () => {
+  return {
+    type: PLAY_EPISODE,
+    payload: true
+  }
+}
 export const setSearchField = (text) => {
   return {
      type: CHANGE_SEARCH_FIELD,
