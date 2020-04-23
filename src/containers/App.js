@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => { // dispatch the action
   return {  
     onClickLoadRand: () => dispatch(requestRandomEpisode()),
-    onClickLoadPlayer: () => dispatch(displayMediaPlayer())
+    onClickShowPlayer: () => dispatch(displayMediaPlayer())
   }
 }
 
@@ -32,7 +32,7 @@ class App extends Component {
     super();
   }
   
-  calcAudio  = (audioSeconds) => {
+  calcAudio  = (audioSeconds) => { // in ms
     let hours = Math.floor(audioSeconds / 3600);
     audioSeconds %= 3600; // get remainder of mins from hours 
     let mins = Math.floor(audioSeconds / 60);
@@ -48,7 +48,7 @@ class App extends Component {
   
 
   render() {
-    const { randomEpisode, isLoading, isShown, onClickLoadPlayer, onClickLoadRand} = this.props;
+    const { randomEpisode, isLoading, isShown, onClickShowPlayer, onClickLoadRand} = this.props;
     const { calcAudio } = this;
     console.log("episode length=>",calcAudio(randomEpisode[0].length)()); // display current time of episode    
       return (
@@ -58,7 +58,7 @@ class App extends Component {
           {isLoading ? 
               <CardLoader/> : 
               <ErrorBoundry>
-                <CardList onClickLoadPlayer={onClickLoadPlayer} calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
+                <CardList onClickShowPlayer={onClickShowPlayer} calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
               </ErrorBoundry>
           }
         </Carousel>

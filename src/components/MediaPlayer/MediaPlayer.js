@@ -4,16 +4,14 @@ import test from "../../assets/img/test.png";
 import styles from "./Media.module.scss";
 import CustomPlayPause from './CustomPlayPause/CustomPlayPause';
 import CustomProgress from './CustomProgress/CustomProgress';
-
+import Loader from "../Loader/Loader";
 // dev purposes
 import sampleAudio from "../../assets/audio/sample_audio.mp3"; 
 const {CurrentTime, Progress, Duration} = controls;
 
-class MediaPlayer extends Component  {
-
-  
-  render() {
-     const [episode] = this.props.randomEpisode; // randomEp[0].props
+const MediaPlayer = ({ randomEpisode }) => {
+ 
+     const [episode] = randomEpisode; // randomEp[0].props
      
      return (
       <Media>
@@ -23,7 +21,7 @@ class MediaPlayer extends Component  {
           </div>
           <div className="media-details">
             <div className="media-img">
-              <img src={episode.image ? episode.image:test} height="12rem" width="12rem" alt={episode.title ? episode.title : "episode thumbnail"}/>
+              <img src={episode.image ? episode.image: test} height="12rem" width="12rem" alt={episode.title ? episode.title : "episode thumbnail"}/>
             </div>
             <p className="media-details-name">
               {episode.title.length > 40 ? episode.title.substr(0,40)+"..." : episode.title}
@@ -39,11 +37,5 @@ class MediaPlayer extends Component  {
       </Media>
     )
   }
- 
-}
 
 export default MediaPlayer;
-
-// <Progress className={styles.media_duration_bar} />
-// <i className="far fa-4x fa-play-circle" ></i>
-// <i className="fas fa-2x fa-volume-up"></i>
