@@ -6,10 +6,21 @@ import {
   REQUEST_RAND_EPISODE_PENDING,
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED,
-  SHOW_PLAYER
+  SHOW_PLAYER,
+  PLAY_CURRENT_EPISODE
 } from "./constants";
 
-
+const initStatePlayEpisode = {
+  episode:[],
+}
+export const playEpisode = (state=initStateEpisodes, {type,payload}) => {
+  switch(type) {
+    case PLAY_CURRENT_EPISODE:
+      return {...state, episode: payload};
+    default:
+      return state;
+  }
+}
 
 // DISPLAY MEDIA PLAY ON BUTTON CLICK
 const initStateMediaPlayer = {

@@ -1,7 +1,14 @@
 import React from "react";
 
-const Card = ({id,title,description, length, name, image, onClickShowPlayer}) => {
+const Card = ({id,title,description, length, name, image, onClickShowPlayer,src, playCurrent}) => {
 	// remove html elements from JSON desc
+		const currEpisode = [{
+			id,
+			title,
+			desc:description,
+			length,
+			src
+		}]
 		if(id !== "") {
 			let regex= /(<([^>]+)>)/ig;
 			let descriptionNoHTML = description.replace(regex, "");
@@ -26,7 +33,7 @@ const Card = ({id,title,description, length, name, image, onClickShowPlayer}) =>
 							</div>
 						</div>
 						<div className="card__btn">
-							<button onClick={()=>onClickShowPlayer()} className="btn btn__full--secondary">
+							<button onClick={() => { onClickShowPlayer(); playCurrent(currEpisode)}} className="btn btn__full--secondary">
 								<i className="far fa-5x fa-play-circle "></i>
 							</button>
 						</div>

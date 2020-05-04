@@ -7,8 +7,15 @@ import {
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED,
   SHOW_PLAYER,
+  PLAY_CURRENT_EPISODE
 } from "./constants";
 
+export const playCurrentEpisode = (episode) => {
+  return {
+    type: PLAY_CURRENT_EPISODE,
+    payload: episode
+  }
+}
 
 export const displayMediaPlayer = () => {
   return {

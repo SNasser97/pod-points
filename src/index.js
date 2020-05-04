@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import logger from "redux-logger";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { searchEpisodes, getEpisodes, getRandomEpisode, showMediaPlayer} from "./redux/reducers";
+import { searchEpisodes, getEpisodes, getRandomEpisode, showMediaPlayer, playEpisode} from "./redux/reducers";
 import thunkMiddleWare from "redux-thunk"
 
 import App from './containers/App';
@@ -17,7 +17,9 @@ const rootReducer = combineReducers({
   getEpisodes,
   getRandomEpisode,
   showMediaPlayer,
+  playEpisode
 });
+
 const store = createStore(
   rootReducer, 
   applyMiddleware(thunkMiddleWare,logger)

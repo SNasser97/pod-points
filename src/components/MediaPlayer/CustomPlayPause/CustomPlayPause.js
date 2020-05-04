@@ -10,8 +10,7 @@ class CustomPlayPause extends Component {
     this.props.media.playPause()
   }
   render() {
-    const {styles,media} = this.props;
-    // console.log(media.volume=0.5);
+    const {styles} = this.props;
     return(
       <button
         type="button"

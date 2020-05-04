@@ -1,9 +1,17 @@
 import React from "react";
 import test from "../../assets/img/test.png";
 
-
-const Result = ({id,title,name,desc,image,length}) => {
-
+const Result = ({ id, title, name, desc, image, length, onClickShowPlayer, playCurrent, src, publisher}) => {
+	const currEpisode = [{
+		id,
+		title,
+		name,
+		desc,
+		image,
+		length,
+		src
+	}]
+	console.log("click=>",onClickShowPlayer);
 	return (
 		<div className="results">
 			<div className="results__pod">
@@ -19,15 +27,17 @@ const Result = ({id,title,name,desc,image,length}) => {
 				<div className="results__pod-details">
 					
 					<p className="results__pod-genre">
-						Pod Genre
+						{publisher}
 					</p>
-					<p className="results__pod-author">
+					{/*<p className="results__pod-author">
 						Pod Author
-					</p>
+					</p>*/}
 					<p className="results__pod-length">
 						{length}
 					</p>
-					<button className="btn btn__full results__pod-btn"><i className="far fa-4x fa-play-circle"></i></button>
+					<button onClick={() => {onClickShowPlayer(); playCurrent(currEpisode);}}className="btn btn__full results__pod-btn">
+						<i className="far fa-4x fa-play-circle"></i>
+					</button>
 				</div>
 				
 			</div>

@@ -10,21 +10,23 @@ import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
 
 import Search from "./Search";
-import { requestRandomEpisode, displayMediaPlayer } from "../redux/actions";
+import { requestRandomEpisode, displayMediaPlayer, playCurrentEpisode } from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode, showMediaPlayer, getEpisodes } = state // reducers
+  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode } = state // reducers
   return {
     isLoading:getRandomEpisode.isLoading,
     randomEpisode: getRandomEpisode.randomEpisode,
     isShown: showMediaPlayer.isShown,
-    episodeResults: getEpisodes.episodeResults
+    episodeResults: getEpisodes.episodeResults,
+    episode:playEpisode.episode // current episode to be played
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
   return {  
     onClickLoadRand: () => dispatch(requestRandomEpisode()),
-    onClickShowPlayer: () => dispatch(displayMediaPlayer())
+    onClickShowPlayer: () => dispatch(displayMediaPlayer()),
+    onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode))
   }
 }
 
@@ -51,26 +53,28 @@ class App extends Component {
   render() {
     const { randomEpisode, isLoading, isShown, onClickShowPlayer, onClickLoadRand} = this.props;
     const { calcAudio } = this;
-    console.log("search res=>", this.props.episodeResults);
-    console.log("episode length=>",calcAudio(randomEpisode[0].length)()); // display current time of episode    
-      return (
+    // console.log("search res=>", this.props.episodeResults);
+    // console.log("episode length=>",calcAudio(randomEpisode[0].length)()); // display current time of episode    
+    console.log("from srch=>",this.props.episode)  ;
+    console.log("test=>", this.props.onClickPlayCurrEpisode);
+    return (
         <React.Fragment>
         <Nav/>
         <Carousel onClickLoadRand = {onClickLoadRand} >
           {isLoading ? 
               <CardLoader/> : 
               <ErrorBoundry>
-                <CardList onClickShowPlayer={onClickShowPlayer} calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
+              <CardList playCurrent={this.props.onClickPlayCurrEpisode} onClickShowPlayer={onClickShowPlayer} calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
               </ErrorBoundry>
           }
         </Carousel>
         <Rank/>
-        <Search calcAudio={calcAudio}/>
+        <Search onClickPlayCurrEpisode={this.props.onClickPlayCurrEpisode} onClickShowPlayer={onClickShowPlayer} calcAudio={calcAudio}/>
         {/*
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
-        {isShown ? <MediaPlayer episodeResults={this.props.episodeResults} randomEpisode={randomEpisode}/> : null}
+        {isShown ? <MediaPlayer currentEpisode={this.props.episode} randomEpisode={randomEpisode}/> : null}
         </React.Fragment>
       );
   }

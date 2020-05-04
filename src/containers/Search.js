@@ -6,16 +6,17 @@ import ResultList from "../components/ResultList/ResultList";
 import Loader from "../components/Loader/Loader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import Pagination from "../components/Pagination/Pagination";
-import { setSearchField, requestEpisodes } from "../redux/actions";
+import { setSearchField, requestEpisodes} from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const {searchEpisodes, getEpisodes} = state;
+  const {searchEpisodes, getEpisodes, playEpisode} = state;
   return {
     searchField: searchEpisodes.searchField,
     episodeResults:getEpisodes.episodeResults,
     totalResults: getEpisodes.totalResults,
     isLoading: getEpisodes.isLoading,
     error: getEpisodes.error,
+    episode: playEpisode.episode
   }
 }
 
@@ -26,7 +27,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSearchSubmit: (url, offset) => {
       dispatch(requestEpisodes(url, offset));
-    }
+    },
+    // onClickPlayCurrEpisode: (episode) => {
+    //   dispatch(playCurrentEpisode(episode));
+    // }
   }
 }
 
@@ -42,10 +46,14 @@ class Search extends Component {
       searchField,
       episodeResults,
       totalResults,
-      isLoading
+      isLoading,
+      // onClickPlayCurrEpisode,
+      onClickShowPlayer
     } = this.props; // from store
-    const {calcAudio} = this.props; // from App
-   
+    const {calcAudio, onClickPlayCurrEpisode} = this.props; // from App
+    // console.log(this.episode[0]);
+    console.log("test if curr episode defined=>",this.props.episode);
+    console.log("search play click=>", onClickPlayCurrEpisode);
     return (
       <React.Fragment>
         <SearchField 
@@ -55,7 +63,12 @@ class Search extends Component {
         >
           { isLoading ? <Loader/> : 
             <ErrorBoundry>
-              <ResultList calcAudio={calcAudio} episodeResults={ episodeResults } />
+              <ResultList 
+                onClickShowPlayer={onClickShowPlayer} 
+                playCurrent={ onClickPlayCurrEpisode } 
+                calcAudio={calcAudio} 
+                episodeResults={ episodeResults }
+              />
 
               <Pagination 
                 onSearchSubmit={onSearchSubmit}
@@ -63,7 +76,6 @@ class Search extends Component {
                 episodeResults={ episodeResults } 
                 searchField={searchField}
               />
-
             </ErrorBoundry> 
           }
         </SearchField>
