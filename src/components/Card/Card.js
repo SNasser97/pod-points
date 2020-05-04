@@ -1,17 +1,17 @@
 import React from "react";
 
 const Card = ({id,title,description, length, name, image, onClickShowPlayer,src, playCurrent}) => {
-	// remove html elements from JSON desc
 		const currEpisode = [{
 			id,
 			title,
-			desc:description,
 			length,
-			src
+			src,
+			image
 		}]
 		if(id !== "") {
-			let regex= /(<([^>]+)>)/ig;
-			let descriptionNoHTML = description.replace(regex, "");
+			
+			let regex = /(<([^>]+)>)/ig; // remove html elements from JSON description
+			let descriptionNoHTML = description.replace(regex, ""); 
 			return (	
 				<div className="card">
 					<div className="card--front">

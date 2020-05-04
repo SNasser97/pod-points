@@ -5,8 +5,6 @@ const Result = ({ id, title, name, desc, image, length, onClickShowPlayer, playC
 	const currEpisode = [{
 		id,
 		title,
-		name,
-		desc,
 		image,
 		length,
 		src
