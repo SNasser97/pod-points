@@ -1,27 +1,32 @@
 // styles for react media player components
 @import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
+@import "../../sass/abstracts/animations";
 
-.media_button {
-  background: $colour-secondary;
-  border-radius:50%;
-  height: 7rem;
-  width: 7rem;
-  margin: 2rem;
-
-}
 
 .media_duration_bar {
-  // border-radius: 2.5rem;
-
-  border:4px solid $colour-secondary;
+  
+  border:1px solid $colour-secondary;
+  border-left: 2px solid $colour-secondary;
   background: $white-colour-1;
   order:-1;
   width: 25vw;
+
+  @include respond(tab-port) {
+    width: 75vw;
+    margin:0;   
+  }
+  @include respond(phone) {
+    bottom:0;
+    width: 60vw;
+  }
+  @include respond(phone-xs) {
+    width: 100%;
+  }
   &::-moz-progress-bar { 
     background: $colour-secondary;  
-
   }
-
+  
   /* Chrome */
   &::-webkit-progress-value {
       background: $colour-secondary;
@@ -29,7 +34,6 @@
 }
 
 .media_time {
-  // margin: 2rem !important;
   color: $dark-colour-1;
   background: rgba($dark-colour-1,.015);
   box-shadow:1px 2px .5rem 0px rgba($dark-colour-1,.15);
@@ -40,6 +44,14 @@
   align-items: center;
   max-width:100%;
   margin: 0 2rem;
+  
+  @include respond(tab-port) {
+    margin:0 .5rem;
+    margin: 0;
+  }
+  @include respond(phone-xs) {
+    margin: 0;
+  }
   &__current {
     order:-2;
   }
@@ -48,17 +60,45 @@
   }
 }
 
+
+.media_button {
+  background: $colour-secondary;
+  border-radius:50%;
+  height: 7rem;
+  width: 7rem;
+  margin: 2rem;
+}
+
 .media_button {
   order:-3;
   // background;
-  height: 7rem;
+  height: 6rem;
   font-size: 2rem !important;
-  width: 7rem;
+  width: 6rem;
   border:0;
   cursor:pointer;
-
+  @include respond(tab-port) {
+    height: 6rem;
+    width: 6rem; 
+    margin:0;   
+    position: absolute;
+    bottom:5rem;
+  }
+  @include respond(phone) {
+    width: 6rem;
+    height: 6rem;
+  }
+  i {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4.5rem;
+    @include respond(phone) {
+      font-size: 4.5rem;
+    }
+  }
   &__play{
-  
+    
   }
   &__pause{
 

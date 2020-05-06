@@ -9,15 +9,12 @@ class CustomProgress extends Component {
   render() {
     const { className, style, media } = this.props;
     return (
-      <React.Fragment>
       <progress
         className={className}
         style={style}
         max={media.duration}
         value={media.currentTime}
       />
-      <div><span>{/* progressbar highlight TODO:*/}</span></div>
-      </React.Fragment>
     )
   }
 }

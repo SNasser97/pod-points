@@ -1,5 +1,4 @@
 import React from "react";
-import Legal from "../../assets/img/api-transparent.png";
 
 const Nav = () => {
 	return (

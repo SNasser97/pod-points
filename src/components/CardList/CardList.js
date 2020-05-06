@@ -1,10 +1,11 @@
 import React from "react";
 import Card from "../Card/Card";
+// import { playCurrentEpisode } from "../../redux/actions";
+// import { playCurrentEpisode } from "../../redux/actions";
 
-
-const CardList = ({ randomEpisode, calcAudio}) => {
+const CardList = ({ randomEpisode, calcAudio, onClickShowPlayer, playCurrent}) => {
+	
 	const [episode] = randomEpisode;
-
 	// we check if episodecast exists else display placeholder
 	if(episode.id !== "") {
 		return (
@@ -17,7 +18,11 @@ const CardList = ({ randomEpisode, calcAudio}) => {
 				description={episode.description} 
 				length={calcAudio(episode.length)()} 
 				image={episode.image}
+				src={episode.src}
+				playCurrent={playCurrent}
+				onClickShowPlayer={onClickShowPlayer}
 			/>
+			
 		</div>	
 		);
 	} else {

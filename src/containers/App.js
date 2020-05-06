@@ -10,27 +10,29 @@ import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
 
 import Search from "./Search";
-import { requestRandomEpisode } from "../redux/actions";
+import { requestRandomEpisode, displayMediaPlayer, playCurrentEpisode } from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode } = state // reducers
+  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode } = state // reducers
   return {
     isLoading:getRandomEpisode.isLoading,
-    randomEpisode: getRandomEpisode.randomEpisode
-  }
+    randomEpisode: getRandomEpisode.randomEpisode,
+    isShown: showMediaPlayer.isShown,
+    episodeResults: getEpisodes.episodeResults,
+    currentEpisode:playEpisode.currentEpisode // current episode to be played
+  } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
   return {  
-    onClickLoadRand: () => dispatch(requestRandomEpisode())
+    onClickLoadRand: () => dispatch(requestRandomEpisode()),
+    onClickShowPlayer: () => dispatch(displayMediaPlayer()),
+    onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode))
   }
 }
 
 class App extends Component {
-  constructor() {
-    super();
-  }
   
-  calcAudio  = (audioSeconds) => {
+  calcAudio  = (audioSeconds) => { // in ms
     let hours = Math.floor(audioSeconds / 3600);
     audioSeconds %= 3600; // get remainder of mins from hours 
     let mins = Math.floor(audioSeconds / 60);
@@ -46,27 +48,44 @@ class App extends Component {
   
 
   render() {
-    const { randomEpisode, isLoading} = this.props;
+    const { 
+      currentEpisode, 
+      randomEpisode, 
+      isLoading, 
+      isShown, 
+      onClickShowPlayer, 
+      onClickLoadRand,
+      onClickPlayCurrEpisode
+    } = this.props;
     const { calcAudio } = this;
-    console.log("episode length=>",calcAudio(this.props.randomEpisode[0].length)); // display current time of episode    
-      return (
+    
+    return (
         <React.Fragment>
         <Nav/>
-        <Carousel onClickLoadRand = {this.props.onClickLoadRand} >
+        <Carousel onClickLoadRand = {onClickLoadRand} >
           {isLoading ? 
               <CardLoader/> : 
               <ErrorBoundry>
-                <CardList calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
+                <CardList 
+                  playCurrent={onClickPlayCurrEpisode} 
+                  onClickShowPlayer={onClickShowPlayer} 
+                  calcAudio={calcAudio} 
+                  randomEpisode={ randomEpisode }
+                />
               </ErrorBoundry>
           }
         </Carousel>
         <Rank/>
-        <Search calcAudio={calcAudio}/>
+        <Search 
+          onClickPlayCurrEpisode={onClickPlayCurrEpisode} 
+          onClickShowPlayer={onClickShowPlayer} 
+          calcAudio={calcAudio}
+        />
         {/*
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
-        <MediaPlayer randomEpisode={randomEpisode}/>
+        {isShown ? <MediaPlayer currentEpisode={currentEpisode} /> : null}
         </React.Fragment>
       );
   }

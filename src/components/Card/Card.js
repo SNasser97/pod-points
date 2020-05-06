@@ -1,10 +1,17 @@
 import React from "react";
 
-const Card = ({id,title,description, length, name, image}) => {
-	// remove html elements from JSON desc
+const Card = ({id,title,description, length, name, image, onClickShowPlayer,src, playCurrent}) => {
+		const currEpisode = [{
+			id,
+			title,
+			length,
+			src,
+			image
+		}]
 		if(id !== "") {
-			let regex= /(<([^>]+)>)/ig;
-			let descriptionNoHTML = description.replace(regex, "");
+			
+			let regex = /(<([^>]+)>)/ig; // remove html elements from JSON description
+			let descriptionNoHTML = description.replace(regex, ""); 
 			return (	
 				<div className="card">
 					<div className="card--front">
@@ -26,11 +33,10 @@ const Card = ({id,title,description, length, name, image}) => {
 							</div>
 						</div>
 						<div className="card__btn">
-							<button className="btn btn__full--secondary"><i className="far fa-5x fa-play-circle "></i></button>
+							<button onClick={() => { onClickShowPlayer(); playCurrent(currEpisode)}} className="btn btn__full--secondary">
+								<i class="fas fa-2x fa-podcast"></i>
+							</button>
 						</div>
-					</div>
-					<div className="card--back">
-							
 					</div>
 				</div>
 			);

@@ -6,9 +6,23 @@ import {
   REQUEST_RAND_EPISODE_PENDING,
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED,
-  PLAY_EPISODE,
+  SHOW_PLAYER,
+  PLAY_CURRENT_EPISODE
 } from "./constants";
 
+export const playCurrentEpisode = (episode) => {
+  return {
+    type: PLAY_CURRENT_EPISODE,
+    payload: episode
+  }
+}
+
+export const displayMediaPlayer = () => {
+  return {
+    type: SHOW_PLAYER,
+    payload: true
+  }
+}
 export const setSearchField = (text) => {
   return {
      type: CHANGE_SEARCH_FIELD,
@@ -19,8 +33,8 @@ export const setSearchField = (text) => {
 export const requestRandomEpisode = () => async (dispatch) => {
   const url = "https://listen-api.listennotes.com/api/v2/just_listen"; 
   
+  dispatch({type: REQUEST_RAND_EPISODE_PENDING}); // do pending outside catch block
   try {
-    dispatch({type: REQUEST_RAND_EPISODE_PENDING});
     const resp = await fetch(url, {
       headers:{
         "Content-Type":"application/json",
@@ -44,8 +58,8 @@ export const requestRandomEpisode = () => async (dispatch) => {
 export const requestEpisodes = (urlSearch, urlOffset) => async (dispatch) => {
   const url =  `https://listen-api.listennotes.com/api/v2/search?q=${urlSearch}&offset=${urlOffset ? urlOffset : 0}&scope=episode&language=Any language&len_min=0`
   
+  dispatch({type: REQUEST_EPISODE_PENDING});
   try {
-    dispatch({type: REQUEST_EPISODE_PENDING});
     const resp = await fetch(url, {
        headers:{
         "Content-Type":"application/json",

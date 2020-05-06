@@ -10,13 +10,17 @@ class CustomPlayPause extends Component {
     this.props.media.playPause()
   }
   render() {
+    const {styles} = this.props;
+    console.log("media props=>",this.props.media);
     return(
       <button
         type="button"
-        className=""
+        className={styles.media_button}
         onClick={this._handlePlayPause}
       >
-       {this.props.media.isPlaying ? <i className="far fa-4x fa-pause-circle" ></i>:<i className="far fa-4x fa-play-circle" ></i>}
+       {this.props.media.isPlaying ? 
+        <i className="far fa-2x fa-pause-circle" ></i>:
+        <i className="far fa-2x fa-play-circle" ></i>}
       </button>
     )
   }
