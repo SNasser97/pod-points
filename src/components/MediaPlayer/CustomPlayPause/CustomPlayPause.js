@@ -11,6 +11,7 @@ class CustomPlayPause extends Component {
   }
   render() {
     const {styles} = this.props;
+    console.log("media props=>",this.props.media);
     return(
       <button
         type="button"

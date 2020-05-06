@@ -11,12 +11,12 @@ import {
 } from "./constants";
 
 const initStatePlayEpisode = {
-  episode:[],
+  currentEpisode:[],
 }
 export const playEpisode = (state=initStateEpisodes, {type,payload}) => {
   switch(type) {
     case PLAY_CURRENT_EPISODE:
-      return {...state, episode: payload};
+      return { ...state, currentEpisode: payload};
     default:
       return state;
   }

@@ -34,7 +34,7 @@ const Card = ({id,title,description, length, name, image, onClickShowPlayer,src,
 						</div>
 						<div className="card__btn">
 							<button onClick={() => { onClickShowPlayer(); playCurrent(currEpisode)}} className="btn btn__full--secondary">
-								<i className="far fa-5x fa-play-circle "></i>
+								<i class="fas fa-2x fa-podcast"></i>
 							</button>
 						</div>
 					</div>

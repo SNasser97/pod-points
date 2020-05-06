@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
     randomEpisode: getRandomEpisode.randomEpisode,
     isShown: showMediaPlayer.isShown,
     episodeResults: getEpisodes.episodeResults,
-    episode:playEpisode.episode // current episode to be played
+    currentEpisode:playEpisode.currentEpisode // current episode to be played
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -31,9 +31,6 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
 }
 
 class App extends Component {
-  constructor() {
-    super();
-  }
   
   calcAudio  = (audioSeconds) => { // in ms
     let hours = Math.floor(audioSeconds / 3600);
@@ -51,12 +48,17 @@ class App extends Component {
   
 
   render() {
-    const { randomEpisode, isLoading, isShown, onClickShowPlayer, onClickLoadRand} = this.props;
+    const { 
+      currentEpisode, 
+      randomEpisode, 
+      isLoading, 
+      isShown, 
+      onClickShowPlayer, 
+      onClickLoadRand,
+      onClickPlayCurrEpisode
+    } = this.props;
     const { calcAudio } = this;
-    // console.log("search res=>", this.props.episodeResults);
-    // console.log("episode length=>",calcAudio(randomEpisode[0].length)()); // display current time of episode    
-    console.log("from srch=>",this.props.episode)  ;
-    console.log("test=>", this.props.onClickPlayCurrEpisode);
+    
     return (
         <React.Fragment>
         <Nav/>
@@ -64,17 +66,26 @@ class App extends Component {
           {isLoading ? 
               <CardLoader/> : 
               <ErrorBoundry>
-              <CardList playCurrent={this.props.onClickPlayCurrEpisode} onClickShowPlayer={onClickShowPlayer} calcAudio={calcAudio} randomEpisode={ randomEpisode }/>
+                <CardList 
+                  playCurrent={onClickPlayCurrEpisode} 
+                  onClickShowPlayer={onClickShowPlayer} 
+                  calcAudio={calcAudio} 
+                  randomEpisode={ randomEpisode }
+                />
               </ErrorBoundry>
           }
         </Carousel>
         <Rank/>
-        <Search onClickPlayCurrEpisode={this.props.onClickPlayCurrEpisode} onClickShowPlayer={onClickShowPlayer} calcAudio={calcAudio}/>
+        <Search 
+          onClickPlayCurrEpisode={onClickPlayCurrEpisode} 
+          onClickShowPlayer={onClickShowPlayer} 
+          calcAudio={calcAudio}
+        />
         {/*
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
-        {isShown ? <MediaPlayer currentEpisode={this.props.episode} randomEpisode={randomEpisode}/> : null}
+        {isShown ? <MediaPlayer currentEpisode={currentEpisode} /> : null}
         </React.Fragment>
       );
   }

@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
     totalResults: getEpisodes.totalResults,
     isLoading: getEpisodes.isLoading,
     error: getEpisodes.error,
-    episode: playEpisode.episode
+    currentEpisode: playEpisode.currentEpisode
   }
 }
 
@@ -35,9 +35,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class Search extends Component { 
-  constructor(props) {
-    super(props);
-  }
   
   render() {
     const { // from our redux store
@@ -47,13 +44,10 @@ class Search extends Component {
       episodeResults,
       totalResults,
       isLoading,
-      // onClickPlayCurrEpisode,
       onClickShowPlayer
     } = this.props; // from store
     const {calcAudio, onClickPlayCurrEpisode} = this.props; // from App
-    // console.log(this.episode[0]);
-    console.log("test if curr episode defined=>",this.props.episode);
-    console.log("search play click=>", onClickPlayCurrEpisode);
+    
     return (
       <React.Fragment>
         <SearchField 

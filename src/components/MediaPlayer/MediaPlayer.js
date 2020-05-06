@@ -7,12 +7,10 @@ import CustomProgress from './CustomProgress/CustomProgress';
 import sampleAudio from "../../assets/audio/sample_audio.mp3"; 
 const {CurrentTime, Duration} = controls;
 
-const MediaPlayer = ({ randomEpisode, currentEpisode }) => {
+const MediaPlayer = ({ currentEpisode }) => {
   
-  console.table(currentEpisode);
-  const [episode] = currentEpisode ? currentEpisode : randomEpisode; // randomEp[0].props
-  console.log("episode arr=>", episode.src);
-     
+  let [episode] = currentEpisode; // randomEp[0].props
+  console.log("array current episode from Mediaplayer=>", currentEpisode);
      return (
       <Media>
         <div className="media">

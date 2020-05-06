@@ -34,7 +34,7 @@ const Result = ({ id, title, name, desc, image, length, onClickShowPlayer, playC
 						{length}
 					</p>
 					<button onClick={() => {onClickShowPlayer(); playCurrent(currEpisode);}}className="btn btn__full results__pod-btn">
-						<i className="far fa-4x fa-play-circle"></i>
+						<i class="fas fa-4x fa-podcast"></i>
 					</button>
 				</div>
 				
