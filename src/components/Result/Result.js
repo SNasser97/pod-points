@@ -9,7 +9,6 @@ const Result = ({ id, title, name, desc, image, length, onClickShowPlayer, playC
 		length,
 		src
 	}]
-	console.log("click=>",onClickShowPlayer);
 	return (
 		<div className="results">
 			<div className="results__pod">
@@ -34,7 +33,7 @@ const Result = ({ id, title, name, desc, image, length, onClickShowPlayer, playC
 						{length}
 					</p>
 					<button onClick={() => {onClickShowPlayer(); playCurrent(currEpisode);}}className="btn btn__full results__pod-btn">
-						<i class="fas fa-4x fa-podcast"></i>
+						<i className="fas fa-4x fa-podcast"></i>
 					</button>
 				</div>
 				
