@@ -11,14 +11,13 @@ const ModalScore = () => {
         <div className="modal__star--2">
           <i className="fas fa-star"></i>
         </div>
-        <p className="modal__praise fs--3">Awesome Job!</p>
+        <p className="modal__praise fs--2">Awesome Job!</p>
         <p className="modal__reward fs--4">You've earned   
-          <span className="modal__reward--scored">{100}</span>
+          <span className="modal__reward--scored">{"value"}</span>
           points!
         </p>
         <button className="btn btn__full modal__btn fs--4">Close
           <i className="far fa-thumbs-up"></i>
-          
         </button>
       </div>
     </div>
