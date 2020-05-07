@@ -1,7 +1,10 @@
 import React from "react";
 
-const ModalScore = () => {
-
+const ModalScore = ({points, onClickCloseModal}) => {
+  /*
+    Pass payload value to display reward to user, 
+    if points were to be afjusted we would change only the value in payload
+  */
   return (
     <div className="modal">
       <div className="modal__wrapper">
@@ -13,10 +16,10 @@ const ModalScore = () => {
         </div>
         <p className="modal__praise fs--2">Awesome Job!</p>
         <p className="modal__reward fs--4">You've earned   
-          <span className="modal__reward--scored">{"value"}</span>
+          <span className="modal__reward--scored">{points}</span>
           points!
         </p>
-        <button className="btn btn__full modal__btn fs--4">Close
+        <button onClick={()=> onClickCloseModal()} className="btn btn__full modal__btn fs--4">Close
           <i className="far fa-thumbs-up"></i>
         </button>
       </div>

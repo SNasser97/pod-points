@@ -14,7 +14,8 @@ import {
   requestRandomEpisode, 
   displayMediaPlayer, 
   playCurrentEpisode,
-  updateUserScore
+  updateUserScore,
+  closeModal
 } from "../redux/actions";
 
 const mapStateToProps = (state) => {
@@ -25,7 +26,8 @@ const mapStateToProps = (state) => {
     isShown: showMediaPlayer.isShown,
     episodeResults: getEpisodes.episodeResults,
     currentEpisode: playEpisode.currentEpisode,
-    score: updateScore.score
+    score: updateScore.score,
+    showReward: updateScore.showReward,
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -33,7 +35,8 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
     onClickLoadRand: () => dispatch(requestRandomEpisode()),
     onClickShowPlayer: () => dispatch(displayMediaPlayer()),
     onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode)),
-    onUpdateScore: () => dispatch(updateUserScore())
+    onUpdateScore: () => dispatch(updateUserScore()),
+    onClickCloseModal: () => dispatch(closeModal())
   }
 }
 
@@ -52,7 +55,6 @@ class App extends Component {
       return `${hours}${mins}:${secs}`
     };
   }
-  
 
   render() {
     const { 
@@ -63,15 +65,16 @@ class App extends Component {
       onClickShowPlayer, 
       onClickLoadRand,
       onClickPlayCurrEpisode,
+      onClickCloseModal,
       onUpdateScore,
       score,
-    } = this.props;
-    const { calcAudio } = this;
-    
+      showReward
+    } = this.props; // redux store
+    const { calcAudio } = this; // from App
     return (
         <React.Fragment>
         <Nav/>
-        <Modal />
+        {showReward ? <Modal onClickCloseModal={onClickCloseModal} points={updateUserScore().payload} /> : null}
         <Carousel onClickLoadRand = {onClickLoadRand} >
           {isLoading ? 
               <CardLoader/> : 

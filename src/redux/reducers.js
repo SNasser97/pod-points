@@ -8,19 +8,25 @@ import {
   REQUEST_RAND_EPISODE_FAILED,
   SHOW_PLAYER,
   PLAY_CURRENT_EPISODE,
-  UPDATE_SCORE
+  UPDATE_SCORE,
+  CLOSE_SCORE,
 } from "./constants";
 
 
 // UPDATE USER SCORE 
 const initStateUser = {
-  user:"test",
-  score:0
+  score:0,
+  showReward: false
 }
 export const updateScore = (state=initStateUser, {type,payload}) => {
   switch(type) {
     case UPDATE_SCORE:
-      return {...state, score: state.score+payload}
+      return {...state, 
+        score: state.score+payload,
+        showReward: true,
+      }
+    case CLOSE_SCORE:
+      return {...state, showReward:payload}
     default:
       return state;
   }
