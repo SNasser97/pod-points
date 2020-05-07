@@ -8,7 +8,7 @@ import CardList from "../components/CardList/CardList";
 import CardLoader from "../components/CardLoader/CardLoader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
-
+import Modal from "../components/ModalScore/ModalScore";
 import Search from "./Search";
 import { 
   requestRandomEpisode, 
@@ -71,6 +71,7 @@ class App extends Component {
     return (
         <React.Fragment>
         <Nav/>
+        <Modal />
         <Carousel onClickLoadRand = {onClickLoadRand} >
           {isLoading ? 
               <CardLoader/> : 
