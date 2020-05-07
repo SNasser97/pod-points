@@ -7,15 +7,17 @@ import CustomProgress from './CustomProgress/CustomProgress';
 import sampleAudio from "../../assets/audio/sample_audio.mp3"; 
 const { CurrentTime, Duration, Volume, SeekBar} = controls;
 
-const MediaPlayer = ({ currentEpisode }) => {
+const MediaPlayer = ({ currentEpisode, onUpdateScore,score }) => {
   
-  let [episode] = currentEpisode; // randomEp[0].props
+  
+  let [episode] = "currentEpisode"; // randomEp[0].props
   console.log("array current episode from Mediaplayer=>", currentEpisode);
+
      return (
       <Media>
         <div className="media">
           <div className="media-player">
-             {<Player src={episode.src} />}
+             {<Player onEnded={()=> onUpdateScore()} src={sampleAudio} />}
           </div>
           <div className="media-details">
             <div className="media-img">
@@ -26,7 +28,7 @@ const MediaPlayer = ({ currentEpisode }) => {
             </p>
           </div>
           <div className="media-controls">
-            <CustomProgress className={styles.media_duration_bar}/>
+            <CustomProgress score={score} onUpdateScore={onUpdateScore} className={styles.media_duration_bar}/>
             <CurrentTime className={`fs--4 ${styles.media_time} ${styles.media_time__current}`}/>
             <CustomPlayPause styles={styles}/>
             <Volume />

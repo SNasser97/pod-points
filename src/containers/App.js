@@ -10,23 +10,30 @@ import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
 
 import Search from "./Search";
-import { requestRandomEpisode, displayMediaPlayer, playCurrentEpisode } from "../redux/actions";
+import { 
+  requestRandomEpisode, 
+  displayMediaPlayer, 
+  playCurrentEpisode,
+  updateUserScore
+} from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode } = state // reducers
+  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode, updateScore } = state // reducers
   return {
-    isLoading:getRandomEpisode.isLoading,
+    isLoading: getRandomEpisode.isLoading,
     randomEpisode: getRandomEpisode.randomEpisode,
     isShown: showMediaPlayer.isShown,
     episodeResults: getEpisodes.episodeResults,
-    currentEpisode:playEpisode.currentEpisode // current episode to be played
+    currentEpisode: playEpisode.currentEpisode,
+    score: updateScore.score
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
   return {  
     onClickLoadRand: () => dispatch(requestRandomEpisode()),
     onClickShowPlayer: () => dispatch(displayMediaPlayer()),
-    onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode))
+    onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode)),
+    onUpdateScore: () => dispatch(updateUserScore())
   }
 }
 
@@ -55,7 +62,9 @@ class App extends Component {
       isShown, 
       onClickShowPlayer, 
       onClickLoadRand,
-      onClickPlayCurrEpisode
+      onClickPlayCurrEpisode,
+      onUpdateScore,
+      score,
     } = this.props;
     const { calcAudio } = this;
     
@@ -85,7 +94,7 @@ class App extends Component {
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
-        {isShown ? <MediaPlayer currentEpisode={currentEpisode} /> : null}
+        {!isShown ? <MediaPlayer score={score} onUpdateScore={ onUpdateScore } currentEpisode={currentEpisode} /> : null}
         </React.Fragment>
       );
   }
