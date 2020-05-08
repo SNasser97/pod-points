@@ -98,7 +98,7 @@ class App extends Component {
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
-        {!isShown ? <MediaPlayer score={score} onUpdateScore={ onUpdateScore } currentEpisode={currentEpisode} /> : null}
+        {isShown ? <MediaPlayer score={score} onUpdateScore={ onUpdateScore } currentEpisode={currentEpisode} /> : null}
         </React.Fragment>
       );
   }

@@ -36,7 +36,7 @@ export const updateScore = (state=initStateUser, {type,payload}) => {
 const initStatePlayEpisode = {
   currentEpisode:[],
 }
-export const playEpisode = (state=initStateEpisodes, {type,payload}) => {
+export const playEpisode = (state = initStatePlayEpisode, {type,payload}) => {
   switch(type) {
     case PLAY_CURRENT_EPISODE:
       return { ...state, currentEpisode: payload};

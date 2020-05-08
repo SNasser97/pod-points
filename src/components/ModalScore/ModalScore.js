@@ -1,10 +1,14 @@
 import React from "react";
-
+import victorySound from "../../assets/audio/victorySound.mp3";
 const ModalScore = ({points, onClickCloseModal}) => {
   /*
     Pass payload value to display reward to user, 
     if points were to be afjusted we would change only the value in payload
   */
+  // play sound effect when ModalScore is rendered.
+  const soundEffect = new Audio(victorySound);
+  soundEffect.play();
+
   return (
     <div className="modal">
       <div className="modal__wrapper">
