@@ -7,7 +7,7 @@ import CustomProgress from './CustomProgress/CustomProgress';
 import sampleAudio from "../../assets/audio/sample_audio.mp3"; 
 const { CurrentTime, Duration, Volume, SeekBar} = controls;
 
-const MediaPlayer = ({ currentEpisode, onUpdateScore, score }) => {
+const MediaPlayer = ({currentEpisode, onUpdateScore}) => {
   
   let [episode] = currentEpisode; // currentEpisode[0].props
   return (
@@ -25,7 +25,7 @@ const MediaPlayer = ({ currentEpisode, onUpdateScore, score }) => {
           </p>
         </div>
         <div className="media-controls">
-          <CustomProgress score={score} onUpdateScore={onUpdateScore} className={styles.media_duration_bar}/>
+          <CustomProgress className={styles.media_duration_bar}/>
           <CurrentTime className={`fs--4 ${styles.media_time} ${styles.media_time__current}`}/>
           <CustomPlayPause styles={styles}/>
           <Volume />

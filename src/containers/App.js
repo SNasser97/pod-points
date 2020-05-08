@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 import Nav from "../components/Nav/Nav";
 import Rank from "../components/Rank/Rank";
@@ -67,16 +73,16 @@ class App extends Component {
       onClickPlayCurrEpisode,
       onClickCloseModal,
       onUpdateScore,
-      score,
       showReward
     } = this.props; // redux store
     const { calcAudio } = this; // from App
     return (
+      <Router>
         <React.Fragment>
-        <Nav/>
-        {showReward ? <Modal onClickCloseModal={onClickCloseModal} points={updateUserScore().payload} /> : null}
-        <Carousel onClickLoadRand = {onClickLoadRand} >
-          {isLoading ? 
+          <Nav />
+          {showReward ? <Modal onClickCloseModal={onClickCloseModal} points={updateUserScore().payload} /> : null}
+          <Carousel onClickLoadRand = {onClickLoadRand} >
+            {isLoading ? 
               <CardLoader/> : 
               <ErrorBoundry>
                 <CardList 
@@ -86,20 +92,21 @@ class App extends Component {
                   randomEpisode={ randomEpisode }
                 />
               </ErrorBoundry>
-          }
-        </Carousel>
-        <Rank/>
-        <Search 
-          onClickPlayCurrEpisode={onClickPlayCurrEpisode} 
-          onClickShowPlayer={onClickShowPlayer} 
-          calcAudio={calcAudio}
-        />
-        {/*
-          <Leaderboard/> // TODO
-          <Profile/> // TODO
-        */}
-        {isShown ? <MediaPlayer score={score} onUpdateScore={ onUpdateScore } currentEpisode={currentEpisode} /> : null}
+            }
+          </Carousel>
+          <Rank/>
+          <Search 
+            onClickPlayCurrEpisode={onClickPlayCurrEpisode} 
+            onClickShowPlayer={onClickShowPlayer} 
+            calcAudio={calcAudio}
+          />
+          {/*
+            <Leaderboard/> // TODO
+            <Profile/> // TODO
+          */}
+          {isShown ? <MediaPlayer onUpdateScore={ onUpdateScore } currentEpisode={currentEpisode} /> : null}
         </React.Fragment>
+      </Router>
       );
   }
 }
