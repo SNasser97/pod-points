@@ -7,8 +7,24 @@ import {
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED,
   SHOW_PLAYER,
-  PLAY_CURRENT_EPISODE
+  PLAY_CURRENT_EPISODE,
+  UPDATE_SCORE,
+  CLOSE_SCORE
 } from "./constants";
+
+export const closeModal = () => {
+  return {
+    type: CLOSE_SCORE,
+    payload: false
+  }
+}
+
+export const updateUserScore = () => {
+  return {
+    type: UPDATE_SCORE,
+    payload: 100
+  }
+}
 
 export const playCurrentEpisode = (episode) => {
   return {

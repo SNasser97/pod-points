@@ -34,9 +34,7 @@ const Pagination = ({episodeResults, onSearchSubmit, totalResults, searchField})
   } else {
     return (
       <div className="pagination">
-       {
-        createPagButtons()
-       }  
+       { createPagButtons() }  
       </div>
     );
   }

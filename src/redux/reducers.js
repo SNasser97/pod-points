@@ -7,13 +7,36 @@ import {
   REQUEST_RAND_EPISODE_SUCCESS,
   REQUEST_RAND_EPISODE_FAILED,
   SHOW_PLAYER,
-  PLAY_CURRENT_EPISODE
+  PLAY_CURRENT_EPISODE,
+  UPDATE_SCORE,
+  CLOSE_SCORE,
 } from "./constants";
 
+
+// UPDATE USER SCORE 
+const initStateUser = {
+  score:0,
+  showReward: false
+}
+export const updateScore = (state=initStateUser, {type,payload}) => {
+  switch(type) {
+    case UPDATE_SCORE:
+      return {...state, 
+        score: state.score+payload,
+        showReward: true,
+      }
+    case CLOSE_SCORE:
+      return {...state, showReward:payload}
+    default:
+      return state;
+  }
+}
+
+// PLAY CURRENT EPISODE
 const initStatePlayEpisode = {
   currentEpisode:[],
 }
-export const playEpisode = (state=initStateEpisodes, {type,payload}) => {
+export const playEpisode = (state = initStatePlayEpisode, {type,payload}) => {
   switch(type) {
     case PLAY_CURRENT_EPISODE:
       return { ...state, currentEpisode: payload};

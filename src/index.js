@@ -4,9 +4,16 @@ import { Provider } from "react-redux";
 import logger from "redux-logger";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { searchEpisodes, getEpisodes, getRandomEpisode, showMediaPlayer, playEpisode} from "./redux/reducers";
-import thunkMiddleWare from "redux-thunk"
+import { 
+  searchEpisodes, 
+  getEpisodes, 
+  getRandomEpisode, 
+  showMediaPlayer, 
+  playEpisode,
+  updateScore,
+} from "./redux/reducers";
 
+import thunkMiddleWare from "redux-thunk"
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -17,12 +24,13 @@ const rootReducer = combineReducers({
   getEpisodes,
   getRandomEpisode,
   showMediaPlayer,
-  playEpisode
+  playEpisode,
+  updateScore
 });
 
 const store = createStore(
   rootReducer, 
-  applyMiddleware(thunkMiddleWare,logger)
+  applyMiddleware(thunkMiddleWare, logger)
 );
 
 ReactDOM.render(

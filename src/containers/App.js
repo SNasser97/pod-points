@@ -8,25 +8,35 @@ import CardList from "../components/CardList/CardList";
 import CardLoader from "../components/CardLoader/CardLoader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
-
+import Modal from "../components/ModalScore/ModalScore";
 import Search from "./Search";
-import { requestRandomEpisode, displayMediaPlayer, playCurrentEpisode } from "../redux/actions";
+import { 
+  requestRandomEpisode, 
+  displayMediaPlayer, 
+  playCurrentEpisode,
+  updateUserScore,
+  closeModal
+} from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode } = state // reducers
+  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode, updateScore } = state // reducers
   return {
-    isLoading:getRandomEpisode.isLoading,
+    isLoading: getRandomEpisode.isLoading,
     randomEpisode: getRandomEpisode.randomEpisode,
     isShown: showMediaPlayer.isShown,
     episodeResults: getEpisodes.episodeResults,
-    currentEpisode:playEpisode.currentEpisode // current episode to be played
+    currentEpisode: playEpisode.currentEpisode,
+    score: updateScore.score,
+    showReward: updateScore.showReward,
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
   return {  
     onClickLoadRand: () => dispatch(requestRandomEpisode()),
     onClickShowPlayer: () => dispatch(displayMediaPlayer()),
-    onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode))
+    onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode)),
+    onUpdateScore: () => dispatch(updateUserScore()),
+    onClickCloseModal: () => dispatch(closeModal())
   }
 }
 
@@ -45,7 +55,6 @@ class App extends Component {
       return `${hours}${mins}:${secs}`
     };
   }
-  
 
   render() {
     const { 
@@ -55,13 +64,17 @@ class App extends Component {
       isShown, 
       onClickShowPlayer, 
       onClickLoadRand,
-      onClickPlayCurrEpisode
-    } = this.props;
-    const { calcAudio } = this;
-    
+      onClickPlayCurrEpisode,
+      onClickCloseModal,
+      onUpdateScore,
+      score,
+      showReward
+    } = this.props; // redux store
+    const { calcAudio } = this; // from App
     return (
         <React.Fragment>
         <Nav/>
+        {showReward ? <Modal onClickCloseModal={onClickCloseModal} points={updateUserScore().payload} /> : null}
         <Carousel onClickLoadRand = {onClickLoadRand} >
           {isLoading ? 
               <CardLoader/> : 
@@ -85,7 +98,7 @@ class App extends Component {
           <Leaderboard/> // TODO
           <Profile/> // TODO
         */}
-        {isShown ? <MediaPlayer currentEpisode={currentEpisode} /> : null}
+        {isShown ? <MediaPlayer score={score} onUpdateScore={ onUpdateScore } currentEpisode={currentEpisode} /> : null}
         </React.Fragment>
       );
   }
