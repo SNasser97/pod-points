@@ -23,10 +23,12 @@ body {
    margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    position: relative;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+html, body{
+  height: 100%;
 }

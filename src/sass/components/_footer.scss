@@ -1,19 +1,44 @@
+
 .footer {
+  position: relative;
+  bottom:0;
+  left: 0;
   width: 100%;
-  background: $dark-colour-1;
-  height: 30rem;
-  display: flex;
+  height: auto;
+  background: $colour-secondary-hover;
+  display:flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  &__details {
+  &__legal {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 4rem;
-    width: 40rem;
+    justify-content: flex-end;
+    align-self: center;
+    margin-left: auto;
+    width: 100%;
+  }
+  &__legalImage {
+    height: auto;
+    width: 35rem;
+     @include respond(tab-port) {
+      width: 25rem;
+    }
   }
   &__author {
-    // text-decoration: ;
-    color:$colour-secondary;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    position: relative;
+    top:5rem;
+    @include respond(tab-port) {
+      top:0;
+    }
+  }
+  &__github {
+    display: inline-block;
+    margin-left: 1rem;
+    color:$colour-tertiary;
   }
 }
+
