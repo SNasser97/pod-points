@@ -60,3 +60,13 @@
     } //1800px +
   }
 }
+
+
+@mixin animate($name, $seconds:.5s) {
+  @if $name == moveUp {
+    animation: $name $seconds;
+  }
+  @if $name == moveUp-mobile {
+    animation: $name $seconds;
+  }
+}
