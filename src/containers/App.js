@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import Nav from "../components/Nav/Nav";
@@ -15,7 +14,10 @@ import CardLoader from "../components/CardLoader/CardLoader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
 import Modal from "../components/ModalScore/ModalScore";
+import SignIn from "../components/SignIn/SignIn";
+import Register from "../components/Register/Register";
 import Search from "./Search";
+
 import { 
   requestRandomEpisode, 
   displayMediaPlayer, 
@@ -80,31 +82,41 @@ class App extends Component {
       <Router>
         <React.Fragment>
           <Nav />
-          {showReward ? <Modal onClickCloseModal={onClickCloseModal} points={updateUserScore().payload} /> : null}
-          <Carousel onClickLoadRand = {onClickLoadRand} >
-            {isLoading ? 
-              <CardLoader/> : 
-              <ErrorBoundry>
-                <CardList 
-                  playCurrent={onClickPlayCurrEpisode} 
-                  onClickShowPlayer={onClickShowPlayer} 
-                  calcAudio={calcAudio} 
-                  randomEpisode={ randomEpisode }
-                />
-              </ErrorBoundry>
-            }
-          </Carousel>
-          <Rank/>
-          <Search 
-            onClickPlayCurrEpisode={onClickPlayCurrEpisode} 
-            onClickShowPlayer={onClickShowPlayer} 
-            calcAudio={calcAudio}
-          />
-          {/*
-            <Leaderboard/> // TODO
-            <Profile/> // TODO
-          */}
-          {isShown ? <MediaPlayer onUpdateScore={ onUpdateScore } currentEpisode={currentEpisode} /> : null}
+          <Switch>
+            <Route path="/" exact>
+              <p>Where home page resides</p>
+            </Route>
+            <Route path="/signin" component={SignIn} />
+            <Route path="/register" component={Register} />
+            <Route path="/home" exact>
+              {showReward ? <Modal onClickCloseModal={onClickCloseModal} points={updateUserScore().payload} /> : null}
+              <Carousel onClickLoadRand={onClickLoadRand} >
+                {isLoading ?
+                  <CardLoader /> :
+                  <ErrorBoundry>
+                    <CardList
+                      playCurrent={onClickPlayCurrEpisode}
+                      onClickShowPlayer={onClickShowPlayer}
+                      calcAudio={calcAudio}
+                      randomEpisode={randomEpisode}
+                    />
+                  </ErrorBoundry>
+                }
+              </Carousel>
+              <Rank />
+              <Search
+                onClickPlayCurrEpisode={onClickPlayCurrEpisode}
+                onClickShowPlayer={onClickShowPlayer}
+                calcAudio={calcAudio}
+              />
+              {/*
+                <Leaderboard/> // TODO
+                <Profile/> // TODO
+              */}
+              {isShown ? <MediaPlayer onUpdateScore={onUpdateScore} currentEpisode={currentEpisode} /> : null}
+            </Route>
+          </Switch>
+          
         </React.Fragment>
       </Router>
       );
