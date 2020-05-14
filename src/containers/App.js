@@ -5,7 +5,6 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-
 import Nav from "../components/Nav/Nav";
 import Rank from "../components/Rank/Rank";
 import Carousel from "../components/Carousel/Carousel";
@@ -19,6 +18,8 @@ import Register from "../components/Register/Register";
 import Footer from "../components/Footer/Footer";
 import Search from "./Search";
 import Home from "../components/Home/Home";
+import About from "../components/About/About";
+
 import { 
   requestRandomEpisode, 
   displayMediaPlayer, 
@@ -85,6 +86,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact>
             <Home/>
+            <About/>
             <Footer/>
           </Route>
           <Route path="/signin" component={SignIn} />
