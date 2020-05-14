@@ -1,5 +1,5 @@
 import React from "react";
-import svg from "../../assets/img/temp.svg";
+import svg from "../../assets/img/hero.svg";
 import {Fade, Zoom} from "react-reveal";
 const Home = () => {
   return (
