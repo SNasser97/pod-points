@@ -17,12 +17,16 @@
     background-position:0 30rem;
   }
   @include respond(tab-port) {
-    background-size: 80%;
-    background-position:0rem 42rem;
+    background-size: 60%;
+    background-position:0rem 32rem;
   }
   @include respond(phone) {
-    background-size: 100%;
-    background-position:0 52rem;
+    background-size: 80%;
+    background-position:0 22rem;
+  }
+  @include respond(phone-xs) {
+    background-size: 80%;
+    background-position:0 30rem;
   }
   &__wrapper {
     display: flex;
@@ -47,7 +51,10 @@
     color: $colour-tertiary;
     cursor: pointer;
     margin-left: 2rem;
-    
+    a {
+      color:currentColor;
+      text-decoration: none;
+    }
     &--ghost {
       background: 0;
       border:1px solid $colour-secondary;
@@ -74,6 +81,9 @@
     }
     @include respond(tab-port) {
       font-size: 6rem;
+    }
+    @include respond(phone) {
+      font-size: 4rem;
     }
   }
   
