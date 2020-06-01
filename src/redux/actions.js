@@ -66,16 +66,17 @@ export const requestRandomEpisode = () => async (dispatch) => {
 }
 
 export const requestEpisodes = (urlSearch, urlOffset) => async (dispatch) => {
-  const url =  `https://listen-api.listennotes.com/api/v2/search?q=${urlSearch}&offset=${urlOffset ? urlOffset : 0}&scope=episode&language=Any language&len_min=0`
   const SERVER_URL_EPISODE='http://localhost:3000/episodes';
-  const urlObj = { url };
+  const urlParams = {
+    urlSearch,
+    urlOffset
+  };
 
   /*
     1. POST user query from clicking 'search'
     2. Pass urlObj to body 
     3. Express makes GET request to external API (listennotes)
     4. Returns response
-    !Unexpected : some show 1-6, then onclick 6 => displays 1-26 pagButtons
   */
   dispatch({ type: REQUEST_EPISODE_PENDING });
   try {
@@ -84,7 +85,7 @@ export const requestEpisodes = (urlSearch, urlOffset) => async (dispatch) => {
        headers:{
         "Content-Type":"application/json",
       },
-      body: JSON.stringify(urlObj)
+      body: JSON.stringify(urlParams)
     })
     const respData = await resp.json();
     dispatch({
