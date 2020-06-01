@@ -10,7 +10,7 @@ const Nav = () => {
 		<header>
 			<nav className="nav fs--3">
 				<div className="nav__brand">
-					<h3 className="nav__brand--name fs--2"> PodPoints <span role="img" aria-label="emoji microphone">🎤</span></h3>
+					<h3 className="nav__brand--name fs--2"> PodPoints<i className="fas fa-1x fa-microphone-alt"></i></h3>
 				</div>
 				<Switch>
 					<Route path="/home">
