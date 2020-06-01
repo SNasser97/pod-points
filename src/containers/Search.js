@@ -35,7 +35,10 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class Search extends Component { 
-  
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const { // from our redux store
       onSearchChange, 
@@ -47,7 +50,7 @@ class Search extends Component {
       onClickShowPlayer
     } = this.props; // from store
     const {calcAudio, onClickPlayCurrEpisode} = this.props; // from App
-    
+    console.log("search props + app props =>", this.props);
     return (
       <React.Fragment>
         <SearchField 
