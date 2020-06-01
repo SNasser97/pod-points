@@ -47,22 +47,16 @@ export const setSearchField = (text) => {
 }
 
 export const requestRandomEpisode = () => async (dispatch) => {
-  const url = "https://listen-api.listennotes.com/api/v2/just_listen"; 
-  
-  dispatch({type: REQUEST_RAND_EPISODE_PENDING}); // do pending outside catch block
+  // Fetch from backend
+  const SERVER_URL_RANDOM = "http://localhost:3000/random_episode";
+  dispatch({type: REQUEST_RAND_EPISODE_PENDING}); 
   try {
-    const resp = await fetch(url, {
-      headers:{
-        "Content-Type":"application/json",
-        "X-ListenAPI-Key":`${process.env.REACT_APP_API_KEY}`
-      }
-    })
+    const resp = await fetch(SERVER_URL_RANDOM);
     const respData = await resp.json();
-    // display skel-loader 3 seconds
-    setTimeout(()=> dispatch({
+    dispatch({
       type: REQUEST_RAND_EPISODE_SUCCESS,
       payload: respData
-    }), 3000);
+    })
   } catch(error) {
     dispatch({
       type:REQUEST_RAND_EPISODE_FAILED,
@@ -73,14 +67,24 @@ export const requestRandomEpisode = () => async (dispatch) => {
 
 export const requestEpisodes = (urlSearch, urlOffset) => async (dispatch) => {
   const url =  `https://listen-api.listennotes.com/api/v2/search?q=${urlSearch}&offset=${urlOffset ? urlOffset : 0}&scope=episode&language=Any language&len_min=0`
-  
-  dispatch({type: REQUEST_EPISODE_PENDING});
+  const SERVER_URL_EPISODE='http://localhost:3000/episodes';
+  const urlObj = { url };
+
+  /*
+    1. POST user query from clicking 'search'
+    2. Pass urlObj to body 
+    3. Express makes GET request to external API (listennotes)
+    4. Returns response
+    !Unexpected : some show 1-6, then onclick 6 => displays 1-26 pagButtons
+  */
+  dispatch({ type: REQUEST_EPISODE_PENDING });
   try {
-    const resp = await fetch(url, {
+    const resp = await fetch(SERVER_URL_EPISODE, {
+      method:'post',
        headers:{
         "Content-Type":"application/json",
-        "X-ListenAPI-Key":`${process.env.REACT_APP_API_KEY}`
-      }
+      },
+      body: JSON.stringify(urlObj)
     })
     const respData = await resp.json();
     dispatch({
