@@ -1,6 +1,9 @@
 import React from "react";
-import svg from "../../assets/img/hero.svg";
 import {Fade, Zoom} from "react-reveal";
+import { Link } from "react-router-dom";
+import About from "../About/About";
+import Footer from "../Footer/Footer";
+
 const Home = () => {
   return (
     <>
@@ -11,11 +14,15 @@ const Home = () => {
           </Zoom>
           <Fade up>
             <div className="hero__cta">
-              <div className="hero__ctaBtn fs--2">Get started</div>
+              <div className="hero__ctaBtn fs--2">
+                <Link to="/register">Get started</Link>
+              </div>
             </div>
           </Fade>
         </div>
       </section>
+      <About/>
+      <Footer/>
     </>
   );
 }

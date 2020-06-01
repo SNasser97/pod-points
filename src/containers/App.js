@@ -15,10 +15,8 @@ import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
 import Modal from "../components/ModalScore/ModalScore";
 import SignIn from "../components/SignIn/SignIn";
 import Register from "../components/Register/Register";
-import Footer from "../components/Footer/Footer";
 import Search from "./Search";
 import Home from "../components/Home/Home";
-import About from "../components/About/About";
 
 import { 
   requestRandomEpisode, 
@@ -58,12 +56,12 @@ class App extends Component {
     let mins = Math.floor(audioSeconds / 60);
     let secs = audioSeconds % 60; // get remainder of seconds from mins
     
-    return () => {
-      hours = hours ? `${hours}:` : "";
-      mins = mins < 10 ? `0${mins}` : mins;
-      secs = secs < 10 ? `0${secs}` : secs;
-      return `${hours}${mins}:${secs}`
-    };
+    // return () => {
+    hours = hours ? `${hours}:` : "";
+    mins = mins < 10 ? `0${mins}` : mins;
+    secs = secs < 10 ? `0${secs}` : secs;
+    return `${hours}${mins}:${secs}`
+  // };
   }
 
   render() {
@@ -86,8 +84,6 @@ class App extends Component {
         <Switch>
           <Route path="/" exact>
             <Home/>
-            <About/>
-            <Footer/>
           </Route>
           <Route path="/signin" component={SignIn} />
           <Route path="/register" component={Register} />
