@@ -9,8 +9,33 @@ import {
   SHOW_PLAYER,
   PLAY_CURRENT_EPISODE,
   UPDATE_SCORE,
-  CLOSE_SCORE
+  CLOSE_SCORE,
+  USER_SIGN_PENDING,
+  USER_SIGN_IN,
+  USER_SIGN_FAILED,
 } from "./constants";
+
+
+export const signIn = (email, pw) => async (dispatch) =>{
+  const url = "http://localhost:3000/sign_in";
+  dispatch({type: USER_SIGN_PENDING});
+  try {
+    const respSign = await fetch(url, {
+      method:'post',
+      body: JSON.stringify({email, pw})
+    });
+    const respData = await respSign.json();
+    dispatch({
+      type: USER_SIGN_IN,
+      payload: respData
+    })
+  } catch(e) {
+    dispatch({
+      type: USER_SIGN_FAILED,
+      payload: e
+    });
+  }
+}
 
 export const closeModal = () => {
   return {
@@ -82,7 +107,7 @@ export const requestEpisodes = (urlSearch, urlOffset) => async (dispatch) => {
   try {
     const resp = await fetch(SERVER_URL_EPISODE, {
       method:'post',
-       headers:{
+      headers:{
         "Content-Type":"application/json",
       },
       body: JSON.stringify(urlParams)

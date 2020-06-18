@@ -10,8 +10,46 @@ import {
   PLAY_CURRENT_EPISODE,
   UPDATE_SCORE,
   CLOSE_SCORE,
+  USER_SIGN_IN,
+  USER_SIGN_PENDING,
+  USER_SIGN_FAILED,
 } from "./constants";
 
+// SIGN USER IN
+const initStateSignIn = {
+  user: {
+    id:"",
+    username:"",
+    email:"",
+    score:0,
+    joined: "",
+  },
+  error: "",
+  isLoggedIn:false,
+}
+
+export const userSignIn = (state=initStateSignIn, {type,payload}) => {
+  switch(type) {
+    case USER_SIGN_PENDING:
+      return {...state}
+    case USER_SIGN_IN:
+      return {
+        ...state,
+        user: {
+          id:payload.id,
+          username:payload.username,
+          email:payload.email,
+          score: payload.score,
+          joined: payload.joined,
+        },
+        isLoggedIn: true
+      }
+    case USER_SIGN_FAILED:
+      return {...state, error:payload, isLoggedIn:false}
+    default:
+      return state;
+  }
+};
 
 // UPDATE USER SCORE 
 const initStateUser = {
