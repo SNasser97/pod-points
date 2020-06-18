@@ -9,14 +9,14 @@ import Pagination from "../components/Pagination/Pagination";
 import { setSearchField, requestEpisodes} from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const {searchEpisodes, getEpisodes, playEpisode} = state;
+  const {searchEpisodes, getEpisodes} = state;
   return {
     searchField: searchEpisodes.searchField,
     episodeResults:getEpisodes.episodeResults,
     totalResults: getEpisodes.totalResults,
     isLoading: getEpisodes.isLoading,
     error: getEpisodes.error,
-    currentEpisode: playEpisode.currentEpisode
+    // currentEpisode: playEpisode.currentEpisode
   }
 }
 
