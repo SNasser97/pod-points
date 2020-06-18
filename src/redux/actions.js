@@ -13,16 +13,21 @@ import {
   USER_SIGN_PENDING,
   USER_SIGN_IN,
   USER_SIGN_FAILED,
+  CHANGE_USERNAME_FIELD,
+  CHANGE_PW_FIELD,
 } from "./constants";
 
-
-export const signIn = (email, pw) => async (dispatch) =>{
+// HANDLE USER REG + SIGNIN
+export const signIn = (username, password) => async (dispatch) =>{
   const url = "http://localhost:3000/sign_in";
   dispatch({type: USER_SIGN_PENDING});
   try {
     const respSign = await fetch(url, {
-      method:'post',
-      body: JSON.stringify({email, pw})
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({username, password})
     });
     const respData = await respSign.json();
     dispatch({
@@ -37,13 +42,7 @@ export const signIn = (email, pw) => async (dispatch) =>{
   }
 }
 
-export const closeModal = () => {
-  return {
-    type: CLOSE_SCORE,
-    payload: false
-  }
-}
-
+// UPDATE USER SCORE
 export const updateUserScore = () => {
   return {
     type: UPDATE_SCORE,
@@ -51,6 +50,30 @@ export const updateUserScore = () => {
   }
 }
 
+// USER FORM
+export const setUsernameText = (text) => {
+  return {
+    type: CHANGE_USERNAME_FIELD,
+    payload: text
+  }
+}
+
+export const setPasswordText = (text) => {
+  return {
+    type: CHANGE_PW_FIELD,
+    payload:text
+  }
+}
+
+// ACTION FOR MODAL 
+export const closeModal = () => {
+  return {
+    type: CLOSE_SCORE,
+    payload: false
+  }
+}
+
+// ACTION FOR EPISODES
 export const playCurrentEpisode = (episode) => {
   return {
     type: PLAY_CURRENT_EPISODE,
@@ -64,6 +87,8 @@ export const displayMediaPlayer = () => {
     payload: true
   }
 }
+
+// ACTION FOR HANDLING API REQ + SEARCH PARAMS
 export const setSearchField = (text) => {
   return {
      type: CHANGE_SEARCH_FIELD,

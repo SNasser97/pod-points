@@ -11,6 +11,9 @@ import {
   showMediaPlayer, 
   playEpisode,
   updateScore,
+  getUsernameText,
+  getPasswordText,
+  userSignIn
 } from "./redux/reducers";
 
 import thunkMiddleWare from "redux-thunk"
@@ -25,7 +28,10 @@ const rootReducer = combineReducers({
   getRandomEpisode,
   showMediaPlayer,
   playEpisode,
-  updateScore
+  updateScore,
+  getUsernameText,
+  getPasswordText,
+  userSignIn,
 });
 
 const store = createStore(

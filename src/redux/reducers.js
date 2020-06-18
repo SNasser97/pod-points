@@ -13,8 +13,29 @@ import {
   USER_SIGN_IN,
   USER_SIGN_PENDING,
   USER_SIGN_FAILED,
+  CHANGE_USERNAME_FIELD,
+  CHANGE_PW_FIELD,
 } from "./constants";
 
+// SIGNIN FORM
+const initStateSignInUserField = { usernameField:'', }
+export const getUsernameText = (state = initStateSignInUserField, {type, payload}) => {
+  switch (type) {
+    case CHANGE_USERNAME_FIELD:
+      return {...state, usernameField:payload}
+    default:
+      return state
+  }
+}
+const initStateSignInPassField = { passwordField:'', }
+export const getPasswordText = (state = initStateSignInPassField, {type,payload}) => {
+  switch (type) {
+    case CHANGE_PW_FIELD:
+      return {...state, passwordField: payload}
+    default:
+      return state
+  }
+}
 // SIGN USER IN
 const initStateSignIn = {
   user: {
@@ -31,7 +52,7 @@ const initStateSignIn = {
 export const userSignIn = (state=initStateSignIn, {type,payload}) => {
   switch(type) {
     case USER_SIGN_PENDING:
-      return {...state}
+      return {...state, isLoggedIn:false}
     case USER_SIGN_IN:
       return {
         ...state,
