@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
     isLoading: getRandomEpisode.isLoading,
     randomEpisode: getRandomEpisode.randomEpisode,
     isShown: showMediaPlayer.isShown,
-    episodeResults: getEpisodes.episodeResults,
+    // episodeResults: getEpisodes.episodeResults,
     currentEpisode: playEpisode.currentEpisode,
     score: updateScore.score,
     showReward: updateScore.showReward,
@@ -49,6 +49,10 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
 }
 
 class App extends Component {
+  
+  constructor() {
+    super();
+  }
   
   calcAudio  = (audioSeconds) => { // in ms
     let hours = Math.floor(audioSeconds / 3600);
