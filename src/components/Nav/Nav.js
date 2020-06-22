@@ -15,7 +15,7 @@ const Nav = () => {
 				<Switch>
 					<Route path="/home">
 							<div className="nav__btn">
-								<Link to="/signin">
+								<Link to="/">
 									<div href="#!" className="btn btn__ghost">Sign out</div>
 								</Link>
 							</div>
@@ -28,7 +28,7 @@ const Nav = () => {
 							</Link>
 						</div>
 						<div className="nav__btn">
-							<Link to="/signin">
+							<Link to="/sign_in">
 								<div href="#!" className="btn btn__ghost">Log in</div>
 							</Link>
 						</div>

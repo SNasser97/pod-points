@@ -77,7 +77,7 @@ const Register = () => {
             <input className="btn btn__full" type="submit" value="Sign Up" />
           </div>
           <div className="form__link fs--3">
-            <Link to="/signin">
+            <Link to="/sign_in">
               Back to sign in
               <i className="fas fa-arrow-circle-right"></i>
             </Link>
