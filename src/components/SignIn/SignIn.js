@@ -29,14 +29,18 @@ class SignIn extends Component {
       onUserFieldChange,
       handleUserSignIn, 
       usernameField, 
-      passwordField
-    } = this.props
+      passwordField,
+      user,
+      isLoggedIn,
+    } = this.props // from App
     // todo: handleSignIn action
-    console.log(handleUserSignIn)
+    // console.info('inside signin.js', user.isLoggedIn)
+    // console.log(handleUserSignIn)
+    console.info('inside signin =>', user , isLoggedIn)
     return (
       <main>
         <div className="container">
-          <form className="form" action="" method="POST">
+          <form className="form" method="POST">
             <fieldset className="signin__header">
               <p className="signin__title fs--1">Sign in</p>
               <div className="signin__box fs--5">
@@ -69,10 +73,8 @@ class SignIn extends Component {
               </div>
             </fieldset>
             <div className="signin__btn ">
-              <Link to="/home">
-                <input onClick={() => handleUserSignIn(usernameField,passwordField)} 
+              <input onClick={(e) => {handleUserSignIn(usernameField, passwordField); e.preventDefault()}} 
                 className="btn btn__full" type="submit" value="Sign In" />
-              </Link>
             </div>
             <div className="form__link form__link--register fs--3">
               <Link to="/register">
