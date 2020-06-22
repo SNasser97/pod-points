@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import Nav from "../components/Nav/Nav";
 import Rank from "../components/Rank/Rank";
@@ -23,11 +24,11 @@ import {
   displayMediaPlayer, 
   playCurrentEpisode,
   updateUserScore,
-  closeModal
+  closeModal,
 } from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode, updateScore } = state // reducers
+  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode, updateScore, userSignIn } = state // reducers
   return {
     isLoading: getRandomEpisode.isLoading,
     randomEpisode: getRandomEpisode.randomEpisode,
@@ -36,6 +37,8 @@ const mapStateToProps = (state) => {
     currentEpisode: playEpisode.currentEpisode,
     score: updateScore.score,
     showReward: updateScore.showReward,
+    user: userSignIn.user,
+    isLoggedIn: userSignIn.isLoggedIn,
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -79,19 +82,26 @@ class App extends Component {
       onClickPlayCurrEpisode,
       onClickCloseModal,
       onUpdateScore,
-      showReward
+      showReward,
+      user,
+      isLoggedIn,
     } = this.props; // redux store
     const { calcAudio } = this; // from App
+    console.info(' in side app.js', user, isLoggedIn)
+
     return (
       <Router>
         <Nav />
         <Switch>
-          <Route path="/" exact>
+          <Route exact path="/">
             <Home/>
           </Route>
-          <Route path="/signin" component={SignIn} />
+          <Route path="/sign_in">
+            {/* todo: reset setInit state when logging out */}
+            { isLoggedIn ? <Redirect to="/home" /> : <SignIn />}
+          </Route>
           <Route path="/register" component={Register} />
-          <Route path="/home" >
+          <Route path="/home">
             {showReward ? (
               <Modal
                 onClickCloseModal={onClickCloseModal}
