@@ -26,19 +26,26 @@ import {
   updateUserScore,
   closeModal,
 } from "../redux/actions";
+import { userRegister } from '../redux/reducers';
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode, showMediaPlayer, getEpisodes, playEpisode, updateScore, userSignIn } = state // reducers
+  const { 
+    getRandomEpisode, 
+    showMediaPlayer, 
+    playEpisode, 
+    updateScore, 
+    userSignIn,
+    userRegister,
+   } = state // reducers
   return {
     isLoading: getRandomEpisode.isLoading,
     randomEpisode: getRandomEpisode.randomEpisode,
     isShown: showMediaPlayer.isShown,
-    // episodeResults: getEpisodes.episodeResults,
     currentEpisode: playEpisode.currentEpisode,
     score: updateScore.score,
     showReward: updateScore.showReward,
-    user: userSignIn.user,
-    isLoggedIn: userSignIn.isLoggedIn,
+    user: !userSignIn.user.id ? userRegister.user : userSignIn.user,
+    isLoggedIn: userSignIn.isLoggedIn || userRegister.isLoggedIn,
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -88,7 +95,7 @@ class App extends Component {
     } = this.props; // redux store
     const { calcAudio } = this; // from App
     console.info(' in side app.js', user, isLoggedIn)
-
+    
     return (
       <Router>
         <Nav />
@@ -96,11 +103,13 @@ class App extends Component {
           <Route exact path="/">
             <Home/>
           </Route>
-          <Route path="/sign_in">
+          <Route exact path="/sign_in">
             {/* todo: reset setInit state when logging out */}
             { isLoggedIn ? <Redirect to="/home" /> : <SignIn />}
           </Route>
-          <Route path="/register" component={Register} />
+          <Route exact path="/register">
+            { isLoggedIn ? <Redirect to="/home" /> : <Register />}
+          </Route>
           <Route path="/home">
             {showReward ? (
               <Modal
@@ -122,7 +131,7 @@ class App extends Component {
                 </ErrorBoundry>
               )}
             </Carousel>
-            <Rank />
+            <Rank user={user} />
             <Search
               onClickPlayCurrEpisode={onClickPlayCurrEpisode}
               onClickShowPlayer={onClickShowPlayer}
@@ -131,7 +140,7 @@ class App extends Component {
             {/*
                   <Leaderboard/> // TODO
                   <Profile/> // TODO
-                */}
+            */}
             {isShown ? (
               <MediaPlayer
                 onUpdateScore={onUpdateScore}
