@@ -13,7 +13,11 @@ import {
   updateScore,
   getUsernameText,
   getPasswordText,
-  userSignIn
+  getRegPasswordText,
+  getRegUsernameText,
+  getRegEmailText,
+  userSignIn,
+  userRegister,
 } from "./redux/reducers";
 
 import thunkMiddleWare from "redux-thunk"
@@ -31,7 +35,11 @@ const rootReducer = combineReducers({
   updateScore,
   getUsernameText,
   getPasswordText,
+  getRegPasswordText,
+  getRegUsernameText,
+  getRegEmailText,
   userSignIn,
+  userRegister
 });
 
 const store = createStore(

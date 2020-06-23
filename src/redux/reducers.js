@@ -10,18 +10,24 @@ import {
   PLAY_CURRENT_EPISODE,
   UPDATE_SCORE,
   CLOSE_SCORE,
-  USER_SIGN_IN,
+  USER_SIGN_SUCCESS,
   USER_SIGN_PENDING,
   USER_SIGN_FAILED,
-  CHANGE_USERNAME_FIELD,
-  CHANGE_PW_FIELD,
+  USER_REG_PENDING,
+  USER_REG_SUCCESS,
+  USER_REG_FAILED,
+  CHANGE_SIGN_USERNAME_FIELD,
+  CHANGE_SIGN_PW_FIELD,
+  CHANGE_REG_USERNAME_FIELD,
+  CHANGE_REG_PW_FIELD,
+  CHANGE_REG_EMAIL_FIELD,
 } from "./constants";
 
 // SIGNIN FORM
 const initStateSignInUserField = { usernameField:'', }
 export const getUsernameText = (state = initStateSignInUserField, {type, payload}) => {
   switch (type) {
-    case CHANGE_USERNAME_FIELD:
+    case CHANGE_SIGN_USERNAME_FIELD:
       return {...state, usernameField:payload}
     default:
       return state
@@ -30,14 +36,42 @@ export const getUsernameText = (state = initStateSignInUserField, {type, payload
 const initStateSignInPassField = { passwordField:'', }
 export const getPasswordText = (state = initStateSignInPassField, {type,payload}) => {
   switch (type) {
-    case CHANGE_PW_FIELD:
+    case CHANGE_SIGN_PW_FIELD:
       return {...state, passwordField: payload}
     default:
       return state
   }
 }
+// REG FORM
+const initStateRegPassField = {passwordFieldReg:''}
+export const getRegPasswordText = (state = initStateRegPassField, {type, payload}) => {
+  switch (type) {
+    case CHANGE_REG_PW_FIELD:
+      return { ...state, passwordFieldReg: payload}
+    default:
+      return state
+  }
+}
+const initStateRegUserField = {usernameFieldReg:''}
+export const getRegUsernameText = (state = initStateRegUserField, { type, payload }) => {
+  switch (type) {
+    case CHANGE_REG_USERNAME_FIELD:
+      return { ...state, usernameFieldReg: payload }
+    default:
+      return state
+  }
+}
+const initStateRegEmailField = {emailFieldReg:''}
+export const getRegEmailText = (state=initStateRegEmailField, {type,payload}) => {
+  switch (type) {
+    case CHANGE_REG_EMAIL_FIELD:
+      return { ...state, emailFieldReg:payload}
+    default:
+      return state;
+  }
+}
 // SIGN USER IN
-const initStateSignIn = {
+const initStateUserSession = {
   user: {
     id:"",
     username:"",
@@ -48,12 +82,33 @@ const initStateSignIn = {
   error: "",
   isLoggedIn:false,
 }
-
-export const userSignIn = (state=initStateSignIn, {type,payload}) => {
+export const userRegister = (state = initStateUserSession, {type, payload}) => {
+  switch (type) {
+    case USER_REG_PENDING:
+      return {...state, isLoggedIn:false}
+    case USER_REG_SUCCESS:
+      return {
+        ...state, 
+        user: {
+          id: payload.id,
+          username: payload.username,
+          email: payload.email,
+          score: payload.score,
+          joined: payload.joined,
+        },
+        isLoggedIn:true,
+      }
+    case USER_REG_FAILED:
+      return {...state, error:payload, isLoggedIn:false}
+    default:
+      return state;
+  }
+}
+export const userSignIn = (state = initStateUserSession, {type,payload}) => {
   switch(type) {
     case USER_SIGN_PENDING:
       return {...state, isLoggedIn:false}
-    case USER_SIGN_IN:
+    case USER_SIGN_SUCCESS:
       return {
         ...state,
         user: {

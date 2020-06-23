@@ -10,14 +10,53 @@ import {
   PLAY_CURRENT_EPISODE,
   UPDATE_SCORE,
   CLOSE_SCORE,
+  USER_SIGN_SUCCESS,
   USER_SIGN_PENDING,
-  USER_SIGN_IN,
   USER_SIGN_FAILED,
-  CHANGE_USERNAME_FIELD,
-  CHANGE_PW_FIELD,
+  USER_REG_PENDING,
+  USER_REG_SUCCESS,
+  USER_REG_FAILED,
+  CHANGE_SIGN_USERNAME_FIELD,
+  CHANGE_SIGN_PW_FIELD,
+  CHANGE_REG_USERNAME_FIELD,
+  CHANGE_REG_PW_FIELD,
+  CHANGE_REG_EMAIL_FIELD,
 } from "./constants";
 
-// HANDLE USER REG + SIGNIN
+// set user reg input
+export const setRegPassword = (text) => { return { type: CHANGE_REG_PW_FIELD, payload:text}}
+export const setRegUsername = (text) => { return { type: CHANGE_REG_USERNAME_FIELD, payload:text}}
+export const setRegEmail = (text) => {return { type: CHANGE_REG_EMAIL_FIELD, payload:text}}
+
+export const register = (email, username, password) => async (dispatch) => {
+  const url = "http://localhost:3000/register";
+ 
+  dispatch({ type: USER_REG_PENDING});
+  try {
+    const respReg = await fetch(url, {
+      method:"POST",
+      headers: {
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({email,username,password})
+    });
+    const respData = await respReg.json();
+    dispatch({
+      type: USER_REG_SUCCESS,
+      payload: respData,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_REG_FAILED,
+      payload:error
+    });
+  }
+}
+
+// USER SIGN FORM
+export const setUsernameText = (text) => { return { type: CHANGE_SIGN_USERNAME_FIELD, payload: text } }
+export const setPasswordText = (text) => { return { type: CHANGE_SIGN_PW_FIELD, payload: text } }
+
 export const signIn = (username, password) => async (dispatch) =>{
   const url = "http://localhost:3000/sign_in";
   dispatch({type: USER_SIGN_PENDING});
@@ -31,13 +70,13 @@ export const signIn = (username, password) => async (dispatch) =>{
     });
     const respData = await respSign.json();
     dispatch({
-      type: USER_SIGN_IN,
+      type: USER_SIGN_SUCCESS,
       payload: respData
-    })
-  } catch(e) {
+    });
+  } catch(error) {
     dispatch({
       type: USER_SIGN_FAILED,
-      payload: e
+      payload: error
     });
   }
 }
@@ -47,21 +86,6 @@ export const updateUserScore = () => {
   return {
     type: UPDATE_SCORE,
     payload: 100
-  }
-}
-
-// USER FORM
-export const setUsernameText = (text) => {
-  return {
-    type: CHANGE_USERNAME_FIELD,
-    payload: text
-  }
-}
-
-export const setPasswordText = (text) => {
-  return {
-    type: CHANGE_PW_FIELD,
-    payload:text
   }
 }
 
@@ -103,10 +127,13 @@ export const requestRandomEpisode = () => async (dispatch) => {
   try {
     const resp = await fetch(SERVER_URL_RANDOM);
     const respData = await resp.json();
-    dispatch({
-      type: REQUEST_RAND_EPISODE_SUCCESS,
-      payload: respData
-    })
+    setTimeout(() => { //! this can be removed, left in to show loader effect
+      dispatch({
+        type: REQUEST_RAND_EPISODE_SUCCESS,
+        payload: respData
+      })
+    }, 1000);
+    
   } catch(error) {
     dispatch({
       type:REQUEST_RAND_EPISODE_FAILED,
