@@ -26,7 +26,6 @@ import {
   updateUserScore,
   closeModal,
 } from "../redux/actions";
-import { userRegister } from '../redux/reducers';
 
 const mapStateToProps = (state) => {
   const { 
@@ -42,7 +41,8 @@ const mapStateToProps = (state) => {
     randomEpisode: getRandomEpisode.randomEpisode,
     isShown: showMediaPlayer.isShown,
     currentEpisode: playEpisode.currentEpisode,
-    score: updateScore.score,
+    score: updateScore.score, //! updated score from BE
+    reward: updateScore.reward, //! points awarded from BE
     showReward: updateScore.showReward,
     user: !userSignIn.user.id ? userRegister.user : userSignIn.user,
     isLoggedIn: userSignIn.isLoggedIn || userRegister.isLoggedIn,
@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
     onClickLoadRand: () => dispatch(requestRandomEpisode()),
     onClickShowPlayer: () => dispatch(displayMediaPlayer()),
     onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode)),
-    onUpdateScore: () => dispatch(updateUserScore()),
+    onUpdateScore: (id) => dispatch(updateUserScore(id)),
     onClickCloseModal: () => dispatch(closeModal())
   }
 }
@@ -70,12 +70,10 @@ class App extends Component {
     let mins = Math.floor(audioSeconds / 60);
     let secs = audioSeconds % 60; // get remainder of seconds from mins
     
-    // return () => {
     hours = hours ? `${hours}:` : "";
     mins = mins < 10 ? `0${mins}` : mins;
     secs = secs < 10 ? `0${secs}` : secs;
     return `${hours}${mins}:${secs}`
-  // };
   }
 
   render() {
@@ -91,6 +89,8 @@ class App extends Component {
       onUpdateScore,
       showReward,
       user,
+      score,
+      reward,
       isLoggedIn,
     } = this.props; // redux store
     const { calcAudio } = this; // from App
@@ -114,7 +114,7 @@ class App extends Component {
             {showReward ? (
               <Modal
                 onClickCloseModal={onClickCloseModal}
-                points={updateUserScore().payload}
+                reward={reward}
               />
             ) : null}
             <Carousel onClickLoadRand={onClickLoadRand}>
@@ -131,7 +131,7 @@ class App extends Component {
                 </ErrorBoundry>
               )}
             </Carousel>
-            <Rank user={user} />
+            <Rank user={user} score={score}/>
             <Search
               onClickPlayCurrEpisode={onClickPlayCurrEpisode}
               onClickShowPlayer={onClickShowPlayer}
@@ -145,6 +145,7 @@ class App extends Component {
               <MediaPlayer
                 onUpdateScore={onUpdateScore}
                 currentEpisode={currentEpisode}
+                id = {user.id}
               />
             ) : null}
           </Route>
