@@ -1,33 +1,9 @@
-import { 
-  CHANGE_SEARCH_FIELD, 
-  REQUEST_EPISODE_PENDING,
-  REQUEST_EPISODE_SUCCESS,
-  REQUEST_EPISODE_FAILED,
-  REQUEST_RAND_EPISODE_PENDING,
-  REQUEST_RAND_EPISODE_SUCCESS,
-  REQUEST_RAND_EPISODE_FAILED,
-  SHOW_PLAYER,
-  PLAY_CURRENT_EPISODE,
-  UPDATE_SCORE,
-  CLOSE_SCORE,
-  USER_SIGN_SUCCESS,
-  USER_SIGN_PENDING,
-  USER_SIGN_FAILED,
-  USER_REG_PENDING,
-  USER_REG_SUCCESS,
-  USER_REG_FAILED,
-  CHANGE_SIGN_USERNAME_FIELD,
-  CHANGE_SIGN_PW_FIELD,
-  CHANGE_REG_USERNAME_FIELD,
-  CHANGE_REG_PW_FIELD,
-  CHANGE_REG_EMAIL_FIELD,
-} from "./constants";
-
+import { CONSTANTS } from "./constants";
 // SIGNIN FORM
 const initStateSignInUserField = { usernameField:'', }
 export const getUsernameText = (state = initStateSignInUserField, {type, payload}) => {
   switch (type) {
-    case CHANGE_SIGN_USERNAME_FIELD:
+    case CONSTANTS.CHANGE_SIGN_USERNAME_FIELD:
       return {...state, usernameField:payload}
     default:
       return state
@@ -36,7 +12,7 @@ export const getUsernameText = (state = initStateSignInUserField, {type, payload
 const initStateSignInPassField = { passwordField:'', }
 export const getPasswordText = (state = initStateSignInPassField, {type,payload}) => {
   switch (type) {
-    case CHANGE_SIGN_PW_FIELD:
+    case CONSTANTS.CHANGE_SIGN_PW_FIELD:
       return {...state, passwordField: payload}
     default:
       return state
@@ -46,7 +22,7 @@ export const getPasswordText = (state = initStateSignInPassField, {type,payload}
 const initStateRegPassField = {passwordFieldReg:''}
 export const getRegPasswordText = (state = initStateRegPassField, {type, payload}) => {
   switch (type) {
-    case CHANGE_REG_PW_FIELD:
+    case CONSTANTS.CHANGE_REG_PW_FIELD:
       return { ...state, passwordFieldReg: payload}
     default:
       return state
@@ -55,7 +31,7 @@ export const getRegPasswordText = (state = initStateRegPassField, {type, payload
 const initStateRegUserField = {usernameFieldReg:''}
 export const getRegUsernameText = (state = initStateRegUserField, { type, payload }) => {
   switch (type) {
-    case CHANGE_REG_USERNAME_FIELD:
+    case CONSTANTS.CHANGE_REG_USERNAME_FIELD:
       return { ...state, usernameFieldReg: payload }
     default:
       return state
@@ -64,7 +40,7 @@ export const getRegUsernameText = (state = initStateRegUserField, { type, payloa
 const initStateRegEmailField = {emailFieldReg:''}
 export const getRegEmailText = (state=initStateRegEmailField, {type,payload}) => {
   switch (type) {
-    case CHANGE_REG_EMAIL_FIELD:
+    case CONSTANTS.CHANGE_REG_EMAIL_FIELD:
       return { ...state, emailFieldReg:payload}
     default:
       return state;
@@ -84,9 +60,9 @@ const initStateUserSession = {
 }
 export const userRegister = (state = initStateUserSession, {type, payload}) => {
   switch (type) {
-    case USER_REG_PENDING:
+    case CONSTANTS.USER_REG_PENDING:
       return {...state, isLoggedIn:false}
-    case USER_REG_SUCCESS:
+    case CONSTANTS.USER_REG_SUCCESS:
       return {
         ...state, 
         user: {
@@ -98,7 +74,7 @@ export const userRegister = (state = initStateUserSession, {type, payload}) => {
         },
         isLoggedIn:true,
       }
-    case USER_REG_FAILED:
+    case CONSTANTS.USER_REG_FAILED:
       return {...state, error:payload, isLoggedIn:false}
     default:
       return state;
@@ -106,9 +82,9 @@ export const userRegister = (state = initStateUserSession, {type, payload}) => {
 }
 export const userSignIn = (state = initStateUserSession, {type,payload}) => {
   switch(type) {
-    case USER_SIGN_PENDING:
+    case CONSTANTS.USER_SIGN_PENDING:
       return {...state, isLoggedIn:false}
-    case USER_SIGN_SUCCESS:
+    case CONSTANTS.USER_SIGN_SUCCESS:
       return {
         ...state,
         user: {
@@ -120,7 +96,7 @@ export const userSignIn = (state = initStateUserSession, {type,payload}) => {
         },
         isLoggedIn: true
       }
-    case USER_SIGN_FAILED:
+    case CONSTANTS.USER_SIGN_FAILED:
       return {...state, error:payload, isLoggedIn:false}
     default:
       return state;
@@ -134,12 +110,12 @@ const initStateUser = {
 }
 export const updateScore = (state=initStateUser, {type,payload}) => {
   switch(type) {
-    case UPDATE_SCORE:
+    case CONSTANTS.UPDATE_SCORE:
       return {...state, 
         score: state.score+payload,
         showReward: true,
       }
-    case CLOSE_SCORE:
+    case CONSTANTS.CLOSE_SCORE:
       return {...state, showReward:payload}
     default:
       return state;
@@ -152,7 +128,7 @@ const initStatePlayEpisode = {
 }
 export const playEpisode = (state = initStatePlayEpisode, {type,payload}) => {
   switch(type) {
-    case PLAY_CURRENT_EPISODE:
+    case CONSTANTS.PLAY_CURRENT_EPISODE:
       return { ...state, currentEpisode: payload};
     default:
       return state;
@@ -166,7 +142,7 @@ const initStateMediaPlayer = {
 
 export const showMediaPlayer = (state=initStateMediaPlayer, {type,payload}) => {
   switch(type) {
-    case SHOW_PLAYER:
+    case CONSTANTS.SHOW_PLAYER:
       return {...state, isShown:payload}
     default:
       return state;
@@ -180,7 +156,7 @@ const initStateSearch = {
 
 export const searchEpisodes = (state=initStateSearch, {type, payload}) => {
   switch(type) {
-    case CHANGE_SEARCH_FIELD:
+    case CONSTANTS.CHANGE_SEARCH_FIELD:
       return { ...state, searchField: payload }
     default:
       return state; // ""
@@ -198,19 +174,19 @@ const initStateEpisodes = {
 
 export const getEpisodes = (state=initStateEpisodes, {type, payload}) => {
   switch(type) {
-    case REQUEST_EPISODE_PENDING:
+    case CONSTANTS.REQUEST_EPISODE_PENDING:
       return {
         ...state,
         isLoading:true,
       }
-    case REQUEST_EPISODE_SUCCESS:
+    case CONSTANTS.REQUEST_EPISODE_SUCCESS:
       return {
         ...state,
         episodeResults: payload.results,
         totalResults: payload.total,
         isLoading:false
       }
-    case REQUEST_EPISODE_FAILED:
+    case CONSTANTS.REQUEST_EPISODE_FAILED:
       return {
         ...state,
         error: payload,
@@ -239,12 +215,12 @@ const initStateRandomEp = {
 
 export const getRandomEpisode = (state=initStateRandomEp, {type, payload}) => {
   switch(type) {
-    case REQUEST_RAND_EPISODE_PENDING:
+    case CONSTANTS.REQUEST_RAND_EPISODE_PENDING:
       return {
         ...state,
         isLoading:true
       }
-    case REQUEST_RAND_EPISODE_SUCCESS:
+    case CONSTANTS.REQUEST_RAND_EPISODE_SUCCESS:
       return {
         ...state,
         randomEpisode:[{
@@ -258,7 +234,7 @@ export const getRandomEpisode = (state=initStateRandomEp, {type, payload}) => {
         }],
         isLoading:false
       }
-    case REQUEST_RAND_EPISODE_FAILED:
+    case CONSTANTS.REQUEST_RAND_EPISODE_FAILED:
       return {
         ...state,
         error: payload,
