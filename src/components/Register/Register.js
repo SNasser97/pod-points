@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {register, setRegUsername , setRegEmail, setRegPassword} from "../../redux/actions"
+import {
+  register,
+  setRegUsername, 
+  setRegEmail, 
+  setRegPassword,
+} from "../../redux/actions"
 
 const mapStateToProps = (state) => {
   const {getRegPasswordText, getRegUsernameText, getRegEmailText} = state;
@@ -43,24 +48,6 @@ class Register extends Component  {
           <form className="form" method="POST">
             <fieldset className="signin__header">
               <p className="signin__title fs--1">Sign up</p>
-              <div className="signin__box fs--5">
-                {/* <label //! to be removed
-                  
-                  className="signin__label signin__label--fullname has_color--darkgrey4"
-                  htmlFor="fullname-reg"
-                >
-                  Fullname
-              </label>
-                <input
-                  // onChange={}
-                  className="signin__input fs--4"
-                  name="fullname-reg"
-                  type="text"
-                  autoComplete="off"
-                  required
-                />
-                <hr className="signin__line" /> */}
-              </div>
               <div className="signin__box fs--5">
                 <label
                   className="signin__label signin__label--username has_color--darkgrey4"
