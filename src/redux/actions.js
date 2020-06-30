@@ -59,10 +59,14 @@ export const signIn = (username, password) => async (dispatch) =>{
 }
 
 // UPDATE USER SCORE
-export const updateUserScore = () => async (dispatch) => {
+export const updateUserScore = (id) => async (dispatch) => {
   const url = "http://localhost:3001/score";
   try {
-    const respScore = await fetch(url);
+    const respScore = await fetch(url, {
+      method:"put",
+      headers: { "Content-Type":"application/json"},
+      body: JSON.stringify({id})
+    });
     const respData = await respScore.json();
 
     dispatch({
@@ -75,11 +79,6 @@ export const updateUserScore = () => async (dispatch) => {
       payload: 0,
     })
   }
-  // ! debugging
-  // return {
-  //   type: CONSTANTS.UPDATE_SCORE,
-  //   payload: 100
-  // }
 }
 
 // ACTION FOR MODAL 
