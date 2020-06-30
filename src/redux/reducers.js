@@ -47,7 +47,7 @@ export const getRegEmailText = (state=initStateRegEmailField, {type,payload}) =>
   }
 }
 // SIGN USER IN
-const initStateUserSession = {
+const initStateUser = {
   user: {
     id:"",
     username:"",
@@ -58,7 +58,7 @@ const initStateUserSession = {
   error: "",
   isLoggedIn:false,
 }
-export const userRegister = (state = initStateUserSession, {type, payload}) => {
+export const userRegister = (state = initStateUser, {type, payload}) => {
   switch (type) {
     case CONSTANTS.USER_REG_PENDING:
       return {...state, isLoggedIn:false}
@@ -80,7 +80,7 @@ export const userRegister = (state = initStateUserSession, {type, payload}) => {
       return state;
   }
 }
-export const userSignIn = (state = initStateUserSession, {type,payload}) => {
+export const userSignIn = (state = initStateUser, {type,payload}) => {
   switch(type) {
     case CONSTANTS.USER_SIGN_PENDING:
       return {...state, isLoggedIn:false}
@@ -104,15 +104,12 @@ export const userSignIn = (state = initStateUserSession, {type,payload}) => {
 };
 
 // UPDATE USER SCORE 
-const initStateUser = {
-  score:0,
-  showReward: false
-}
 export const updateScore = (state=initStateUser, {type,payload}) => {
   switch(type) {
     case CONSTANTS.UPDATE_SCORE:
-      return {...state, 
-        score: state.score+payload,
+      return {...state,
+        score: payload.user_score_new,
+        reward: payload.reward,
         showReward: true,
       }
     case CONSTANTS.CLOSE_SCORE:
