@@ -7,14 +7,14 @@ import CustomProgress from './CustomProgress/CustomProgress';
 import sampleAudio from "../../assets/audio/sample_audio.mp3"; 
 const { CurrentTime, Duration, Volume, SeekBar} = controls;
 
-const MediaPlayer = ({currentEpisode, onUpdateScore}) => {
+const MediaPlayer = ({currentEpisode, onUpdateScore, id}) => {
   
   let [episode] = currentEpisode; // currentEpisode[0].props
   return (
     <Media>
       <div className="media">
         <div className="media-player">
-            {<Player onEnded={()=> onUpdateScore()} src={episode.src} />}
+            {<Player onEnded={()=> onUpdateScore(id)} src={episode.src} />}
         </div>
         <div className="media-details">
           <div className="media-img">
