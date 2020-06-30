@@ -1,51 +1,157 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import Nav from "../components/Nav/Nav";
 import Rank from "../components/Rank/Rank";
 import Carousel from "../components/Carousel/Carousel";
 import CardList from "../components/CardList/CardList";
 import CardLoader from "../components/CardLoader/CardLoader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
+import MediaPlayer from "../components/MediaPlayer/MediaPlayer";
+import Modal from "../components/ModalScore/ModalScore";
+import SignIn from "../components/SignIn/SignIn";
+import Register from "../components/Register/Register";
 import Search from "./Search";
-import { requestRandomEpisode } from "../redux/actions";
+import Home from "../components/Home/Home";
+
+import { 
+  requestRandomEpisode, 
+  displayMediaPlayer, 
+  playCurrentEpisode,
+  updateUserScore,
+  closeModal,
+} from "../redux/actions";
 
 const mapStateToProps = (state) => {
-  const { getRandomEpisode } = state // reducers
+  const { 
+    getRandomEpisode, 
+    showMediaPlayer, 
+    playEpisode, 
+    updateScore, 
+    userSignIn,
+    userRegister,
+   } = state // reducers
   return {
-    isLoading:getRandomEpisode.isLoading,
-    randomEpisode: getRandomEpisode.randomEpisode
-  }
+    isLoading: getRandomEpisode.isLoading,
+    randomEpisode: getRandomEpisode.randomEpisode,
+    isShown: showMediaPlayer.isShown,
+    currentEpisode: playEpisode.currentEpisode,
+    score: updateScore.score, //! updated score from BE
+    reward: updateScore.reward, //! points awarded from BE
+    showReward: updateScore.showReward,
+    user: !userSignIn.user.id ? userRegister.user : userSignIn.user,
+    isLoggedIn: userSignIn.isLoggedIn || userRegister.isLoggedIn,
+  } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
   return {  
-    onClickLoadRand: () => dispatch(requestRandomEpisode())
+    onClickLoadRand: () => dispatch(requestRandomEpisode()),
+    onClickShowPlayer: () => dispatch(displayMediaPlayer()),
+    onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode)),
+    onUpdateScore: (id) => dispatch(updateUserScore(id)),
+    onClickCloseModal: () => dispatch(closeModal())
   }
 }
 
 class App extends Component {
   
+  constructor() {
+    super();
+  }
+  
+  calcAudio  = (audioSeconds) => { // in ms
+    let hours = Math.floor(audioSeconds / 3600);
+    audioSeconds %= 3600; // get remainder of mins from hours 
+    let mins = Math.floor(audioSeconds / 60);
+    let secs = audioSeconds % 60; // get remainder of seconds from mins
+    
+    hours = hours ? `${hours}:` : "";
+    mins = mins < 10 ? `0${mins}` : mins;
+    secs = secs < 10 ? `0${secs}` : secs;
+    return `${hours}${mins}:${secs}`
+  }
+
   render() {
-    const { randomEpisode, isLoading} = this.props;
-      return (
-        <React.Fragment>
-        <Nav/>
-        <Carousel onClickLoadRand = {this.props.onClickLoadRand} >
-          {isLoading ? 
-              <CardLoader/> : 
-              <ErrorBoundry>
-                <CardList randomEpisode={ randomEpisode }/>
-              </ErrorBoundry>
-          }
-        </Carousel>
-        <Rank/>
-        <Search/>
-        {/*
-          <Leaderboard/> // TODO
-          <Profile/> // TODO
-        */}
-        </React.Fragment>
-      );
+    const { 
+      currentEpisode, 
+      randomEpisode, 
+      isLoading, 
+      isShown, 
+      onClickShowPlayer, 
+      onClickLoadRand,
+      onClickPlayCurrEpisode,
+      onClickCloseModal,
+      onUpdateScore,
+      showReward,
+      user,
+      score,
+      reward,
+      isLoggedIn,
+    } = this.props; // redux store
+    const { calcAudio } = this; // from App
+    console.info(' in side app.js', user, isLoggedIn)
+    
+    return (
+      <Router>
+        <Nav />
+        <Switch>
+          <Route exact path="/">
+            <Home/>
+          </Route>
+          <Route exact path="/sign_in">
+            {/* todo: reset setInit state when logging out */}
+            { isLoggedIn ? <Redirect to="/home" /> : <SignIn />}
+          </Route>
+          <Route exact path="/register">
+            { isLoggedIn ? <Redirect to="/home" /> : <Register />}
+          </Route>
+          <Route path="/home">
+            {showReward ? (
+              <Modal
+                onClickCloseModal={onClickCloseModal}
+                reward={reward}
+              />
+            ) : null}
+            <Carousel onClickLoadRand={onClickLoadRand}>
+              {isLoading ? (
+                <CardLoader />
+              ) : (
+                <ErrorBoundry>
+                  <CardList
+                    playCurrent={onClickPlayCurrEpisode}
+                    onClickShowPlayer={onClickShowPlayer}
+                    calcAudio={calcAudio}
+                    randomEpisode={randomEpisode}
+                  />
+                </ErrorBoundry>
+              )}
+            </Carousel>
+            <Rank user={user} score={score}/>
+            <Search
+              onClickPlayCurrEpisode={onClickPlayCurrEpisode}
+              onClickShowPlayer={onClickShowPlayer}
+              calcAudio={calcAudio}
+            />
+            {/*
+                  <Leaderboard/> // TODO
+                  <Profile/> // TODO
+            */}
+            {isShown ? (
+              <MediaPlayer
+                onUpdateScore={onUpdateScore}
+                currentEpisode={currentEpisode}
+                id = {user.id}
+              />
+            ) : null}
+          </Route>
+        </Switch>
+      </Router>
+    );
   }
 }
 

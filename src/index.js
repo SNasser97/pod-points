@@ -4,21 +4,47 @@ import { Provider } from "react-redux";
 import logger from "redux-logger";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { searchEpisodes, getEpisodes, getRandomEpisode} from "./redux/reducers";
-import thunkMiddleWare from "redux-thunk"
+import { 
+  searchEpisodes, 
+  getEpisodes, 
+  getRandomEpisode, 
+  showMediaPlayer, 
+  playEpisode,
+  updateScore,
+  getUsernameText,
+  getPasswordText,
+  getRegPasswordText,
+  getRegUsernameText,
+  getRegEmailText,
+  userSignIn,
+  userRegister,
+} from "./redux/reducers";
 
+import thunkMiddleWare from "redux-thunk"
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './sass/main.scss';
 
 const rootReducer = combineReducers({
   searchEpisodes, // same as searchEpisodes: searchEpisodes
   getEpisodes,
   getRandomEpisode,
+  showMediaPlayer,
+  playEpisode,
+  updateScore,
+  getUsernameText,
+  getPasswordText,
+  getRegPasswordText,
+  getRegUsernameText,
+  getRegEmailText,
+  userSignIn,
+  userRegister
 });
+
 const store = createStore(
   rootReducer, 
-  applyMiddleware(thunkMiddleWare,logger)
+  applyMiddleware(thunkMiddleWare, logger)
 );
 
 ReactDOM.render(

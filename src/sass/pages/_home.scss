@@ -1,0 +1,184 @@
+// MAIN SECTION
+.section {
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+}
+.hero {
+  height: 100vh;
+  min-height: 100%;
+  background: url(../../assets/img/hero.svg);
+  background-size: 40%;
+  background-position:40% 38rem;
+  background-repeat: no-repeat;
+  
+  @include respond(tab-port) {
+    background-size: 100%;
+    background-position:0 30rem;
+  }
+  @include respond(tab-port) {
+    background-size: 60%;
+    background-position:0rem 32rem;
+  }
+  @include respond(phone) {
+    background-size: 80%;
+    background-position:0 22rem;
+  }
+  @include respond(phone-xs) {
+    background-size: 80%;
+    background-position:0 30rem;
+  }
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem;
+    flex-direction: column;
+  }
+  
+  &__cta {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 5rem;
+    height: 10rem;
+    position: relative;
+  }
+  &__ctaBtn{
+    background: $colour-secondary;
+    padding: 1rem;
+    border-radius: .5rem;
+    color: $colour-tertiary;
+    cursor: pointer;
+    margin-left: 2rem;
+    a {
+      color:currentColor;
+      text-decoration: none;
+    }
+    &--ghost {
+      background: 0;
+      border:1px solid $colour-secondary;
+      color:$colour-secondary;
+    }
+  }
+  &__imgContainer {
+    margin-top: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    // height: 120rem;
+  }
+  &__img {
+    width: 50rem;
+    height: auto;
+  }
+  &__title {
+    margin-top: 10rem;
+    color:$colour-secondary;
+    @include respond(big-desktop) {
+      font-size: 9rem;
+    }
+    @include respond(tab-port) {
+      font-size: 6rem;
+    }
+    @include respond(phone) {
+      font-size: 4rem;
+    }
+  }
+  
+}
+// ABOUT SECTION
+.about {
+  height: auto;
+  background:$colour-secondary;
+  &__wrapper {
+    padding: 3rem;
+    padding-bottom: 20rem;
+  }
+  &__title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color:$colour-tertiary;
+    position: relative;
+
+    z-index: 2;
+  }
+  .card__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include respond(tab-land) {
+        flex-direction: column;
+    }
+    .card{
+      height: 40rem;
+      width: 35rem;
+      margin: .5rem;
+      padding: 1.5rem;
+      border-radius: 3.5rem;
+      position: relative;
+      transition: all .3s !important;
+      &:hover {
+        background:$white-colour-1;
+      }
+      @include respond(phone) {
+        // height: auto;
+        width: 32rem;
+        margin:0;
+        margin-bottom:1.5rem;
+      }
+      @include respond(phone-xs) {
+        width: 26rem;
+      }
+      &__title {
+        font-size: 2.5rem;
+        margin-top: 3rem;
+        color: $colour-secondary-hover;
+      }
+      &__next {
+        height: 9rem;
+        width: 9rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 8rem;
+        color:$colour-tertiary;
+        border-radius: 100%;
+        background:$colour-secondary;
+        box-shadow: 0px 1px 1px 0px rgba($dark-colour-1,.25);
+        position: absolute;
+        right: -5rem;
+        top:16rem;
+        z-index: 1;
+        @include respond(tab-land) {
+          right:13rem;
+          top:33rem;
+          transform:rotate(90deg);
+        }
+      }
+      &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 6rem;
+        color:$colour-secondary;
+        border-radius: 100%;
+        border:4px dashed currentColor;
+        width: 15rem;
+        height: 15rem;
+        margin: 0 auto;
+        margin-top: 5rem;
+      }
+      
+      &__line {
+        color: $colour-secondary;
+        background:currentColor;
+        width: 2rem;
+        height: .5rem;
+      }
+    }
+  }
+  
+}

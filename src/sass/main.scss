@@ -2,7 +2,6 @@
 @import "./abstracts/mixins";
 @import "./abstracts/typography";
 @import "./abstracts/animations";
-
 @import "./components/nav";
 @import "./components/button";
 @import "./components/rank";
@@ -15,10 +14,12 @@
 @import "./components/cardloader";
 @import "./components/pagination";
 @import "./components/footer";
+@import "./components/mediaPlayer";
+@import "./components/modalScore";
+@import "./components/signIn";
+@import "./pages/home";
 
 // @import "./components/nav";
 // @import "./components/nav";
 // @import "./components/nav";
-
-
 @import "./base/base";

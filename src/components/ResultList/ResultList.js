@@ -1,14 +1,8 @@
 import React from "react";
 import Result from "../Result/Result";
+// import { playCurrentEpisode } from "../../redux/actions";
 
-const ResultList = ({ episodeResults }) => {
-    const calcTime = (secs) => {
-      let time = secs;
-      let hrs = Math.floor(time / 60 / 60);
-      let mins = Math.floor(time / 60 ) - (hrs * 60);
-      return `${mins}:00`;
-    }
-  console.log("ep res=>",episodeResults);
+const ResultList = ({ episodeResults, calcAudio, playCurrent, onClickShowPlayer }) => {
   // displays when user hasn't typed or no results are returned  
   if(!episodeResults.length) {
     return <p className="fs--2">hmmm..nothing here? <span role="img" aria-label="inspect emoji">🧐</span></p>
@@ -25,7 +19,11 @@ const ResultList = ({ episodeResults }) => {
             name={eps.title_original} 
             desc={eps.description_original} 
             image={ eps.thumbnail } 
-            length={ calcTime(eps.audio_length_sec) }
+            length={ calcAudio(eps.audio_length_sec)}
+            playCurrent={playCurrent}
+            src={eps.audio}
+            onClickShowPlayer={onClickShowPlayer}
+            publisher={eps.publisher_original}
             /> 
         })
       }

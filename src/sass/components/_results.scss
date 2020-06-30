@@ -5,30 +5,54 @@
 	margin-top: 2rem;
 	border-radius:25rem;
 	padding: 0;
+	&:before {
+			display:block;
+			position: absolute;
+			z-index: 1;
+			width: 0rem;
+			transition: .2s all;
+			height:10rem;
+			background:$colour-secondary;
+			background:linear-gradient(135deg, 
+				rgba($colour-tertiary,0.65) 40%, 
+				rgba($colour-tertiary,0.15) 40%);
+			border-radius: 1.2rem;
+			opacity: 0;
+			content:"";
+		}
+		&:hover:before {
+			width: 10rem;
+			opacity: 1;
+		}
 	@include respond(tab-port) {
 				// height:40rem;
 				// width: 100%;
 				border-radius:8rem;
 		}
 	&__pod {
-		background: $dark-colour-1;
-		color:$colour-tertiary;
+		background: $colour-tertiary;
+		color:$dark-colour-1;
 		// margin-bottom: 1rem;
 		height: 10rem;
 		display:flex;
 		align-items:center;
 		justify-content:space-around;
 		transition: .1s all;
-		transform:translateX(0);
+		transform: translateX(0);
 		border-radius:1rem;
+		
 		@include respond(tab-port) {
 				height:40rem;
 				width: 100%;
 				border-radius:2rem;
 		}
 		&:hover {
-			// background: rgba($colour-tertiary, 0.85);
-			transform:translateX(15px);
+			
+			// transform: translateX(2.5rem);
+			box-shadow: 0 2px 0.2rem 1px rgba(202, 202, 202, 0.25);
+			@include respond(tab-port) {
+				transform:none;
+			}
 		}
 		&-details {
 			display:flex;
@@ -37,10 +61,12 @@
 			justify-content:center;
 			// text-align: center;
 			margin: 0 auto;
-			margin-left: 3rem;
+
+			// margin-left: 3rem;
 			// margin-right: 1rem;
 			@include respond(tab-port) {
 				display:flex;
+				margin-left: 3rem;
 				justify-content: center;
 				flex-direction: column;
 			}
@@ -64,10 +90,14 @@
 			width: 100%;
 		}
 		&-btn {
-			margin-right: 10rem;
-			width: 6rem;
-			height: 6rem;
+			margin-right: 6rem;
+			width: auto !important;
+			height: auto !important;
 			border-radius:50%;
+			font-size: 1rem;
+			color:$colour-secondary !important;
+			background: transparent;
+
 			@include respond(tab-port) {
 				margin-right: 0rem;
 				height: 9rem;
@@ -77,20 +107,27 @@
 				margin-right: 0rem;
 				height: 6rem;
 				width: 6rem;
+				font-size: 1.2rem;
 			}
-			background: transparent;
 			&:hover {
+				background-color:$colour-tertiary;
+				transform:scale(1.25);
+				color: $colour-secondary;
 				cursor:pointer;
 			}
 		}
 		&-image {
 			// position: absolute;
-			height: 8rem;
-			width: 8rem;
+			height: 10rem;
+			width: 10rem;
+			border-radius:1rem 0 0 1rem;
+			border-right:2px solid rgba($colour-secondary,.2);
+			padding: 0.45rem;
 			// margin-right: 1rem;
 			@include respond(tab-port) {
 				height: 12rem;
 				width: 12rem;
+				border-radius:0;
 			}
 			@include respond(phone) {
 				margin-right: 0rem;

@@ -1,19 +1,64 @@
+
 .footer {
+  position: relative;
+  bottom:0;
+  left: 0;
   width: 100%;
-  background: $dark-colour-1;
-  height: 30rem;
-  display: flex;
+  height: auto;
+  background: $colour-secondary-hover;
+  display:flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  &__details {
-    display: flex;
-    justify-content: flex-start;
+  &__disclaimer {
+    display:flex;
     align-items: center;
-    height: 4rem;
+    justify-content: center;
+    margin-left: auto;
     width: 40rem;
+    @include respond(tab-port) {
+      width: 100%;
+    }
+    margin-right: 1rem;
+  } 
+  &__disclaimerIcon {
+    font-size: 3rem;
+    color:rgba($colour-tertiary,.45);
+  }
+  &__disclaimerText {
+    color:rgba($white-colour-1,.35);
+    margin-left: .5rem;
+    // width: 50vw;
+  }
+  &__legal {
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+    margin-left: auto;
+    width: 100%;
+  }
+  &__legalImage {
+    height: auto;
+    width: 35rem;
+     @include respond(tab-port) {
+      width: 25rem;
+    }
   }
   &__author {
-    // text-decoration: ;
-    color:$colour-secondary;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 25rem;
+    position: relative;
+    top:5rem;
+    @include respond(tab-port) {
+      top:0;
+    }
+  }
+  &__github {
+    display: inline-block;
+    margin-left: 1rem;
+    color:$colour-tertiary;
   }
 }
+

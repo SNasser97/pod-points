@@ -22,7 +22,7 @@
 		border-radius:10%;
 		// padding: ;
 		margin: 0;
-		background: $dark-colour-2;
+		// background: $dark-colour-2;
 	}
 	@include respond(phone-xs) {
 		height: 60rem;
@@ -32,8 +32,9 @@
 		margin: 0;
 	}
 	background: $colour-tertiary;
-	z-index: 1;
-	box-shadow:2px 1px 1px 0px $colour-secondary;
+	// z-index: 1;
+	// border:3px solid rgba($colour-secondary,1.25);
+	box-shadow:2px 1px 4.5rem 8px rgba(0,0,0,.15);
 	&__title {
 		text-align: center;
 		margin: 0 auto;
@@ -92,7 +93,6 @@
 		&:hover {
 			transform:scale(.95);
 		}
-		// padding:2rem 0;
 		background: $dark-colour-2;
 		width: 16rem;
 		height: 16rem;
@@ -100,12 +100,14 @@
 		border-radius:25rem;
 		display:flex;
 		flex-wrap:wrap;
+		justify-content:center;
 		align-items:center;
 		position: absolute;
 		left:0;
 		bottom:0rem;
 		border:.5rem solid $colour-secondary;
 		color:$colour-secondary;
+
 		@include respond(phone) {
 			width: 14rem;
 			height: 14rem;
@@ -173,6 +175,7 @@
 		position: absolute;
 		bottom:10rem;
 		right:25rem;
+		// background: #000;
 		@include respond(phone) {
 			// width:auto;
 			padding: .5rem;
@@ -190,6 +193,12 @@
 			margin-top: 5rem;
 			height: 10rem;
 			border-radius:50%;
+			background: transparent;
+			color:$colour-secondary;
+			transform:scale(1);
+			&:hover {
+				transform:scale(1.05);
+			}
 			@include respond(phone-xs) {
 			// width:auto;
 			width: 8rem;

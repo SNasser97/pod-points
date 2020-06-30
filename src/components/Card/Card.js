@@ -1,10 +1,17 @@
 import React from "react";
 
-const Card = ({id,title,description, length, name, image}) => {
-	// remove html elements from JSON desc
+const Card = ({id,title,description, length, name, image, onClickShowPlayer,src, playCurrent}) => {
+		const currEpisode = [{
+			id,
+			title,
+			length,
+			src,
+			image
+		}]
 		if(id !== "") {
-			let regex= /(<([^>]+)>)/ig;
-			let descriptionNoHTML = description.replace(regex, "");
+			
+			let regex = /(<([^>]+)>)/ig; // remove html elements from JSON description
+			let descriptionNoHTML = description.replace(regex, ""); 
 			return (	
 				<div className="card">
 					<div className="card--front">
@@ -19,18 +26,17 @@ const Card = ({id,title,description, length, name, image}) => {
 						<div className="card__desc">
 							<img src={image} alt="thumbnail" className="card__image" height="150" width="150"/>
 								<p className="card__info--length fs--4">
-									{"Duration: "+ length + " minutes"}
+									{"Duration: "+ length}
 								</p>
 							<div className="card__info--round">
 								<p>{descriptionNoHTML !== "" ? descriptionNoHTML.substring(0,150)+"..." : "Hmm..this podcast doesn't include a description..." }</p>
 							</div>
 						</div>
 						<div className="card__btn">
-							<button className="btn btn__full--secondary">Play</button>
+							<button onClick={() => { onClickShowPlayer(); playCurrent(currEpisode)}} className="btn btn__full--secondary">
+								<i className="fas fa-4x fa-podcast"></i>
+							</button>
 						</div>
-					</div>
-					<div className="card--back">
-							
 					</div>
 				</div>
 			);

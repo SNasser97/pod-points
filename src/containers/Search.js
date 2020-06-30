@@ -6,7 +6,7 @@ import ResultList from "../components/ResultList/ResultList";
 import Loader from "../components/Loader/Loader";
 import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
 import Pagination from "../components/Pagination/Pagination";
-import { setSearchField, requestEpisodes } from "../redux/actions";
+import { setSearchField, requestEpisodes} from "../redux/actions";
 
 const mapStateToProps = (state) => {
   const {searchEpisodes, getEpisodes} = state;
@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
     totalResults: getEpisodes.totalResults,
     isLoading: getEpisodes.isLoading,
     error: getEpisodes.error,
+    // currentEpisode: playEpisode.currentEpisode
   }
 }
 
@@ -26,14 +27,19 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSearchSubmit: (url, offset) => {
       dispatch(requestEpisodes(url, offset));
-    }
+    },
+    // onClickPlayCurrEpisode: (episode) => {
+    //   dispatch(playCurrentEpisode(episode));
+    // }
   }
 }
 
 class Search extends Component { 
+  constructor(props) {
+    super(props);
+  }
 
-  
-render() {
+  render() {
     const { // from our redux store
       onSearchChange, 
       onSearchSubmit, 
@@ -41,9 +47,10 @@ render() {
       episodeResults,
       totalResults,
       isLoading,
-    } = this.props; 
-    // TODO
-    // const { paginateResult} = this;
+      onClickShowPlayer
+    } = this.props; // from store
+    const {calcAudio, onClickPlayCurrEpisode} = this.props; // from App
+    console.log("search props + app props =>", this.props);
     return (
       <React.Fragment>
         <SearchField 
@@ -53,7 +60,12 @@ render() {
         >
           { isLoading ? <Loader/> : 
             <ErrorBoundry>
-              <ResultList episodeResults={ episodeResults } />
+              <ResultList 
+                onClickShowPlayer={onClickShowPlayer} 
+                playCurrent={ onClickPlayCurrEpisode } 
+                calcAudio={calcAudio} 
+                episodeResults={ episodeResults }
+              />
 
               <Pagination 
                 onSearchSubmit={onSearchSubmit}
@@ -61,7 +73,6 @@ render() {
                 episodeResults={ episodeResults } 
                 searchField={searchField}
               />
-
             </ErrorBoundry> 
           }
         </SearchField>

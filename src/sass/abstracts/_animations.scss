@@ -33,9 +33,40 @@
   }
 }
 
+@keyframes spin {
+  100%{
+    transform: rotate(360deg);
+  }
+}
 
 
 
+@keyframes moveUp {
+	0%{
+		transform:translateY(0) translate(-50%,30%);
+		opacity: 0;
+	}
+	50%{
+		transform:translateY(-15%) translate(-50%,30%);
+	}
+	100%{
+		transform:translateY(0) translate(-50%,30%);
+		opacity: 1;
+	}
 
+}
 
+@keyframes moveUp-mobile {
+	0%{
+		transform:translateY(0);
+		opacity: 0;
+	}
+	50%{
+		transform:translateY(-15%);
+	}
+	100%{
+		transform:translateY(0);
+		opacity: 1;
+	}
 
+}
