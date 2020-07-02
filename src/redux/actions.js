@@ -1,5 +1,19 @@
 import { CONSTANTS } from "./constants";
 
+
+// fetch list of all users
+export const requestAllUsers = () => async (dispatch) => {
+  const url = "http://localhost:3001/leaderboard";
+  dispatch({ type: CONSTANTS.REQUEST_ALL_USERS_PENDING});
+  try {
+    const respAllUsers = await fetch(url);
+    const respUserData = await respAllUsers.json();
+    dispatch({ type: CONSTANTS.REQUEST_ALL_USERS_SUCCESS, payload: respUserData})
+  } catch (error) {
+    dispatch({ type: CONSTANTS.REQUEST_ALL_USERS_FAILED, payload: error})
+  }
+}
+
 // set user reg input
 export const setRegPassword = (text) => { return { type: CONSTANTS.CHANGE_REG_PW_FIELD, payload:text}}
 export const setRegUsername = (text) => { return { type: CONSTANTS.CHANGE_REG_USERNAME_FIELD, payload:text}}

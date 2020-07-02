@@ -1,4 +1,25 @@
 import { CONSTANTS } from "./constants";
+
+
+
+// LEADERBOARD OF USERS 
+const initStateAllUsers = {
+  allUsers:[],
+  error: "",
+  isLoadingAll: false,
+}
+export const getAllUsers = (state = initStateAllUsers, {type,payload}) => {
+  switch (type) {
+    case CONSTANTS.REQUEST_ALL_USERS_PENDING:
+      return {...state, isLoadingAll:true}
+    case CONSTANTS.REQUEST_ALL_USERS_SUCCESS:
+      return {...state, allUsers:payload, isLoadingAll:false}
+    case CONSTANTS.REQUEST_ALL_USERS_FAILED:
+      return {...state, error:payload}
+    default:
+      return state;
+  }
+}
 // SIGNIN FORM
 const initStateSignInUserField = { usernameField:'', }
 export const getUsernameText = (state = initStateSignInUserField, {type, payload}) => {
