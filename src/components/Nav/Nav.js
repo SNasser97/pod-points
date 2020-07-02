@@ -13,7 +13,7 @@ const Nav = () => {
 					<h3 className="nav__brand--name fs--2"> PodPoints<i className="fas fa-1x fa-microphone-alt"></i></h3>
 				</div>
 				<Switch>
-					<Route path="/home">
+					<Route path="/(home|leaderboard)">
 							<div className="nav__btn">
 								<Link to="/">
 									<div href="#!" className="btn btn__ghost">Sign out</div>
