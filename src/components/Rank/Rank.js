@@ -1,6 +1,7 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
-const Rank = ({user, score}) => {
+const Rank = ({user, score, refresh}) => {
 	// displays current score and if score is updated will show new score once user finishes episode.
 	return (
 		<div className="user">
@@ -12,7 +13,10 @@ const Rank = ({user, score}) => {
 				  You have a total score of <span className="user__rank--score">{!score ? user.score : score}</span> points!
 				</p>
 				<div className="user__info">
-					<a href="#!" className="btn btn__ghost user__btn">View leaderboard</a>
+					<Link to="/leaderboard" onClick={refresh}>
+						<span className="btn btn__ghost user__btn">View leaderboard</span>
+					</Link>
+					{/* <a href="#!" className="btn btn__ghost user__btn">View leaderboard</a> */}
 				</div>
 			</div>
 		</div>

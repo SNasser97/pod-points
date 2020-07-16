@@ -18,6 +18,7 @@ import SignIn from "../components/SignIn/SignIn";
 import Register from "../components/Register/Register";
 import Search from "./Search";
 import Home from "../components/Home/Home";
+import Leaderboard from "../components/Leaderboard/Leaderboard";
 
 import { 
   requestRandomEpisode, 
@@ -25,6 +26,7 @@ import {
   playCurrentEpisode,
   updateUserScore,
   closeModal,
+  requestAllUsers
 } from "../redux/actions";
 
 const mapStateToProps = (state) => {
@@ -35,6 +37,7 @@ const mapStateToProps = (state) => {
     updateScore, 
     userSignIn,
     userRegister,
+    getAllUsers,
    } = state // reducers
   return {
     isLoading: getRandomEpisode.isLoading,
@@ -46,6 +49,13 @@ const mapStateToProps = (state) => {
     showReward: updateScore.showReward,
     user: !userSignIn.user.id ? userRegister.user : userSignIn.user,
     isLoggedIn: userSignIn.isLoggedIn || userRegister.isLoggedIn,
+    isLoadingAll: getAllUsers.isLoadingAll,
+    allUsers: getAllUsers.allUsers,
+    userLoginError: userSignIn.error,
+    userRegError: userRegister.error,
+    showLoginInvalid: userSignIn.showInvalid,
+    showRegInvalid: userRegister.showInvalid,
+
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -54,7 +64,8 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
     onClickShowPlayer: () => dispatch(displayMediaPlayer()),
     onClickPlayCurrEpisode: (episode) => dispatch(playCurrentEpisode(episode)),
     onUpdateScore: (id) => dispatch(updateUserScore(id)),
-    onClickCloseModal: () => dispatch(closeModal())
+    onClickCloseModal: () => dispatch(closeModal()),
+    onLoadShowUsers: () => dispatch(requestAllUsers()),
   }
 }
 
@@ -63,7 +74,6 @@ class App extends Component {
   constructor() {
     super();
   }
-  
   calcAudio  = (audioSeconds) => { // in ms
     let hours = Math.floor(audioSeconds / 3600);
     audioSeconds %= 3600; // get remainder of mins from hours 
@@ -75,7 +85,6 @@ class App extends Component {
     secs = secs < 10 ? `0${secs}` : secs;
     return `${hours}${mins}:${secs}`
   }
-
   render() {
     const { 
       currentEpisode, 
@@ -86,29 +95,32 @@ class App extends Component {
       onClickLoadRand,
       onClickPlayCurrEpisode,
       onClickCloseModal,
+      onLoadShowUsers,
       onUpdateScore,
       showReward,
       user,
       score,
       reward,
       isLoggedIn,
+      isLoadingAll,
+      allUsers,
+      showLoginInvalid,
+      showRegInvalid,
+      userLoginError,
+      userRegError
     } = this.props; // redux store
     const { calcAudio } = this; // from App
-    console.info(' in side app.js', user, isLoggedIn)
-    
     return (
       <Router>
         <Nav />
         <Switch>
-          <Route exact path="/">
-            <Home/>
-          </Route>
+          <Route exact path="/" component={Home}/>
           <Route exact path="/sign_in">
             {/* todo: reset setInit state when logging out */}
-            { isLoggedIn ? <Redirect to="/home" /> : <SignIn />}
+            { isLoggedIn ? <Redirect to="/home" /> : <SignIn validLog={showLoginInvalid} errorLog={userLoginError}/>}
           </Route>
           <Route exact path="/register">
-            { isLoggedIn ? <Redirect to="/home" /> : <Register />}
+            {isLoggedIn ? <Redirect to="/home" /> : <Register validReg={showRegInvalid} errorReg={userRegError}/>}
           </Route>
           <Route path="/home">
             {showReward ? (
@@ -131,16 +143,14 @@ class App extends Component {
                 </ErrorBoundry>
               )}
             </Carousel>
-            <Rank user={user} score={score}/>
+
+            <Rank user={user} score={score} refresh={onLoadShowUsers}/>
+            
             <Search
               onClickPlayCurrEpisode={onClickPlayCurrEpisode}
               onClickShowPlayer={onClickShowPlayer}
               calcAudio={calcAudio}
             />
-            {/*
-                  <Leaderboard/> // TODO
-                  <Profile/> // TODO
-            */}
             {isShown ? (
               <MediaPlayer
                 onUpdateScore={onUpdateScore}
@@ -148,6 +158,10 @@ class App extends Component {
                 id = {user.id}
               />
             ) : null}
+            
+          </Route>
+          <Route exact path='/leaderboard'>
+            <Leaderboard user={user} allUsers={allUsers} refresh={onLoadShowUsers}/>
           </Route>
         </Switch>
       </Router>

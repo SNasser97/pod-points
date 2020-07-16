@@ -1,5 +1,19 @@
 import { CONSTANTS } from "./constants";
 
+
+// fetch list of all users
+export const requestAllUsers = () => async (dispatch) => {
+  const url = "http://localhost:3001/leaderboard";
+  dispatch({ type: CONSTANTS.REQUEST_ALL_USERS_PENDING});
+  try {
+    const respAllUsers = await fetch(url);
+    const respUserData = await respAllUsers.json();
+    dispatch({ type: CONSTANTS.REQUEST_ALL_USERS_SUCCESS, payload: respUserData})
+  } catch (error) {
+    dispatch({ type: CONSTANTS.REQUEST_ALL_USERS_FAILED, payload: error})
+  }
+}
+
 // set user reg input
 export const setRegPassword = (text) => { return { type: CONSTANTS.CHANGE_REG_PW_FIELD, payload:text}}
 export const setRegUsername = (text) => { return { type: CONSTANTS.CHANGE_REG_USERNAME_FIELD, payload:text}}
@@ -7,7 +21,7 @@ export const setRegEmail = (text) => { return { type: CONSTANTS.CHANGE_REG_EMAIL
 
 export const register = (email, username, password) => async (dispatch) => {
   const url = "http://localhost:3001/register";
- 
+  
   dispatch({ type: CONSTANTS.USER_REG_PENDING});
   try {
     const respReg = await fetch(url, {
@@ -18,10 +32,17 @@ export const register = (email, username, password) => async (dispatch) => {
       body: JSON.stringify({email,username,password})
     });
     const respData = await respReg.json();
-    dispatch({
-      type: CONSTANTS.USER_REG_SUCCESS,
-      payload: respData,
-    });
+    if (!respData.hasOwnProperty("error")) {
+      dispatch({
+        type: CONSTANTS.USER_REG_SUCCESS,
+        payload: respData
+      });
+    } else {
+      dispatch({
+        type: CONSTANTS.USER_REG_FAILED,
+        payload: respData.error
+      });
+    }
   } catch (error) {
     dispatch({
       type: CONSTANTS.USER_REG_FAILED,
@@ -34,7 +55,7 @@ export const register = (email, username, password) => async (dispatch) => {
 export const setUsernameText = (text) => { return { type: CONSTANTS.CHANGE_SIGN_USERNAME_FIELD, payload: text } }
 export const setPasswordText = (text) => { return { type: CONSTANTS.CHANGE_SIGN_PW_FIELD, payload: text } }
 
-export const signIn = (username, password) => async (dispatch) =>{
+export const signIn = (username, password) => async (dispatch) => {
   const url = "http://localhost:3001/sign_in";
   dispatch({type: CONSTANTS.USER_SIGN_PENDING});
   try {
@@ -46,10 +67,18 @@ export const signIn = (username, password) => async (dispatch) =>{
       body: JSON.stringify({username, password})
     });
     const respData = await respSign.json();
-    dispatch({
-      type: CONSTANTS.USER_SIGN_SUCCESS,
-      payload: respData
-    });
+    //! check if the response does not return JSON prop, validate details on B.E.
+    if(!respData.hasOwnProperty("error")) {
+      dispatch({
+        type: CONSTANTS.USER_SIGN_SUCCESS,
+        payload: respData
+      });
+    } else {
+      dispatch({
+        type: CONSTANTS.USER_SIGN_FAILED,
+        payload: respData.error
+      });
+    }
   } catch(error) {
     dispatch({
       type: CONSTANTS.USER_SIGN_FAILED,
@@ -68,7 +97,6 @@ export const updateUserScore = (id) => async (dispatch) => {
       body: JSON.stringify({id})
     });
     const respData = await respScore.json();
-
     dispatch({
       type:CONSTANTS.UPDATE_SCORE,
       payload: respData

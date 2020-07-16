@@ -16,6 +16,7 @@ import {
   getRegPasswordText,
   getRegUsernameText,
   getRegEmailText,
+  getAllUsers,
   userSignIn,
   userRegister,
 } from "./redux/reducers";
@@ -38,8 +39,9 @@ const rootReducer = combineReducers({
   getRegPasswordText,
   getRegUsernameText,
   getRegEmailText,
+  getAllUsers,
   userSignIn,
-  userRegister
+  userRegister,
 });
 
 const store = createStore(
