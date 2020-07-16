@@ -26,7 +26,8 @@ import {
   playCurrentEpisode,
   updateUserScore,
   closeModal,
-  requestAllUsers
+  requestAllUsers,
+  logUserOut
 } from "../redux/actions";
 
 const mapStateToProps = (state) => {
@@ -55,6 +56,7 @@ const mapStateToProps = (state) => {
     userRegError: userRegister.error,
     showLoginInvalid: userSignIn.showInvalid,
     showRegInvalid: userRegister.showInvalid,
+    currentUser: userSignIn || userRegister,
 
   } 
 }
@@ -66,6 +68,7 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
     onUpdateScore: (id) => dispatch(updateUserScore(id)),
     onClickCloseModal: () => dispatch(closeModal()),
     onLoadShowUsers: () => dispatch(requestAllUsers()),
+    onClickLogOut: () => dispatch(logUserOut())
   }
 }
 
@@ -85,6 +88,17 @@ class App extends Component {
     secs = secs < 10 ? `0${secs}` : secs;
     return `${hours}${mins}:${secs}`
   }
+
+  // createLocalUser(currentUserData) {
+  //   // if no localStorage item "user" exists, create and stringfiy obj
+  //   if(!localStorage.getItem("user")) {
+  //     localStorage.setItem("user", JSON.stringify(currentUserData))
+  //   }
+  // }
+  // setLocalUserSession(currentUser) {
+    
+  // }
+
   render() {
     const { 
       currentEpisode, 
@@ -110,9 +124,10 @@ class App extends Component {
       userRegError
     } = this.props; // redux store
     const { calcAudio } = this; // from App
+    console.info("CURRENT USER =>", this.props.currentUser);
     return (
       <Router>
-        <Nav />
+        <Nav logout={this.props.onClickLogOut} />
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/sign_in">
