@@ -23,6 +23,34 @@
 		border-radius:.5rem;
     // background: linear-gradient(-45deg, $colour-secondary 25%,$colour-tertiary 25%);
 		// z-index: -1;
+		&__validation {
+			width: 80%;
+			background: $colour-danger-1;
+			border-radius: .5rem;
+			text-align: center;
+			font-size: 2rem;
+			margin: 0 auto;
+			margin-top: 5rem;
+
+		}
+		&__validationMsg {
+			margin: .8rem;
+			margin:0 auto;
+			border-radius: inherit;
+			text-align: center;
+			border: 2px solid $colour-danger-2;
+			color: $colour-danger-3;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: .5rem;
+
+		}
+		&__validationIcon {
+			display: inline-block;
+			margin-right: 1rem;
+			font-size: 2.5rem;
+		}
 		&__link {
 			position: absolute;
 			right: 2rem;
@@ -184,58 +212,9 @@
     &--password::before {content:"\f084"; }
     &--username::before {content:"\f007"; }
     &--email::before {content:"\f0e0"; }
-		// 1/2 CUSTOM CHECKBOX CONTAINER
-		// &--check {
-		// 	display:flex;
-		// 	position: relative;
-		// 	-webkit-user-select: none;
-	  //   	user-select: none;
-		// 	padding-left: 3.5rem;
-		// 	align-items:center;
-		// 	margin-top: 3rem;
-	  //   	input {
-	  //   		position: absolute;
-	  //   		opacity: 0;
-	  //   		left:1rem;
-	  //   		top:-.8rem;
-	  //   		right: 0;
-	  //   		width: 0;
-	  //   		z-index: 1;
-	  //   		height: 2rem;
-	  //   		width: 25rem;
-	  //   		cursor:pointer;
-	  //   		// stop showing blue box hightlight when clicking checkbox on touch devices
-	  //   		// Can be removed if blocks/limits accessbilitiy
-	  //   		@include respond(tab-port) { 
-	  //   			cursor:default;
-	  //   		}
-	  //   	}
-		}
-		// 2/4 CUSTOM CHECKBOX HOVER STYLE
-		// &--check:hover input ~ .signin__checkbox {
-		// 	background: $grey-light-1;
-		// }
-		// &--check input:checked ~ .signin__checkbox {
-		// 	background-color: $colour-tertiary;
-
-		// }
-		// &--check input:checked ~ .signin__checkbox:after {
- 		//  	display: block;
-		// }
-		// &--check .signin__checkbox:after {
-		// 	left: .8rem;
-		//     top: .2rem;
-		//     width: .8rem;
-		//     height: 1.5rem;
-		//     border: solid $colour-primary;
-		//     border-width: 0 3px 3px 0;
-		//     -webkit-transform: rotate(45deg);
-		//     -ms-transform: rotate(45deg);
-		//     transform: rotate(45deg);
-
-		// }
-
-	// }
+		
+	}
+		
 	&__line {
 		width: 0%;
 		border:2px solid $colour-secondary;
@@ -244,33 +223,7 @@
 		opacity: 0;
 		transition: all .3s;
 	}
-	// 3/4 CUSTOM CHECKBOX POSITION + APPLIED STYLE
-	// &__checkbox {
-	// 	position: absolute;
-	// 	top:-.3rem;
-	// 	left:0;
-	// 	height: 2.5rem;
-	// 	width: 2.5rem;
-	// 	border-radius:.5rem;
-	//  	background-color: $colour-primary;
-	//  	border:1px solid $grey-dark-1;
-	// 	transition: all .1s;
-
-	// 	&:after{
-	// 		content:"";
-	// 		position: absolute;
-	// 		display:none;
-	// 	}
-	// }
-
-	// // 4/4 ORIGINAL HTML CHECKBOX
-	// &__check {
-	// 	margin: 1rem;
-	// 	display:flex;
-	// 	justify-content:flex-start;
-	// 	width: 4rem;
-	// 	margin-left:-1rem;
-	// }
+	
 	&__btn {
 		display:flex;
 		justify-content:center;
