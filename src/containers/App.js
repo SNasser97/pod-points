@@ -51,6 +51,11 @@ const mapStateToProps = (state) => {
     isLoggedIn: userSignIn.isLoggedIn || userRegister.isLoggedIn,
     isLoadingAll: getAllUsers.isLoadingAll,
     allUsers: getAllUsers.allUsers,
+    userLoginError: userSignIn.error,
+    userRegError: userRegister.error,
+    showLoginInvalid: userSignIn.showInvalid,
+    showRegInvalid: userRegister.showInvalid,
+
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -69,7 +74,6 @@ class App extends Component {
   constructor() {
     super();
   }
-  
   calcAudio  = (audioSeconds) => { // in ms
     let hours = Math.floor(audioSeconds / 3600);
     audioSeconds %= 3600; // get remainder of mins from hours 
@@ -80,9 +84,6 @@ class App extends Component {
     mins = mins < 10 ? `0${mins}` : mins;
     secs = secs < 10 ? `0${secs}` : secs;
     return `${hours}${mins}:${secs}`
-  }
-  componentDidMount() {
-    this.props.onLoadShowUsers();
   }
   render() {
     const { 
@@ -102,11 +103,13 @@ class App extends Component {
       reward,
       isLoggedIn,
       isLoadingAll,
-      allUsers
+      allUsers,
+      showLoginInvalid,
+      showRegInvalid,
+      userLoginError,
+      userRegError
     } = this.props; // redux store
     const { calcAudio } = this; // from App
-    console.info(' in side app.js', user, isLoggedIn)
-    
     return (
       <Router>
         <Nav />
@@ -114,10 +117,10 @@ class App extends Component {
           <Route exact path="/" component={Home}/>
           <Route exact path="/sign_in">
             {/* todo: reset setInit state when logging out */}
-            { isLoggedIn ? <Redirect to="/home" /> : <SignIn />}
+            { isLoggedIn ? <Redirect to="/home" /> : <SignIn validLog={showLoginInvalid} errorLog={userLoginError}/>}
           </Route>
           <Route exact path="/register">
-            { isLoggedIn ? <Redirect to="/home" /> : <Register />}
+            {isLoggedIn ? <Redirect to="/home" /> : <Register validReg={showRegInvalid} errorReg={userRegError}/>}
           </Route>
           <Route path="/home">
             {showReward ? (
@@ -141,16 +144,13 @@ class App extends Component {
               )}
             </Carousel>
 
-            <Rank user={user} score={score} />
+            <Rank user={user} score={score} refresh={onLoadShowUsers}/>
             
             <Search
               onClickPlayCurrEpisode={onClickPlayCurrEpisode}
               onClickShowPlayer={onClickShowPlayer}
               calcAudio={calcAudio}
             />
-            {/*
-                  <Profile/> // TODO
-            */}
             {isShown ? (
               <MediaPlayer
                 onUpdateScore={onUpdateScore}
