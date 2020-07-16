@@ -19,6 +19,7 @@ import {
   getAllUsers,
   userSignIn,
   userRegister,
+  userSignOut,
 } from "./redux/reducers";
 
 import thunkMiddleWare from "redux-thunk"
@@ -27,7 +28,8 @@ import * as serviceWorker from './serviceWorker';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './sass/main.scss';
 
-const rootReducer = combineReducers({
+//! reducers part of app
+const appReducer = combineReducers({
   searchEpisodes, // same as searchEpisodes: searchEpisodes
   getEpisodes,
   getRandomEpisode,
@@ -42,7 +44,17 @@ const rootReducer = combineReducers({
   getAllUsers,
   userSignIn,
   userRegister,
+  userSignOut,
 });
+
+//! (1/2) - when the action "USER_LOG_OUT"  is dispatched, 
+//! (2/2) - set state as undefined and use initState defined in each reducer.
+const rootReducer = ( state, action ) => {
+  if (action.type === "USER_LOG_OUT") {
+    state = undefined;
+  }
+  return appReducer(state, action);
+}
 
 const store = createStore(
   rootReducer, 

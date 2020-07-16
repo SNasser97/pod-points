@@ -87,6 +87,12 @@ export const signIn = (username, password) => async (dispatch) => {
   }
 }
 
+export const logUserOut = () => {
+  return {
+    type: CONSTANTS.USER_LOG_OUT,
+    payload: {},
+  }
+}
 // UPDATE USER SCORE
 export const updateUserScore = (id) => async (dispatch) => {
   const url = "http://localhost:3001/score";
