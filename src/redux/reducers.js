@@ -72,31 +72,31 @@ const initStateUser = {
   user: {
     id:"",
     username:"",
-    email:"",
     score:0,
     joined: "",
   },
   error: "",
+  showInvalid: false,
   isLoggedIn:false,
 }
 export const userRegister = (state = initStateUser, {type, payload}) => {
   switch (type) {
     case CONSTANTS.USER_REG_PENDING:
-      return {...state, isLoggedIn:false}
+      return {...state, isLoggedIn:false, showInvalid: false}
     case CONSTANTS.USER_REG_SUCCESS:
       return {
         ...state, 
         user: {
           id: payload.id,
           username: payload.username,
-          email: payload.email,
           score: payload.score,
           joined: payload.joined,
         },
         isLoggedIn:true,
+        showInvalid: false,
       }
     case CONSTANTS.USER_REG_FAILED:
-      return {...state, error:payload, isLoggedIn:false}
+      return {...state, error:payload, isLoggedIn:false, showInvalid: true}
     default:
       return state;
   }
@@ -104,21 +104,21 @@ export const userRegister = (state = initStateUser, {type, payload}) => {
 export const userSignIn = (state = initStateUser, {type,payload}) => {
   switch(type) {
     case CONSTANTS.USER_SIGN_PENDING:
-      return {...state, isLoggedIn:false}
+      return {...state, isLoggedIn:false, showInvalid:false}
     case CONSTANTS.USER_SIGN_SUCCESS:
       return {
         ...state,
         user: {
-          id:payload.id,
-          username:payload.username,
-          email:payload.email,
+          id: payload.id,
+          username: payload.username,
           score: payload.score,
           joined: payload.joined,
         },
-        isLoggedIn: true
+        isLoggedIn: true,
+        showInvalid:false
       }
     case CONSTANTS.USER_SIGN_FAILED:
-      return {...state, error:payload, isLoggedIn:false}
+      return { ...state, error: payload, isLoggedIn: false, showInvalid:true}
     default:
       return state;
   }
