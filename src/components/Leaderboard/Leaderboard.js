@@ -19,9 +19,9 @@ const userTableData = (listOfUsers) => {
           <p className="Lb_rank__userank">
             {
               (i < 5) ? <span className="trophy"><i className="fas fa-trophy"></i></span> :
-              (i === 6 || i < 20) ? <span className="medal"><i class="fas fa-star"></i></span> :
+              (i === 6 || i < 20) ? <span className="medal"><i className="fas fa-star"></i></span> :
                   <span className="award" style={{ "color":`rgb(54, 6, 95,${opacity !== 0 ? opacity-=.005 : 0})`}}>
-                    <i class="fas fa-award"></i>
+                    <i className="fas fa-award"></i>
                   </span>
             }
             <span className='Lb_rank__position'>{eachUser.position}</span>
@@ -39,14 +39,17 @@ const userTableData = (listOfUsers) => {
 }
 
 const Leaderboard = ({allUsers, user, refresh}) => {
-  // const index = users.findIndex(person => person.id === user.id);
-  console.info({allUsers, user});
+  
   const getUserPosition = (listUsers, currUser) => {
     const i = listUsers.findIndex(user => user.id === currUser.id);
-    if(listUsers[i].id === currUser.id) {
+    //! new user is not on leaderboard so will result in undefined - will refresh for new users
+    if (listUsers[i] === undefined) {
+      return (<span style={{ color: "red" }}>Click refresh to view yourself on leaderboard</span>)
+    } else if (listUsers[i].id === currUser.id) {
       return listUsers[i].position;
     }
   }
+
   return (
       <div className="Lb">
         <h1 className="title fs--1">Leaderboard</h1>
@@ -58,7 +61,7 @@ const Leaderboard = ({allUsers, user, refresh}) => {
         </Link>
         <button className="btn btn__ghost user__btn" onClick={() => refresh()}>
           Refresh leaderboard
-              <span><i class="fas fa-sync-alt"></i></span>
+              <span><i className="fas fa-sync-alt"></i></span>
         </button>
         <div className="Lb_headers">
           <div className="Lb_headers__rank"><p>RANK</p></div>
