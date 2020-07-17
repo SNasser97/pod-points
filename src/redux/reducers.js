@@ -1,7 +1,5 @@
 import { CONSTANTS } from "./constants";
 
-
-
 // LEADERBOARD OF USERS 
 const initStateAllUsers = {
   allUsers:[],
@@ -67,7 +65,7 @@ export const getRegEmailText = (state=initStateRegEmailField, {type,payload}) =>
       return state;
   }
 }
-// SIGN USER IN
+// SIGN USER IN + REG
 const initStateUser = {
   user: {
     id:"",
@@ -96,11 +94,19 @@ export const userRegister = (state = initStateUser, {type, payload}) => {
         showInvalid: false,
       }
     case CONSTANTS.USER_REG_FAILED:
-      return {...state, error:payload, isLoggedIn:false, showInvalid: true}
+      return { ...state, error: payload, isLoggedIn: false, showInvalid: true }
     default:
       return state;
   }
 }
+
+export const userSignOut = (state = initStateUser, {type, payload}) => {
+  if (type === CONSTANTS.USER_LOG_OUT) {
+    return state;
+  }
+  return state;
+}
+
 export const userSignIn = (state = initStateUser, {type,payload}) => {
   switch(type) {
     case CONSTANTS.USER_SIGN_PENDING:

@@ -19,6 +19,7 @@ import {
   getAllUsers,
   userSignIn,
   userRegister,
+  userSignOut,
 } from "./redux/reducers";
 
 import thunkMiddleWare from "redux-thunk"
@@ -27,7 +28,33 @@ import * as serviceWorker from './serviceWorker';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './sass/main.scss';
 
-const rootReducer = combineReducers({
+// This prevents users details being cleared when the browser page is reloaded.
+//! save redux state to localStorage
+const saveToLocalStorage = (state) => {
+  try {
+    const stateString = JSON.stringify(state); // stringify state
+    localStorage.setItem("user", stateString);
+  } catch (e) {
+    console.error(e)
+  }
+}
+//! load item user from local storage
+const loadFromLocalStorage = () => {
+  try {
+    const stateString = localStorage.getItem("user");
+    if (stateString === null) {
+      return undefined
+    };
+    return JSON.parse(stateString)
+  } catch (e) {
+    console.log(e);
+    return undefined;
+  }
+}
+// store.subscribe(()=> saveToLocalStorage(store.getState()))
+
+//! reducers part of app
+const appReducer = combineReducers({
   searchEpisodes, // same as searchEpisodes: searchEpisodes
   getEpisodes,
   getRandomEpisode,
@@ -42,12 +69,35 @@ const rootReducer = combineReducers({
   getAllUsers,
   userSignIn,
   userRegister,
+  userSignOut,
 });
 
+//! (1/2) - when the action "USER_LOG_OUT"  is dispatched, 
+//! (2/2) - set state as undefined and use initState defined in each reducer.
+const rootReducer = (state, action) => {
+  if (action.type === "USER_LOG_OUT") {
+    state = undefined;
+  }
+  // reset validation box
+  if (action.type === "USER_SIGN_FAILED" || action.type === "USER_REG_FAILED") {
+    state.userSignIn = undefined;
+    state.userRegister = undefined;
+  }
+  return appReducer(state, action);
+}
+
+//! load local storage set to const and use in store.
+const persistentState = loadFromLocalStorage();
 const store = createStore(
-  rootReducer, 
+  rootReducer,
+  persistentState,
   applyMiddleware(thunkMiddleWare, logger)
 );
+
+//! save current or new user to local storage
+store.subscribe(() => {
+  saveToLocalStorage(store.getState())
+});
 
 ReactDOM.render(
   <Provider store={store}>

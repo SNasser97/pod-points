@@ -5,7 +5,7 @@ import {
 	Route 
 } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ logout }) => {
 	return (
 		<header>
 			<nav className="nav fs--3">
@@ -16,7 +16,7 @@ const Nav = () => {
 					<Route path="/(home|leaderboard)">
 							<div className="nav__btn">
 								<Link to="/">
-									<div href="#!" className="btn btn__ghost">Sign out</div>
+									<div href="#!" className="btn btn__ghost" onClick={() => logout()}>Sign out</div>
 								</Link>
 							</div>
 					</Route>

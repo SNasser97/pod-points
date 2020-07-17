@@ -26,7 +26,8 @@ import {
   playCurrentEpisode,
   updateUserScore,
   closeModal,
-  requestAllUsers
+  requestAllUsers,
+  logUserOut
 } from "../redux/actions";
 
 const mapStateToProps = (state) => {
@@ -55,7 +56,6 @@ const mapStateToProps = (state) => {
     userRegError: userRegister.error,
     showLoginInvalid: userSignIn.showInvalid,
     showRegInvalid: userRegister.showInvalid,
-
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -66,14 +66,18 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
     onUpdateScore: (id) => dispatch(updateUserScore(id)),
     onClickCloseModal: () => dispatch(closeModal()),
     onLoadShowUsers: () => dispatch(requestAllUsers()),
+    onClickLogOut: () => {
+      localStorage.removeItem("user");
+      dispatch(logUserOut())
+    }
   }
 }
 
 class App extends Component {
   
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
   calcAudio  = (audioSeconds) => { // in ms
     let hours = Math.floor(audioSeconds / 3600);
     audioSeconds %= 3600; // get remainder of mins from hours 
@@ -85,6 +89,7 @@ class App extends Component {
     secs = secs < 10 ? `0${secs}` : secs;
     return `${hours}${mins}:${secs}`
   }
+
   render() {
     const { 
       currentEpisode, 
@@ -102,7 +107,6 @@ class App extends Component {
       score,
       reward,
       isLoggedIn,
-      isLoadingAll,
       allUsers,
       showLoginInvalid,
       showRegInvalid,
@@ -112,7 +116,7 @@ class App extends Component {
     const { calcAudio } = this; // from App
     return (
       <Router>
-        <Nav />
+        <Nav logout={this.props.onClickLogOut} />
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/sign_in">
