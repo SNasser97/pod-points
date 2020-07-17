@@ -20,13 +20,18 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
 
 
 class SignIn extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props); //! remove warning from react "no useless-constructor"
+  // }
 
   handleLoginValidation(message) {
       if (message.includes("undefined")) {
-        return (<p className="form__validationMsg"><span className="form__validationIcon"><i className="fas fa-exclamation-circle"></i></span>Incorrect username or password</p>)
+        return (
+          <p className="form__validationMsg">
+            <span className="form__validationIcon"><i className="fas fa-exclamation-circle"></i></span>
+            Incorrect username or password
+          </p>
+        )
       }
     return (<p className="form__validationMsg"><span className="form__validationIcon"><i className="fas fa-exclamation-circle"></i></span>{message}</p>);
   }
@@ -38,16 +43,13 @@ class SignIn extends Component {
       handleUserSignIn, 
       usernameField, 
       passwordField,
-      // user,
-      // isLoggedIn,
     } = this.props
-    const {validLog, errorLog} = this.props // from App
-
+    const {validLog, errorLog} = this.props // props passed from App
     return (
       <main>
         <div className="container">
           <form className="form" method="POST">
-            <div className="form__validation">{this.props.validLog ? this.handleLoginValidation(this.props.errorLog) : null}</div>
+            <div className="form__validation">{validLog ? this.handleLoginValidation(errorLog) : null}</div>
             <fieldset className="signin__header">
               <p className="signin__title fs--1">Sign in</p>
               <div className="signin__box fs--5">
@@ -82,13 +84,17 @@ class SignIn extends Component {
               </div>
             </fieldset>
             <div className="signin__btn ">
-              <input onClick={(e) => {handleUserSignIn(usernameField, passwordField); e.preventDefault()}} 
+              <input onClick={(e) => {
+                handleUserSignIn(usernameField, passwordField); 
+                e.preventDefault(); 
+                }} 
                 className="btn btn__full" type="submit" value="Sign In" />
             </div>
-            <div className="form__link form__link--register fs--3">
+            <div className="form__link form__link--register fs--3" onClick={()=> localStorage.removeItem("user")}>
               <Link to="/register">
                 No account? Sign up!
               <i className="fas fa-arrow-circle-right"></i>
+              
               </Link>
             </div>
           </form>
