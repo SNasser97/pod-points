@@ -10,7 +10,7 @@
 ### About
 
 <p>
-  Pod points is a fullstack web project developed by me using the Listen Notes API (of course with the help of google and documentation!) built throughout whilst being in qurantine.
+  Pod points is a fullstack web project developed by me using the Listen Notes API (of course with the help of google and documentation!) built throughout whilst being in quarantine.
 </p>
 <p>
   This personal project was developed so that I can apply what I have learnt following ZTM Course.
