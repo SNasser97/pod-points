@@ -4,13 +4,19 @@ import styles from "./Media.module.scss";
 import CustomPlayPause from './CustomPlayPause/CustomPlayPause';
 import CustomProgress from './CustomProgress/CustomProgress';
 // dev purposes
-import sampleAudio from "../../assets/audio/sample_audio.mp3"; 
-const { CurrentTime, Duration, Volume, SeekBar} = controls;
+// import sampleAudio from "../../assets/audio/sample_audio.mp3"; used to test on local audio file
+const { 
+  CurrentTime, 
+  Duration, 
+  // Volume, uncomment for testing
+  // SeekBar uncomment for testing
+} = controls;
 
 const MediaPlayer = ({currentEpisode, onUpdateScore, id}) => {
   
   let [episode] = currentEpisode; // currentEpisode[0].props
   return (
+    // The player component when the episode ends will dispatch updating the score using user id and display popup
     <Media>
       <div className="media">
         <div className="media-player">
@@ -28,8 +34,8 @@ const MediaPlayer = ({currentEpisode, onUpdateScore, id}) => {
           <CustomProgress className={styles.media_duration_bar}/>
           <CurrentTime className={`fs--4 ${styles.media_time} ${styles.media_time__current}`}/>
           <CustomPlayPause styles={styles}/>
-          <Volume />
-          <SeekBar className={styles.temp} />
+          {/* <Volume /> for debugging purposes for muting during test of popup modal */}
+          {/* <SeekBar className={styles.temp} for skipping near end to test popup modal /> */}
             {episode.src === 0 ? <p>could not play</p> : null }
           <Duration className={`fs--4 ${styles.media_time} ${styles.media_time__duration}`}/>
         </div>
