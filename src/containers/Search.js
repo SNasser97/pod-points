@@ -28,16 +28,13 @@ const mapDispatchToProps = (dispatch) => {
     onSearchSubmit: (url, offset) => {
       dispatch(requestEpisodes(url, offset));
     },
-    // onClickPlayCurrEpisode: (episode) => {
-    //   dispatch(playCurrentEpisode(episode));
-    // }
   }
 }
 
 class Search extends Component { 
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { // from our redux store
@@ -50,7 +47,6 @@ class Search extends Component {
       onClickShowPlayer
     } = this.props; // from store
     const {calcAudio, onClickPlayCurrEpisode} = this.props; // from App
-    console.log("search props + app props =>", this.props);
     return (
       <React.Fragment>
         <SearchField 
