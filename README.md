@@ -24,6 +24,8 @@
 
 * [react-media-player]("https://github.com/souporserious/react-media-player")
 
+* [react-reveal]("https://www.react-reveal.com/")
+
 ## How it works
 ![](gif/home.gif)
 
