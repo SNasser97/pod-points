@@ -1,7 +1,7 @@
 ## PodPoints
 
 ### Setup
-Note: Make sure to clone the pod-points-api repo found [here]("https://github.com/SNasser97/pod-points-api") 
+Note: Make sure to clone the pod-points-api repo found [here](https://github.com/SNasser97/pod-points-api) 
 
 1. `clone the repos` 
 2. `npm install`
@@ -14,12 +14,12 @@ Note: Make sure to clone the pod-points-api repo found [here]("https://github.co
   This personal project was developed so that I can apply what I have learnt following ZTM Course.
 
 ### Tools/packages used
-* [React]("https://create-react-app.dev/")
-* [Redux]("https://redux.js.org/") (state management)
-* [react-router]("https://reactrouter.com/")
-* [redux-thunk]("https://www.npmjs.com/package/redux-thunk") - (handle async dispatch)
-* [react-media-player]("https://github.com/souporserious/react-media-player")
-* [react-reveal]("https://www.react-reveal.com/")
+* [React](https://create-react-app.dev/)
+* [Redux](https://redux.js.org/) (state management)
+* [react-router](https://reactrouter.com/)
+* [redux-thunk](https://www.npmjs.com/package/redux-thunk) - (handle async dispatch)
+* [react-media-player](https://github.com/souporserious/react-media-player)
+* [react-reveal](https://www.react-reveal.com/)
 
 ## How it works
 ![](gif/home.gif)
