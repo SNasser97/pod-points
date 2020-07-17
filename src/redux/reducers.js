@@ -1,7 +1,5 @@
 import { CONSTANTS } from "./constants";
 
-
-
 // LEADERBOARD OF USERS 
 const initStateAllUsers = {
   allUsers:[],
@@ -95,6 +93,8 @@ export const userRegister = (state = initStateUser, {type, payload}) => {
         isLoggedIn:true,
         showInvalid: false,
       }
+    case CONSTANTS.USER_REG_FAILED:
+      return { ...state, error: payload, isLoggedIn: false, showInvalid: true }
     default:
       return state;
   }
