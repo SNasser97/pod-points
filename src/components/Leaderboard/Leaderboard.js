@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-let opacity = 1; // gradually decrease colour of span award
+// inline styles for go back to home button
 const inlineLinkStyle = {
   "display": "inline-flex",
   "justifyContent": "center",
@@ -11,13 +11,15 @@ const inlineLinkStyle = {
   "height": "6rem",
 }
 // loop through users and create table data
+let opacity = 1; // gradually decrease colour of span award
 const userTableData = (listOfUsers) => {
   return listOfUsers.map((eachUser, i) => {
     return (
       <div className="Lb_details" key={i}>
         <div className="Lb_rank">
           <p className="Lb_rank__userank">
-            {
+          
+            { // Assign each user an icon next to their rank
               (i < 5) ? <span className="trophy"><i className="fas fa-trophy"></i></span> :
               (i === 6 || i < 20) ? <span className="medal"><i className="fas fa-star"></i></span> :
                   <span className="award" style={{ "color":`rgb(54, 6, 95,${opacity !== 0 ? opacity-=.005 : 0})`}}>
