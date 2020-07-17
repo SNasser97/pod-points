@@ -2,7 +2,7 @@
 
 ### Setup
 <!-- <h3>How to set-up</h3> -->
-<b>Note:</b> Make sure to clone the pod-points-api repo found [here]("https://github.com/SNasser97/pod-points-api") 
+Note: Make sure to clone the pod-points-api repo found [here]("https://github.com/SNasser97/pod-points-api") 
 1. `clone the repos` 
 2. `npm install`
 3. `npm run start / npm start`
