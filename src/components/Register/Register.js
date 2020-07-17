@@ -27,12 +27,17 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class Register extends Component  {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   handleRegValidation(message) {
-    return (<p className="form__validationMsg"><span className="form__validationIcon"><i className="fas fa-exclamation-circle"></i></span>{message}</p>);
+    return (
+      <p className="form__validationMsg">
+        <span className="form__validationIcon"><i className="fas fa-exclamation-circle"></i></span>
+        {message}
+      </p>
+    );
   }
   render() {
     const {
@@ -44,12 +49,12 @@ class Register extends Component  {
       usernameFieldReg,
       passwordFieldReg,
     } = this.props
-    const { validReg, errorReg } = this.props // from App
+    const { validReg, errorReg } = this.props // props passed from App
     return (
       <main>
         <div className="container">
           <form className="form" method="POST">
-            <div className="form__validation">{this.props.validReg ? this.handleRegValidation(this.props.errorReg) : null}</div>
+            <div className="form__validation">{validReg ? this.handleRegValidation(errorReg) : null}</div>
             <fieldset className="signin__header">
               <p className="signin__title fs--1">Sign up</p>
               <div className="signin__box fs--5">
