@@ -56,8 +56,6 @@ const mapStateToProps = (state) => {
     userRegError: userRegister.error,
     showLoginInvalid: userSignIn.showInvalid,
     showRegInvalid: userRegister.showInvalid,
-    currentUser: userSignIn || userRegister,
-
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -68,15 +66,18 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
     onUpdateScore: (id) => dispatch(updateUserScore(id)),
     onClickCloseModal: () => dispatch(closeModal()),
     onLoadShowUsers: () => dispatch(requestAllUsers()),
-    onClickLogOut: () => dispatch(logUserOut())
+    onClickLogOut: () => {
+      localStorage.removeItem("user");
+      dispatch(logUserOut())
+    }
   }
 }
 
 class App extends Component {
   
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
   calcAudio  = (audioSeconds) => { // in ms
     let hours = Math.floor(audioSeconds / 3600);
     audioSeconds %= 3600; // get remainder of mins from hours 
@@ -88,16 +89,6 @@ class App extends Component {
     secs = secs < 10 ? `0${secs}` : secs;
     return `${hours}${mins}:${secs}`
   }
-
-  // createLocalUser(currentUserData) {
-  //   // if no localStorage item "user" exists, create and stringfiy obj
-  //   if(!localStorage.getItem("user")) {
-  //     localStorage.setItem("user", JSON.stringify(currentUserData))
-  //   }
-  // }
-  // setLocalUserSession(currentUser) {
-    
-  // }
 
   render() {
     const { 
@@ -116,7 +107,6 @@ class App extends Component {
       score,
       reward,
       isLoggedIn,
-      isLoadingAll,
       allUsers,
       showLoginInvalid,
       showRegInvalid,
@@ -124,7 +114,6 @@ class App extends Component {
       userRegError
     } = this.props; // redux store
     const { calcAudio } = this; // from App
-    console.info("CURRENT USER =>", this.props.currentUser);
     return (
       <Router>
         <Nav logout={this.props.onClickLogOut} />
