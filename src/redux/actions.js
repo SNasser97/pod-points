@@ -1,12 +1,19 @@
 import { CONSTANTS } from "./constants";
+import { SERVER_URL } from "./constants";
 
+/*
+  ! NOTE: 
+   If using local server, 
+   just uncomment the variables in each async dispatch
+   then pass the url into fetch
+*/
 
 // fetch list of all users
 export const requestAllUsers = () => async (dispatch) => {
-  const url = "http://localhost:3001/leaderboard";
+  // const url = "http://localhost:3001/leaderboard";
   dispatch({ type: CONSTANTS.REQUEST_ALL_USERS_PENDING});
   try {
-    const respAllUsers = await fetch(url);
+    const respAllUsers = await fetch(SERVER_URL.LEADERBOARD);
     const respUserData = await respAllUsers.json();
     dispatch({ type: CONSTANTS.REQUEST_ALL_USERS_SUCCESS, payload: respUserData})
   } catch (error) {
@@ -20,11 +27,11 @@ export const setRegUsername = (text) => { return { type: CONSTANTS.CHANGE_REG_US
 export const setRegEmail = (text) => { return { type: CONSTANTS.CHANGE_REG_EMAIL_FIELD, payload:text}}
 
 export const register = (email, username, password) => async (dispatch) => {
-  const url = "http://localhost:3001/register";
+  // const url = "http://localhost:3001/register";
   
   dispatch({ type: CONSTANTS.USER_REG_PENDING});
   try {
-    const respReg = await fetch(url, {
+    const respReg = await fetch(SERVER_URL.REGISTER, {
       method:"POST",
       headers: {
         "Content-Type":"application/json",
@@ -56,10 +63,10 @@ export const setUsernameText = (text) => { return { type: CONSTANTS.CHANGE_SIGN_
 export const setPasswordText = (text) => { return { type: CONSTANTS.CHANGE_SIGN_PW_FIELD, payload: text } }
 
 export const signIn = (username, password) => async (dispatch) => {
-  const url = "http://localhost:3001/sign_in";
+  // const url = "http://localhost:3001/sign_in";
   dispatch({type: CONSTANTS.USER_SIGN_PENDING});
   try {
-    const respSign = await fetch(url, {
+    const respSign = await fetch(SERVER_URL.SIGN_IN, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -95,9 +102,9 @@ export const logUserOut = () => {
 }
 // UPDATE USER SCORE
 export const updateUserScore = (id) => async (dispatch) => {
-  const url = "http://localhost:3001/score";
+  // const url = "http://localhost:3001/score";
   try {
-    const respScore = await fetch(url, {
+    const respScore = await fetch(SERVER_URL.SCORE, {
       method:"put",
       headers: { "Content-Type":"application/json"},
       body: JSON.stringify({id})
@@ -148,10 +155,10 @@ export const setSearchField = (text) => {
 
 export const requestRandomEpisode = () => async (dispatch) => {
   // Fetch from backend
-  const SERVER_URL_RANDOM = "http://localhost:3001/random_episode";
+  // const SERVER_URL_RANDOM = "http://localhost:3001/random_episode";
   dispatch({type: CONSTANTS.REQUEST_RAND_EPISODE_PENDING}); 
   try {
-    const resp = await fetch(SERVER_URL_RANDOM);
+    const resp = await fetch(SERVER_URL.RAND_EPISODE);
     const respData = await resp.json();
     setTimeout(() => { //! this can be removed, left in to show loader effect
       dispatch({
@@ -169,7 +176,7 @@ export const requestRandomEpisode = () => async (dispatch) => {
 }
 
 export const requestEpisodes = (urlSearch, urlOffset) => async (dispatch) => {
-  const SERVER_URL_EPISODE='http://localhost:3001/episodes';
+  // const SERVER_URL_EPISODE='http://localhost:3001/episodes';
   const urlParams = {
     urlSearch,
     urlOffset
@@ -183,7 +190,7 @@ export const requestEpisodes = (urlSearch, urlOffset) => async (dispatch) => {
   */
   dispatch({ type: CONSTANTS.REQUEST_EPISODE_PENDING });
   try {
-    const resp = await fetch(SERVER_URL_EPISODE, {
+    const resp = await fetch(SERVER_URL.EPISODES, {
       method:'post',
       headers:{
         "Content-Type":"application/json",

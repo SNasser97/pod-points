@@ -28,30 +28,7 @@ import * as serviceWorker from './serviceWorker';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './sass/main.scss';
 
-// This prevents users details being cleared when the browser page is reloaded.
-//! save redux state to localStorage
-const saveToLocalStorage = (state) => {
-  try {
-    const stateString = JSON.stringify(state); // stringify state
-    localStorage.setItem("user", stateString);
-  } catch (e) {
-    console.error(e)
-  }
-}
-//! load item user from local storage
-const loadFromLocalStorage = () => {
-  try {
-    const stateString = localStorage.getItem("user");
-    if (stateString === null) {
-      return undefined
-    };
-    return JSON.parse(stateString)
-  } catch (e) {
-    console.log(e);
-    return undefined;
-  }
-}
-// store.subscribe(()=> saveToLocalStorage(store.getState()))
+
 
 //! reducers part of app
 const appReducer = combineReducers({
@@ -86,12 +63,39 @@ const rootReducer = (state, action) => {
   return appReducer(state, action);
 }
 
+// This prevents users details being cleared when the browser page is reloaded.
+//! save redux state to localStorage
+const saveToLocalStorage = (state) => {
+  try {
+    const stateString = JSON.stringify(state); // stringify state
+    localStorage.setItem("user", stateString);
+  } catch (e) {
+    console.error(e)
+  }
+}
+//! load item user from local storage
+const loadFromLocalStorage = () => {
+  try {
+    const stateString = localStorage.getItem("user");
+    if (stateString === null) {
+      return undefined
+    };
+    return JSON.parse(stateString)
+  } catch (e) {
+    console.log(e);
+    return undefined;
+  }
+}
+
 //! load local storage set to const and use in store.
 const persistentState = loadFromLocalStorage();
 const store = createStore(
   rootReducer,
   persistentState,
-  applyMiddleware(thunkMiddleWare, logger)
+  applyMiddleware(
+    thunkMiddleWare, 
+    /* logger */ //! uncomment during development
+  )
 );
 
 //! save current or new user to local storage
