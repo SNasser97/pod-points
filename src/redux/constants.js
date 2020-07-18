@@ -28,3 +28,13 @@ export const CONSTANTS = {
   CHANGE_REG_PW_FIELD: "CHANGE_REG_PW_FIELD",
   CHANGE_REG_EMAIL_FIELD: "CHANGE_REG_EMAIL_FIELD",
 }
+
+//! connection strings to back-end
+export const SERVER_URL = {
+  SIGN_IN: "https://pod-points-backend.herokuapp.com/sign_in",
+  REGISTER: "https://pod-points-backend.herokuapp.com/register",
+  LEADERBOARD: "https://pod-points-backend.herokuapp.com/leaderboard",
+  SCORE: "https://pod-points-backend.herokuapp.com/score",
+  RAND_EPISODE: "https://pod-points-backend.herokuapp.com/random_episode",
+  EPISODES: "https://pod-points-backend.herokuapp.com/episodes"
+}
