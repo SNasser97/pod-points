@@ -9,7 +9,7 @@ Note: Make sure to clone the pod-points-api repo found [here](https://github.com
 
 ### About
 
-  Pod points is a fullstack web project developed by me using the Listen Notes API (of course with the help of google and documentation!) built throughout whilst being in quarantine.
+  Pod points is a fullstack web project (PostgreSQL, Express, React, Node) developed by me using the Listen Notes API (of course with the help of google and documentation!) built throughout whilst being in quarantine.
 
   This personal project was developed so that I can apply what I have learnt following ZTM Course.
 
