@@ -19,7 +19,7 @@ import Register from "../components/Register/Register";
 import Search from "./Search";
 import Home from "../components/Home/Home";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
-
+import LoaderForm from "../components/LoaderForm/LoaderForm";
 import { 
   requestRandomEpisode, 
   displayMediaPlayer, 
@@ -56,6 +56,8 @@ const mapStateToProps = (state) => {
     userRegError: userRegister.error,
     showLoginInvalid: userSignIn.showInvalid,
     showRegInvalid: userRegister.showInvalid,
+    loadingUser: userSignIn.loadingUser,
+    isLoadingUser: userRegister.isLoadingUser || userSignIn.isLoadingUser, // if client signs in or is registering, on submit make prop true
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -111,7 +113,8 @@ class App extends Component {
       showLoginInvalid,
       showRegInvalid,
       userLoginError,
-      userRegError
+      userRegError,
+      loadingUser,
     } = this.props; // redux store
     const { calcAudio } = this; // from App
     return (
@@ -120,10 +123,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/sign_in">
-            {/* todo: reset setInit state when logging out */}
-            { isLoggedIn ? <Redirect to="/home" /> : <SignIn validLog={showLoginInvalid} errorLog={userLoginError}/>}
+            <LoaderForm showLoader={ loadingUser } />
+            {isLoggedIn ? <Redirect to="/home" /> : <SignIn validLog={showLoginInvalid} errorLog={userLoginError}/> }
           </Route>
           <Route exact path="/register">
+            <LoaderForm showLoader={ loadingUser } />
             {isLoggedIn ? <Redirect to="/home" /> : <Register validReg={showRegInvalid} errorReg={userRegError}/>}
           </Route>
           <Route path="/home">

@@ -76,6 +76,7 @@ const initStateUser = {
   error: "",
   showInvalid: false,
   isLoggedIn:false,
+  loadingUser:false,
 }
 export const userRegister = (state = initStateUser, {type, payload}) => {
   switch (type) {
@@ -110,7 +111,7 @@ export const userSignOut = (state = initStateUser, {type, payload}) => {
 export const userSignIn = (state = initStateUser, {type,payload}) => {
   switch(type) {
     case CONSTANTS.USER_SIGN_PENDING:
-      return {...state, isLoggedIn:false, showInvalid:false}
+      return {...state, isLoggedIn:false, showInvalid:false, loadingUser: true}
     case CONSTANTS.USER_SIGN_SUCCESS:
       return {
         ...state,
@@ -121,10 +122,11 @@ export const userSignIn = (state = initStateUser, {type,payload}) => {
           joined: payload.joined,
         },
         isLoggedIn: true,
-        showInvalid:false
+        showInvalid:false,
+        loadingUser: true,
       }
     case CONSTANTS.USER_SIGN_FAILED:
-      return { ...state, error: payload, isLoggedIn: false, showInvalid:true}
+      return { ...state, error: payload, isLoggedIn: false, showInvalid:true, loadingUser: false}
     default:
       return state;
   }

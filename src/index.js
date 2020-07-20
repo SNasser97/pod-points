@@ -94,7 +94,8 @@ const store = createStore(
   persistentState,
   applyMiddleware(
     thunkMiddleWare, 
-    /* logger */ //! uncomment during development
+    //! uncomment logger during development
+    // logger
   )
 );
 
