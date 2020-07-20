@@ -57,7 +57,7 @@ const mapStateToProps = (state) => {
     showLoginInvalid: userSignIn.showInvalid,
     showRegInvalid: userRegister.showInvalid,
     loadingUser: userSignIn.loadingUser,
-    isLoadingUser: userRegister.isLoadingUser || userSignIn.isLoadingUser, // if client signs in or is registering, on submit make prop true
+    loadingUserReg: userRegister.loadingUser,
   } 
 }
 const mapDispatchToProps = (dispatch) => { // dispatch the action
@@ -115,6 +115,7 @@ class App extends Component {
       userLoginError,
       userRegError,
       loadingUser,
+      loadingUserReg,
     } = this.props; // redux store
     const { calcAudio } = this; // from App
     return (
@@ -127,7 +128,7 @@ class App extends Component {
             {isLoggedIn ? <Redirect to="/home" /> : <SignIn validLog={showLoginInvalid} errorLog={userLoginError}/> }
           </Route>
           <Route exact path="/register">
-            <LoaderForm showLoader={ loadingUser } />
+            <LoaderForm showLoader={ loadingUserReg } />
             {isLoggedIn ? <Redirect to="/home" /> : <Register validReg={showRegInvalid} errorReg={userRegError}/>}
           </Route>
           <Route path="/home">
