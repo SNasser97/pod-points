@@ -81,7 +81,7 @@ const initStateUser = {
 export const userRegister = (state = initStateUser, {type, payload}) => {
   switch (type) {
     case CONSTANTS.USER_REG_PENDING:
-      return {...state, isLoggedIn:false, showInvalid: false}
+      return {...state, isLoggedIn:false, showInvalid: false, loadingUser: true}
     case CONSTANTS.USER_REG_SUCCESS:
       return {
         ...state, 
@@ -93,9 +93,10 @@ export const userRegister = (state = initStateUser, {type, payload}) => {
         },
         isLoggedIn:true,
         showInvalid: false,
+        loadingUser: false,
       }
     case CONSTANTS.USER_REG_FAILED:
-      return { ...state, error: payload, isLoggedIn: false, showInvalid: true }
+      return { ...state, error: payload, isLoggedIn: false, showInvalid: true, loadingUser: false }
     default:
       return state;
   }
