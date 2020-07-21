@@ -32,10 +32,17 @@ class Register extends Component  {
   // }
 
   handleRegValidation(message) {
+    let outputMsg = "";
+    //! prevents trying to pass and render an object in JSX
+    if (typeof message === "object") {
+      outputMsg = JSON.stringify(message);
+    } else {
+      outputMsg = message.toString();
+    }
     return (
       <p className="form__validationMsg">
         <span className="form__validationIcon"><i className="fas fa-exclamation-circle"></i></span>
-        {message}
+        {outputMsg}
       </p>
     );
   }

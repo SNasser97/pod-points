@@ -31,7 +31,8 @@ export const register = (email, username, password) => async (dispatch) => {
   
   dispatch({ type: CONSTANTS.USER_REG_PENDING});
   try {
-    const respReg = await fetch(SERVER_URL.REGISTER, {
+    const respReg = await fetch(SERVER_URL.REGISTER, 
+      {
       method:"POST",
       headers: {
         "Content-Type":"application/json",
@@ -53,7 +54,7 @@ export const register = (email, username, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CONSTANTS.USER_REG_FAILED,
-      payload:error
+      payload: error.message
     });
   }
 }
