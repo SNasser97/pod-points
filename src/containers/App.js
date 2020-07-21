@@ -68,10 +68,7 @@ const mapDispatchToProps = (dispatch) => { // dispatch the action
     onUpdateScore: (id) => dispatch(updateUserScore(id)),
     onClickCloseModal: () => dispatch(closeModal()),
     onLoadShowUsers: () => dispatch(requestAllUsers()),
-    onClickLogOut: () => {
-      localStorage.removeItem("user");
-      dispatch(logUserOut())
-    }
+    onClickLogOut: () => {dispatch(logUserOut())}
   }
 }
 
