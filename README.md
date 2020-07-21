@@ -1,4 +1,8 @@
 ## PodPoints
+### [https://pod-points.herokuapp.com/](https://pod-points.herokuapp.com/) - Deployed using Heroku
+
+
+NOTE: For hobby-dev/free version of deploying on heroku - the app and backend are not always running so first initial launch can take some time.
 
 ### Setup
 Note: Make sure to clone the pod-points-api repo found [here](https://github.com/SNasser97/pod-points-api) 
