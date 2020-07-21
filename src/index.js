@@ -56,11 +56,6 @@ const rootReducer = (state, action) => {
   if (action.type === "USER_LOG_OUT") {
     state = undefined;
   }
-  // reset validation box
-  if (action.type === "USER_SIGN_FAILED" || action.type === "USER_REG_FAILED") {
-    state.userSignIn = undefined;
-    state.userRegister = undefined;
-  }
   return appReducer(state, action);
 }
 

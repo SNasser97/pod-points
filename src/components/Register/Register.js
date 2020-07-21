@@ -35,9 +35,16 @@ class Register extends Component  {
     let outputMsg = "";
     //! prevents trying to pass and render an object in JSX
     if (typeof message === "object") {
-      outputMsg = JSON.stringify(message);
-    } else {
       outputMsg = message.toString();
+    } else {
+      outputMsg = "Details registered but server could not process request. Try signing in instead"; // provides JSON parse error
+    }
+    
+    if (message === 'insert into "Users" ("email", "id", "joined", "username") values ($1, $2, $3, $4) returning "id", "username" - duplicate key value violates unique constraint "users_email_key"' 
+    || message === 'insert into "Users" ("email", "id", "joined", "username") values ($1, $2, $3, $4) returning "id", "username" - duplicate key value violates unique constraint "users_user_key"') {
+      outputMsg = "User with such name or email already exists";
+    } else if (message === "Please fill all fields") {
+      outputMsg = message;
     }
     return (
       <p className="form__validationMsg">
