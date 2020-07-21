@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
-// import logger from "redux-logger"; for debugging
+//! for debugging
+// import logger from "redux-logger";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { 
