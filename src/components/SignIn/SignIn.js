@@ -78,7 +78,7 @@ class SignIn extends Component {
                   autoComplete="off"
                   required
                   onChange={onPassFieldChange} // listen for change on input username
-                  placeholder="password: ilovelearning" //! demonstration purposes
+                  placeholder="password: iloveLearning!2020" //! demonstration purposes
                 />
                 <hr className="signin__line" />
               </div>

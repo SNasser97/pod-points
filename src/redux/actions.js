@@ -90,7 +90,7 @@ export const signIn = (username, password) => async (dispatch) => {
   } catch(error) {
     dispatch({
       type: CONSTANTS.USER_SIGN_FAILED,
-      payload: error
+      payload: error.message
     });
   }
 }

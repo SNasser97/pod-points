@@ -56,6 +56,10 @@ const rootReducer = (state, action) => {
   if (action.type === "USER_LOG_OUT") {
     state = undefined;
   }
+  if (action.type === "USER_SIGN_FAILED" || action.type === "USER_REG_FAILED") {
+    state.userRegister = undefined;
+    state.userSignIn = undefined;
+  }
   return appReducer(state, action);
 }
 
